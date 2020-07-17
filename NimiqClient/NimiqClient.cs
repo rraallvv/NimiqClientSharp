@@ -2,7 +2,7 @@
 
 namespace UtilityLibraries
 {
-    public static class StringLibrary
+    public static class NimiqClient
     {
         public static bool StartsWithUpper(this String str)
         {

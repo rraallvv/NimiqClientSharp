@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StringLibrary\StringLibrary.csproj" />
+    <ProjectReference Include="..\NimiqClient\NimiqClient.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringLibrary", "StringLibrary\StringLibrary.csproj", "{D6921730-19D6-40C7-93C3-BA5AA8EC2E7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimiqClient", "NimiqClient\NimiqClient.csproj", "{D6921730-19D6-40C7-93C3-BA5AA8EC2E7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowCase", "ShowCase\ShowCase.csproj", "{4CE9161D-B147-4625-9DC8-C34C37115E93}"
 EndProject
