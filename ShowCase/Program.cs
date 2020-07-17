@@ -1,36 +1,31 @@
 ﻿using System;
-using UtilityLibraries;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 class Program
 {
     static void Main(string[] args)
     {
-        int row = 0;
+        MainAsync().GetAwaiter().GetResult();
+    }
 
-        do
+    private static async Task MainAsync()
+    {
+        HttpClient client = new HttpClient();
+        string url = "http://:@127.0.0.1:8648";
+
+        try
         {
-            if (row == 0 || row >= 25)
-                ResetConsole();
-
-            string input = Console.ReadLine();
-            if (String.IsNullOrEmpty(input)) break;
-            Console.WriteLine($"Input: {input} {"Begins with uppercase? ",30}: " +
-                              $"{(input.StartsWithUpper() ? "Yes" : "No")}\n");
-            row += 3;
-        } while (true);
-        return;
-
-        // Declare a ResetConsole local method
-        void ResetConsole()
+            var contentData = new StringContent(@"{""jsonrpc"": ""2.0"", ""method"": ""consensus"", ""params"": [], ""id"": 1}", System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(url, contentData);
+            var content = response.Content;
+            var data = await content.ReadAsStringAsync();
+            Console.WriteLine(data);
+        }
+        catch (HttpRequestException e)
         {
-            if (row > 0)
-            {
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-            Console.Clear();
-            Console.WriteLine("\nPress <Enter> only to exit; otherwise, enter a string and press <Enter>:\n");
-            row = 3;
+            Console.WriteLine("\nException Caught!");
+            Console.WriteLine("Message :{0} ", e.Message);
         }
     }
 }
