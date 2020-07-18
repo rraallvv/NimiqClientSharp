@@ -249,7 +249,7 @@ namespace Nimiq
             url = $@"{scheme}://{user}:{password}@{host}:{port}";
             if (client != null)
             {
-                this.client = client!;
+                this.client = client;
             }
             else
             {
