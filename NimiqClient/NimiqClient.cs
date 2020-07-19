@@ -207,27 +207,6 @@ namespace Nimiq
         public long fee { get; set; }
         /// <summary>Hex-encoded contract parameters or a message.</summary>
         public string data { get; set; } = null;
-
-        /*
-        /// <summary>OutgoingTransaction initialization.</summary>
-        /// <param name="from">The address the transaction is send from.</params>
-        /// <param name="fromType">The account type at the given address.</params>
-        /// <param name="to">The address the transaction is directed to.</params>
-        /// <param name="toType">The account type at the given address.</params>
-        /// <param name="value">Integer of the value (in smallest unit) sent with this transaction.</params>
-        /// <param name="fee">Integer of the fee (in smallest unit) for this transaction.</params>
-        /// <param name="data">Hex-encoded contract parameters or a message.</params>
-        public init(from: Address, fromType: AccountType? = .basic, to: Address, toType: AccountType? = .basic, value: Int, fee: Int, data: String? = nil)
-        {
-            self.from = from
-            self.fromType = fromType
-            self.to = to
-            self.toType = toType
-            self.value = value
-            self.fee = fee
-            self.data = data
-        }
-        */
     }
 
     /// <summary>Transaction returned by the server.
@@ -320,36 +299,57 @@ namespace Nimiq
         /// <summary>Array of transactions. Either represented by the transaction hash or a Transaction object.</summary>
         [JsonConverter(typeof(HashOrTransactionConverter))]
         public object[] transactions { get; set; }
+    }
 
-        /*
+    /// <summary>Block template header returned by the server.</summary>
+    [Serializable]
+    public class BlockTemplateHeader
+    {
+        /// <summary>Version in block header.</summary>
+        public long version { get; set; }
+        /// <summary>32-byte hex-encoded hash of the previous block.</summary>
+        public Hash prevHash { get; set; }
+        /// <summary>32-byte hex-encoded hash of the interlink.</summary>
+        public Hash interlinkHash { get; set; }
+        /// <summary>32-byte hex-encoded hash of the accounts tree.</summary>
+        public Hash accountsHash { get; set; }
+        /// <summary>Compact form of the hash target for this block.</summary>
+        public long nBits { get; set; }
+        /// <summary>Height of the block in the block chain (also known as block number).</summary>
+        public long height { get; set; }
+    }
 
-        private enum CodingKeys : String, CodingKey {
-            case number, hash, pow, parentHash, nonce, bodyHash, accountsHash, difficulty, timestamp, confirmations, miner, minerAddress, extraData, size, transactions
-        }
+    /// <summary>Block template body returned by the server.</summary>
+    [Serializable]
+    public class BlockTemplateBody
+    {
+        /// <summary>32-byte hex-encoded hash of the block body.</summary>
+        public Hash hash { get; set; }
+        /// <summary>20-byte hex-encoded miner address.</summary>
+        public string minerAddr { get; set; }
+        /// <summary>Hex-encoded value of the extra data field.</summary>
+        public string extraData { get; set; }
+        /// <summary>Array of hex-encoded transactions for this block.</summary>
+        public string[] transactions { get; set; }
+        /// <summary>Array of hex-encoded pruned accounts for this block.</summary>
+        public string[] prunedAccounts { get; set; }
+        /// <summary>Array of hex-encoded hashes that verify the path of the miner address in the merkle tree.
+        /// This can be used to change the miner address easily.</summary>
+        public Hash[] merkleHashes { get; set; }
+    }
 
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            number = try container.decode(Int.self, forKey: .number)
-            hash = try container.decode(Hash.self, forKey: .hash)
-            pow = try container.decode(Hash.self, forKey: .pow)
-            parentHash = try container.decode(Hash.self, forKey: .parentHash)
-            nonce = try container.decode(Int.self, forKey: .nonce)
-            bodyHash = try container.decode(Hash.self, forKey: .bodyHash)
-            accountsHash = try container.decode(Hash.self, forKey: .accountsHash)
-            difficulty = try container.decode(String.self, forKey: .difficulty)
-            timestamp = try container.decode(Int.self, forKey: .timestamp)
-            confirmations = try container.decode(Int.self, forKey: .confirmations)
-            miner = try container.decode(String.self, forKey: .miner)
-            minerAddress = try container.decode(Address.self, forKey: .minerAddress)
-            extraData = try container.decode(String.self, forKey: .extraData)
-            size = try container.decode(Int.self, forKey: .size)
-            do {
-                transactions = try container.decode([Transaction].self, forKey: .transactions)
-            } catch {
-                transactions = try container.decode([Hash].self, forKey: .transactions)
-            }
-        }
-        */
+    /// <summary>Block template returned by the server.</summary>
+    [Serializable]
+    public class BlockTemplate
+    {
+        /// <summary>Block template header returned by the server.</summary>
+        public BlockTemplateHeader header { get; set; }
+        /// <summary>Hex-encoded interlink.</summary>
+        public string interlink { get; set; }
+        /// <summary>Block template body returned by the server.</summary>
+        public BlockTemplateBody body { get; set; }
+        /// <summary>Compact form of the hash target to submit a block to this client.</summary>
+        public long target { get; set; }
     }
 
     // JSONRPC Client
@@ -393,7 +393,8 @@ namespace Nimiq
         /// <param name="config">Options used for the configuration.</param>
         public NimiqClient(Config config = null)
         {
-            if (config != null) {
+            if (config != null)
+            {
                 Init(config.scheme, config.user, config.password, config.host, config.port);
             }
             else
@@ -437,15 +438,15 @@ namespace Nimiq
         /// <summary>Used in all JSONRPC requests to fetch the data.</summary>
         /// <param name="method">JSONRPC method.</param>
         /// <param name="parameters">Parameters used by the request.</param>
-        /// <returns>If succesfull, returns the model reperestation of the result, <c>nil</c> otherwise.</returns>
-        private async Task<T> Fetch<T>(string method, object[] parameters)
+        /// <returns>If succesfull, returns the model reperestation of the result, <c>null</c> otherwise.</returns>
+        private async Task<T> Fetch<T>(string method, object[] parameters = null)
         {
             Root<T> responseObject = null;
             Exception clientError = null;
             try
             {
                 // prepare the request
-                var serializedParams = JsonSerializer.Serialize(parameters);
+                var serializedParams = JsonSerializer.Serialize(parameters ?? new object[0]);
                 var contentData = new StringContent($@"{{""jsonrpc"": ""2.0"", ""method"": ""{method}"", ""params"": {serializedParams}, ""id"": {id}}}", Encoding.UTF8, "application/json");
                 // send the request
                 var response = await client.PostAsync(url, contentData);
@@ -481,7 +482,7 @@ namespace Nimiq
         /// <returns>Array of Accounts owned by the client.</returns>
         public async Task<object[]> Accounts()
         {
-            var result = await Fetch<RawAccount[]>("accounts", new object[0]);
+            var result = await Fetch<RawAccount[]>("accounts");
             return result.Select(o => o.Account).ToArray();
         }
 
@@ -489,14 +490,14 @@ namespace Nimiq
         /// <returns>The current block height the client is on.</returns>
         public async Task<long> BlockNumber()
         {
-            return await Fetch<long>("blockNumber", new object[0]);
+            return await Fetch<long>("blockNumber");
         }
 
         /// <summary>Returns information on the current consensus state.</summary>
         /// <returns>Consensus state. <c>"established"</c> is the value for a good state, other values indicate bad.</returns>
         public async Task<string> Consensus()
         {
-            return await Fetch<string>("consensus", new object[0]);
+            return await Fetch<string>("consensus");
         }
 
         /// <summary>Returns or overrides a constant value.
@@ -505,19 +506,21 @@ namespace Nimiq
         /// <param name="string">The class and name of the constant (format should be <c>"Class.CONSTANT"</c>).</parameter>
         /// <param name="value">The new value of the constant.</parameter>
         /// <returns>The value of the constant.</returns>
-        public async Task<long> Constant(string constant, long? value = null) {
-            var parameters = new object [] { constant };
-            if (value != null) {
-                parameters[parameters.Length] = value.Value;
+        public async Task<long> Constant(string constant, long? value = null)
+        {
+            var parameters = new List<object>() { constant };
+            if (value != null)
+            {
+                parameters.Add(value.Value);
             }
-            return await Fetch<long>("constant", parameters);
+            return await Fetch<long>("constant", parameters.ToArray());
         }
 
         /// <summary>Creates a new account and stores its private key in the client store.</summary>
         /// <returns>Information on the wallet that was created using the command.</returns>
         public async Task<Wallet> CreateAccount()
         {
-            return await Fetch<Wallet>("createAccount", new object[0]);
+            return await Fetch<Wallet>("createAccount");
         }
 
         /// <summary>Creates and signs a transaction without sending it.
@@ -559,7 +562,7 @@ namespace Nimiq
         /// <summary>Returns information about a block by hash.</summary>
         /// <param name="hash">Hash of the block to gather information on.</param>
         /// <param name="fullTransactions">If <c>true</c> it returns the full transaction objects, if <c>false</c> only the hashes of the transactions.</param>
-        /// <returns>A block object or <c>nil</c> when no block was found.</returns>
+        /// <returns>A block object or <c>null</c> when no block was found.</returns>
         public async Task<Block> GetBlockByHash(Hash hash, bool fullTransactions = false)
         {
             return await Fetch<Block>("getBlockByHash", new object[] { hash, fullTransactions });
@@ -568,10 +571,35 @@ namespace Nimiq
         /// <summary>Returns information about a block by block number.</summary>
         /// <param name="height">The height of the block to gather information on.</param>
         /// <param name="fullTransactions">If <c>true</c> it returns the full transaction objects, if <c>false</c> only the hashes of the transactions.</param>
-        /// <returns>A block object or `nil` when no block was found.</returns>
+        /// <returns>A block object or <c>null</c> when no block was found.</returns>
         public async Task<Block> GetBlockByNumber(int height, bool fullTransactions = false)
         {
             return await Fetch<Block>("getBlockByNumber", new object[] { height, fullTransactions });
+        }
+
+        /// <summary>Returns a template to build the next block for mining.
+        /// This will consider pool instructions when connected to a pool.
+        /// If <c>address</c> and <c>extraData</c> are provided the values are overriden.</summary>
+        /// <param name="address">The address to use as a miner for this block. This overrides the address provided during startup or from the pool.</param>
+        /// <param name="extraData">Hex-encoded value for the extra data field. This overrides the extra data provided during startup or from the pool.</param>
+        /// <returns>A block template object.</returns>
+        public async Task<BlockTemplate> GetBlockTemplate(Address address = null, string extraData = "")
+        {
+            var parameters = new List<object>();
+            if (address != null)
+            {
+                parameters.Add(address);
+                parameters.Add(extraData);
+            }
+            return await Fetch<BlockTemplate>("getBlockTemplate", parameters.ToArray());
+        }
+
+        /// <summary>Returns the number of transactions in a block from a block matching the given block hash.</summary>
+        /// <param name="hash">Hash of the block.</param>
+        /// <returns>Number of transactions in the block found, or <c>null</c>, when no block was found.</returns>
+        public async Task<long?> GetBlockTransactionCountByHash(Hash hash)
+        {
+            return await Fetch<long?>("getBlockTransactionCountByHash", new object[] { hash });
         }
     }
 }
