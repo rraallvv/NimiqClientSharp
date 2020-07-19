@@ -58,5 +58,12 @@ namespace Nimiq
 
             return result;
         }
+
+        /// <summary>Convert a JsonElement into its underlying object of a given type.</summary>
+        public static T GetObject<T>(this JsonElement jsonElement)
+        {
+            var jsonString = jsonElement.GetRawText();
+            return JsonSerializer.Deserialize<T>(jsonString);
+        }
     }
 }

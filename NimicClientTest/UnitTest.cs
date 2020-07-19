@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -44,18 +46,17 @@ namespace NimiqClientTest
             Assert.AreEqual(6, result);
         }
 
-		/*
         [TestMethod]
         public async Task TestSyncingStateWhenSyncing()
         {
             HttpMessageHandlerStub.testData = Fixtures.Syncing();
 
-            const result = async client.Syncing();
+            var result = await client.Syncing();
 
             Assert.AreEqual("syncing", HttpMessageHandlerStub.latestRequestMethod);
 
             Assert.IsTrue(result is SyncStatus);
-            const syncing = result as!SyncStatus
+			var syncing = (SyncStatus)result;
             Assert.AreEqual(578430, syncing.startingBlock);
             Assert.AreEqual(586493, syncing.currentBlock);
             Assert.AreEqual(586493, syncing.highestBlock);
@@ -66,12 +67,12 @@ namespace NimiqClientTest
         {
             HttpMessageHandlerStub.testData = Fixtures.SyncingNotSyncing();
 
-            const result = async client.Syncing();
+            var result = await client.Syncing();
 
             Assert.AreEqual("syncing", HttpMessageHandlerStub.latestRequestMethod);
 
-            Assert.IsTrue(result is Bool);
-            const syncing = result as!Bool
+            Assert.IsNotNull(result is bool);
+			var syncing = result;
             Assert.AreEqual(false, syncing);
         }
 
@@ -81,13 +82,12 @@ namespace NimiqClientTest
         {
             HttpMessageHandlerStub.testData = Fixtures.ConsensusSyncing();
 
-            object result = await client.Consensus();
+            var result = await client.Consensus();
 
             Assert.AreEqual("consensus", HttpMessageHandlerStub.latestRequestMethod);
 
             Assert.AreEqual("syncing", result);
         }
-		*/
 
 		[TestMethod]
         public async Task TestPeerListWithPeers()
@@ -124,7 +124,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(result.Length, 0);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestPeerNormal()
         {
@@ -164,11 +163,13 @@ namespace NimiqClientTest
         {
 			HttpMessageHandlerStub.testData = Fixtures.PeerStateError();
 
-			Assert.IsTrueThrowsError(try client.PeerState("unknown"))
-        { error in
-				guard case Error.badMethodCall( _) = error else {
-					return XCTFail();
-				}
+			try
+            {
+				await client.PeerState("unknown");
+			}
+			catch(Exception error)
+            {
+				Assert.IsTrue(error is BadMethodCallException);
 			}
 		}
 
@@ -204,65 +205,69 @@ namespace NimiqClientTest
 		}
 
 		[TestMethod]
-        public async Task TestCreateRawTransaction()
-        {
+		public async Task TestCreateRawTransaction()
+		{
 			HttpMessageHandlerStub.testData = Fixtures.CreateRawTransactionBasic();
 
-			var transaction = OutgoingTransaction(
-				from: "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM",
-				fromType: AccountType.basic,
-				to: "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U",
-				toType: AccountType.basic,
-				value: 100000,
-				fee: 1
-			);
+			var transaction = new OutgoingTransaction()
+			{
+				from = "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM",
+				fromType = AccountType.basic,
+				to = "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U",
+				toType = AccountType.basic,
+				value = 100000,
+				fee = 1
+			};
 
 			var result = await client.CreateRawTransaction(transaction);
 
 			Assert.AreEqual("createRawTransaction", HttpMessageHandlerStub.latestRequestMethod);
 
-			var param = HttpMessageHandlerStub.latestRequestParams[0] as! [String: Any]
-			Assert.IsTrue(NSDictionary(dictionary: param).isEqual([
-				"from": "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM",
-				"fromType": 0,
-				"to": "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U",
-				"toType": 0,
-				"value": 100000,
-				"fee": 1,
-				"data": null
-				] as [String: Any?] as [AnyHashable : Any]));
+			var param = HttpMessageHandlerStub.latestRequestParams[0];
+			CollectionAssert.AreEqual((Dictionary<string, object>)param, new Dictionary<string, object>()
+			{
+				{ "from", "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM" },
+				{ "fromType", 0 },
+				{ "to", "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U" },
+				{ "toType", 0 },
+				{ "value", 100000 },
+				{ "fee", 1 },
+				{ "data", null }
+			});
 
 			Assert.AreEqual("00c3c0d1af80b84c3b3de4e3d79d5c8cc950e044098c969953d68bf9cee68d7b53305dbaac7514a06dae935e40d599caf1bd8a243c00000000000186a00000000000000001000af84c01239b16cee089836c2af5c7b1dbb22cdc0b4864349f7f3805909aa8cf24e4c1ff0461832e86f3624778a867d5f2ba318f92918ada7ae28d70d40c4ef1d6413802", result);
 		}
 
 		[TestMethod]
-        public async Task TestSendTransaction()
-        {
+		public async Task TestSendTransaction()
+		{
 			HttpMessageHandlerStub.testData = Fixtures.SendTransaction();
 
-			var transaction = OutgoingTransaction(
-				from: "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM",
-				fromType: AccountType.basic,
-				to: "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U",
-				toType: AccountType.basic,
-				value: 1,
-				fee: 1
-			);
+			var transaction = new OutgoingTransaction()
+			{
+				from = "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM",
+				fromType = AccountType.basic,
+				to = "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U",
+				toType = AccountType.basic,
+				value = 1,
+				fee = 1
+			};
 
 			var result = await client.SendTransaction(transaction);
 
 			Assert.AreEqual("sendTransaction", HttpMessageHandlerStub.latestRequestMethod);
 
-			var param = HttpMessageHandlerStub.latestRequestParams[0] as! [String: Any]
-			Assert.IsTrue(NSDictionary(dictionary: param).isEqual([
-				"from": "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM",
-				"fromType": 0,
-				"to": "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U",
-				"toType": 0,
-				"value": 1,
-				"fee": 1,
-				"data": null
-				] as [String: Any?] as [AnyHashable : Any]));
+			var param = HttpMessageHandlerStub.latestRequestParams[0];
+			CollectionAssert.AreEqual((Dictionary<string, object>)param, new Dictionary<string, object>()
+			{
+				{ "from", "NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM" },
+				{ "fromType", 0 },
+				{ "to", "NQ16 61ET MB3M 2JG6 TBLK BR0D B6EA X6XQ L91U" },
+				{ "toType", 0 },
+				{ "value", 1 },
+				{ "fee", 1 },
+				{ "data", null }
+			});
 
 			Assert.AreEqual("81cf3f07b6b0646bb16833d57cda801ad5957e264b64705edeef6191fea0ad63", result);
 		}
@@ -286,7 +291,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(100000, result.value);
 			Assert.AreEqual(1, result.fee);
 		}
-		*/
 		
 		[TestMethod]
         public async Task TestGetTransactionByBlockHashAndIndex()
@@ -422,7 +426,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(1, result.flags);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestGetTransactionReceipt()
         {
@@ -454,7 +457,6 @@ namespace NimiqClientTest
 
 			Assert.IsNull(result);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestGetTransactionsByAddress()
@@ -655,7 +657,6 @@ namespace NimiqClientTest
 			Assert.AreEqual("NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM", result);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestPool()
         {
@@ -716,7 +717,6 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(12000, result);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestGetWork()
@@ -780,20 +780,18 @@ namespace NimiqClientTest
 			Assert.AreEqual("17e250f1977ae85bdbe09468efef83587885419ee1074ddae54d3fb5a96e1f54", result.body.hash);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestSubmitBlock()
         {
 			HttpMessageHandlerStub.testData = Fixtures.SubmitBlock();
 
-			var blockHex = "000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f6ba2bbf7e1478a209057000471d73fbdc28df0b717747d929cfde829c4120f62e02da3d162e20fa982029dbde9cc20f6b431ab05df1764f34af4c62a4f2b33f1f010000000000015ac3185f000134990001000000000000000000000000000000000000000007546573744e657400000000"
+			var blockHex = "000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f6ba2bbf7e1478a209057000471d73fbdc28df0b717747d929cfde829c4120f62e02da3d162e20fa982029dbde9cc20f6b431ab05df1764f34af4c62a4f2b33f1f010000000000015ac3185f000134990001000000000000000000000000000000000000000007546573744e657400000000";
 
-			try! client.SubmitBlock(blockHex);
+			await client.SubmitBlock(blockHex);
 
 			Assert.AreEqual("submitBlock", HttpMessageHandlerStub.latestRequestMethod);
 			Assert.AreEqual(blockHex, HttpMessageHandlerStub.latestRequestParams[0]);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestAccounts()
@@ -843,7 +841,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(1000000000, htlc.totalAmount);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestCreateAccount()
         {
@@ -883,7 +880,7 @@ namespace NimiqClientTest
 			Assert.AreEqual("NQ46 NTNU QX94 MVD0 BBT0 GXAR QUHK VGNF 39ET", HttpMessageHandlerStub.latestRequestParams[0]);
 
 			Assert.IsTrue(result is Account);
-			var account = result as! Account
+			var account = (Account)result;
 			Assert.AreEqual("b6edcc7924af5a05af6087959c7233ec2cf1a5db", account.id);
 			Assert.AreEqual("NQ46 NTNU QX94 MVD0 BBT0 GXAR QUHK VGNF 39ET", account.address);
 			Assert.AreEqual(1200000, account.balance);
@@ -901,7 +898,7 @@ namespace NimiqClientTest
 			Assert.AreEqual("NQ09 VF5Y 1PKV MRM4 5LE1 55KV P6R2 GXYJ XYQF", HttpMessageHandlerStub.latestRequestParams[0]);
 
 			Assert.IsTrue(result is VestingContract);
-			var contract = result as! VestingContract
+			var contract = (VestingContract)result;
 			Assert.AreEqual("ebcbf0de7dae6a42d1c12967db9b2287bf2f7f0f", contract.id);
 			Assert.AreEqual("NQ09 VF5Y 1PKV MRM4 5LE1 55KV P6R2 GXYJ XYQF", contract.address);
 			Assert.AreEqual(52500000000000, contract.balance);
@@ -925,7 +922,7 @@ namespace NimiqClientTest
 			Assert.AreEqual("NQ46 NTNU QX94 MVD0 BBT0 GXAR QUHK VGNF 39ET", HttpMessageHandlerStub.latestRequestParams[0]);
 
 			Assert.IsTrue(result is HTLC);
-			var contract = result as! HTLC
+			var contract = (HTLC)result;
 			Assert.AreEqual("4974636bd6d34d52b7d4a2ee4425dc2be72a2b4e", contract.id);
 			Assert.AreEqual("NQ46 NTNU QX94 MVD0 BBT0 GXAR QUHK VGNF 39ET", contract.address);
 			Assert.AreEqual(1000000000, contract.balance);
@@ -952,7 +949,6 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(748883, result);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestGetBlockTransactionCountByHash()
@@ -1027,7 +1023,6 @@ namespace NimiqClientTest
             }, result.transactions);
         }
 
-		/*
 		[TestMethod]
         public async Task TestGetBlockByHashWithTransactions()
         {
@@ -1062,7 +1057,6 @@ namespace NimiqClientTest
 
 			Assert.IsNull(result);
 		}
-		*/
 
 		[TestMethod]
 		public async Task TestGetBlockByNumber()
@@ -1120,7 +1114,6 @@ namespace NimiqClientTest
 			Assert.IsNull(result);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestConstant()
         {
@@ -1161,7 +1154,6 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(5, result);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestLog()

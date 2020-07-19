@@ -600,10 +600,76 @@ namespace Nimiq
         public int? tx { get; set; }
     }
 
-// JSONRPC Client
+    /// <summary>Commands to change the state of a peer.</summary>
+    [Serializable]
+    [JsonConverter(typeof(PeerStateCommandConverter))]
+    public class PeerStateCommand
+    {
+        /// <summary>Connect.</summary>
+        public static PeerStateCommand connect { get { return new PeerStateCommand("connect"); } }
+        /// <summary>Disconnect.</summary>
+        public static PeerStateCommand disconnect { get { return new PeerStateCommand("disconnect"); } }
+        /// <summary>Ban.</summary>
+        public static PeerStateCommand ban { get { return new PeerStateCommand("ban"); } }
+        /// <summary>Unban.</summary>
+        public static PeerStateCommand unban { get { return new PeerStateCommand("unban"); } }
 
-/// <summary>Used in initialization of NimiqClient class.</summary>
-public class Config
+        private class PeerStateCommandConverter : JsonConverter<PeerStateCommand>
+        {
+            public override PeerStateCommand Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                return new PeerStateCommand(reader.GetString());
+            }
+
+            public override void Write(Utf8JsonWriter writer, PeerStateCommand value, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(value);
+            }
+        }
+
+        private PeerStateCommand(string value) { Value = value; }
+
+        private string Value { get; set; }
+
+        public static implicit operator string(PeerStateCommand level)
+        {
+            return level.Value;
+        }
+
+        public static explicit operator PeerStateCommand(string level)
+        {
+            return new PeerStateCommand(level);
+        }
+    }
+
+    /// <summary>Pool connection state information returned by the server.</summary>
+    [Serializable]
+    public enum PoolConnectionState
+    {
+        /// <summary>Connected.</summary>
+        connected = 0,
+        /// <summary>Connecting.</summary>
+        connecting = 1,
+        /// <summary>Closed.</summary>
+        closed = 2
+    }
+
+    /// <summary>Syncing status returned by the server.</summary>
+    [Serializable]
+    public class SyncStatus
+    {
+        /// <summary>The block at which the import started (will only be reset, after the sync reached his head).</summary>
+        public long startingBlock { get; set; }
+        /// <summary>The current block, same as blockNumber.</summary>
+        public long currentBlock { get; set; }
+        /// <summary>The estimated highest block.</summary>
+        public long highestBlock { get; set; }
+    }
+
+    // JSONRPC Client
+
+    /// <summary>Used in initialization of NimiqClient class.</summary>
+    public class Config
     {
         /// <summary>Protocol squeme, <c>"http"</c> or <c>"https"</c>.</summary>
         public string scheme;
@@ -617,10 +683,16 @@ public class Config
         public string password;
     }
 
-    /// <summary>Thrown when something when wrong with the JSONRPC request.</summary>
-    public class NimiqClientException : System.Exception
+    /// <summary>The client couldn't parse the JSON object.</summary>
+    public class WrongFormatException : System.Exception
     {
-        public NimiqClientException(string message) : base(message) { }
+        public WrongFormatException(string message) : base(message) { }
+    }
+
+    /// <summary>The server didn't recognize the method.</summary>
+    public class BadMethodCallException : System.Exception
+    {
+        public BadMethodCallException(string message) : base(message) { }
     }
 
     /// <summary>Nimiq JSONRPC Client</summary>
@@ -711,13 +783,13 @@ public class Config
             // throw if there are any errors
             if (clientError != null)
             {
-                throw new NimiqClientException(clientError.Message); ;
+                throw new WrongFormatException(clientError.Message); ;
             }
 
             if (responseObject.error != null)
             {
                 var responseError = responseObject.error;
-                throw new NimiqClientException($"{responseError.message} (Code: {responseError.code})");
+                throw new BadMethodCallException($"{responseError.message} (Code: {responseError.code})");
             }
 
             // increase the JSONRPC client request id for the next request
@@ -795,7 +867,7 @@ public class Config
         /// <returns>Details about the account. Returns the default empty basic account for non-existing accounts.</returns>
         public async Task<object> GetAccount(Address address)
         {
-            var result = (RawAccount) await Fetch<object>("getAccount", new object[] { address });
+            var result = await Fetch<RawAccount>("getAccount", new object[] { address });
             return result.Account;
         }
 
@@ -925,7 +997,7 @@ public class Config
         }
 
         /// <summary>Sets the log level of the node.</summary>
-        /// <param name="tag">Tag: If `"*"` the log level is set globally, otherwise the log level is applied only on this tag.</param>
+        /// <param name="tag">Tag: If <c>"*"</c> the log level is set globally, otherwise the log level is applied only on this tag.</param>
         /// <param name="level">Minimum log level to display.</param>
         /// <returns><c>true</c> if the log level was changed, <c>false</c> otherwise.</returns>
         public async Task<bool> Log(string tag, LogLevel level)
@@ -1019,6 +1091,123 @@ public class Config
         public async Task<Peer[]>PeerList()
         {
             return await Fetch<Peer[]>("peerList");
+        }
+
+        /// <summary>Returns the state of the peer.
+        /// When no command is given, it returns peer state.
+        /// When a value is given for command, it sets the peer state to that value.</summary>
+        /// <param name="address">The address of the peer.</param>
+        /// <param name="command">The command to send.</param>
+        /// <returns>The current state of the peer.</returns>
+        public async Task<Peer> PeerState(string address, PeerStateCommand command = null)
+        {
+            var parameters = new List<object>();
+            parameters.Add(address);
+            if (command != null)
+            {
+                parameters.Add(command);
+            }
+            return await Fetch<Peer>("peerState", parameters.ToArray());
+        }
+
+        /// <summary>Returns or sets the mining pool.
+        /// When no parameter is given, it returns the current mining pool.
+        /// When a value is given as parameter, it sets the mining pool to that value.</summary>
+        /// <param name="address">The mining pool connection string (<c>url:port</c>) or boolean to enable/disable pool mining.</param>
+        /// <returns>The mining pool connection string, or <c>null</c> if not enabled.</returns>
+        public async Task<string> Pool(object address = null)
+        {
+            var parameters = new List<object>();
+            if (address != null)
+            {
+                if (address is string)
+                {
+                    parameters.Add(address);
+                }
+                else if (address is bool)
+                {
+                    parameters.Add(address);
+                }
+            }
+            return await Fetch<string>("pool", parameters.ToArray());
+        }
+
+        /// <summary>Returns the confirmed mining pool balance.</summary>
+        /// <returns>The confirmed mining pool balance (in smallest unit).</returns>
+        public async Task<int> PoolConfirmedBalance()
+        {
+            return await Fetch<int>("poolConfirmedBalance");
+        }
+
+        /// <summary>Returns the connection state to mining pool.</summary>
+        /// <returns>The mining pool connection state.</returns>
+        public async Task<PoolConnectionState> PoolConnectionState()
+            {
+            return await Fetch<PoolConnectionState>("poolConnectionState");
+        }
+
+        /// <summary>Sends a signed message call transaction or a contract creation, if the data field contains code.</summary>
+        /// <param name"transaction">The hex encoded signed transaction</param>
+        /// <returns>The Hex-encoded transaction hash.</returns>
+        public async Task<Hash> SendRawTransaction(string transaction)
+        {
+            return await Fetch<Hash>("sendRawTransaction", new object[] { transaction });
+        }
+
+        /// <summary>Creates new message call transaction or a contract creation, if the data field contains code.</summary>
+        /// <param name"transaction">The hex encoded signed transaction</param>
+        /// <returns>The Hex-encoded transaction hash.</returns>
+        public async Task<Hash> SendTransaction(OutgoingTransaction transaction)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "from", transaction.from },
+                { "fromType", transaction.fromType },
+                { "to", transaction.to },
+                { "toType", transaction.toType },
+                { "value", transaction.value },
+                { "fee", transaction.fee },
+                { "data", transaction.data }
+            };
+            return await Fetch<Hash>(method: "sendTransaction", new object[] { parameters });
+        }
+
+        /// <summary>Submits a block to the node. When the block is valid, the node will forward it to other nodes in the network.</summary>
+        /// <param name="block">Hex-encoded full block (including header, interlink and body). When submitting work from getWork, remember to include the suffix.</param>
+        public async Task SubmitBlock(string block)
+        {
+            await Fetch<string>("submitBlock", new object[] { block });
+        }
+
+        /// <summary>Returns an object with data about the sync status or <c>false</c>.</summary>
+        /// <returns>An object with sync status data or <c>false</c>, when not syncing.</returns>
+        public async Task<object> Syncing()
+        {
+            var result = (JsonElement) await Fetch<object>("syncing");
+            try
+            {
+                return result.GetBoolean();
+            }
+            catch
+            {
+                return result.GetObject<SyncStatus>();
+            }
+        }
+
+        /// <summary>Deserializes hex-encoded transaction and returns a transaction object.</summary>
+        /// <param name="transaction">The hex encoded signed transaction.</param>
+        /// <returns>The transaction object.</returns>
+        public async Task<Transaction> GetRawTransactionInfo(string transaction)
+        {
+            return await Fetch<Transaction>("getRawTransactionInfo", new object[] { transaction });
+        }
+
+        /// <summary>Resets the constant to default value.</summary>
+        /// <param name="constant">Name of the constant.</param>
+        /// <returns>The new value of the constant.</returns>
+        public async Task<long> ResetConstant(string constant)
+        {
+            return await Fetch<long>("constant", new object[] { constant, "reset" });
         }
     }
 }
