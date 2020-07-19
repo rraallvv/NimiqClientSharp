@@ -32,19 +32,19 @@ namespace NimiqClientTest
         {
         }
 
-		/*
         [TestMethod]
         public async Task TestPeerCount()
         {
             HttpMessageHandlerStub.testData = Fixtures.PeerCount();
     
-            const result = async client.PeerCount();
+            var result = await client.PeerCount();
 
             Assert.AreEqual("peerCount", HttpMessageHandlerStub.latestRequestMethod);
 
             Assert.AreEqual(6, result);
         }
 
+		/*
         [TestMethod]
         public async Task TestSyncingStateWhenSyncing()
         {
@@ -87,6 +87,7 @@ namespace NimiqClientTest
 
             Assert.AreEqual("syncing", result);
         }
+		*/
 
 		[TestMethod]
         public async Task TestPeerListWithPeers()
@@ -123,6 +124,7 @@ namespace NimiqClientTest
 			Assert.AreEqual(result.Length, 0);
 		}
 
+		/*
 		[TestMethod]
         public async Task TestPeerNormal()
         {
@@ -486,9 +488,8 @@ namespace NimiqClientTest
 			Assert.AreEqual(0, result.Length);
 		}
 
-		/*
 		[TestMethod]
-        public async Task Test_mempoolContentHashesOnly()
+        public async Task TestMempoolContentHashesOnly()
         {
 			HttpMessageHandlerStub.testData = Fixtures.MempoolContentHashesOnly();
 
@@ -536,7 +537,7 @@ namespace NimiqClientTest
 
 			Assert.IsNotNull(result);
 			Assert.AreEqual(3, result.total);
-			Assert.AreEqual([1], result.buckets);
+			CollectionAssert.AreEqual(new long[] { 1 }, result.buckets);
 			Assert.AreEqual(3, result.transactionsPerBucket[1]);
 		}
 
@@ -551,8 +552,8 @@ namespace NimiqClientTest
 
 			Assert.IsNotNull(result);
 			Assert.AreEqual(0, result.total);
-			Assert.AreEqual([], result.buckets);
-			Assert.AreEqual(0, result.transactionsPerBucket.Length);
+			CollectionAssert.AreEqual(new long[0], result.buckets);
+			Assert.AreEqual(0, result.transactionsPerBucket.Count);
 		}
 
 		[TestMethod]
@@ -604,7 +605,6 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(false, result);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestHashrate()
@@ -618,7 +618,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(52982.2731, result);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestMinerThreads()
         {
@@ -656,6 +655,7 @@ namespace NimiqClientTest
 			Assert.AreEqual("NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM", result);
 		}
 
+		/*
 		[TestMethod]
         public async Task TestPool()
         {

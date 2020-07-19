@@ -283,27 +283,6 @@ namespace Nimiq
         public long flags { get; set; }
     }
 
-    /// <summary>Transaction returned by the server. Can be of type Hash or Transaction.</summary>
-    class HashOrTransactionConverter : JsonConverter<object[]>
-    {
-        public override object[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            try
-            {
-                return JsonSerializer.Deserialize<Transaction[]>(ref reader);
-            }
-            catch
-            {
-                return JsonSerializer.Deserialize<string[]>(ref reader); ;
-            }
-        }
-
-        public override void Write(Utf8JsonWriter writer, object[] value, JsonSerializerOptions options)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     /// <summary>Block returned by the server.</summary>
     [Serializable]
     public class Block
@@ -339,6 +318,26 @@ namespace Nimiq
         /// <summary>Array of transactions. Either represented by the transaction hash or a Transaction object.</summary>
         [JsonConverter(typeof(HashOrTransactionConverter))]
         public object[] transactions { get; set; }
+
+        private class HashOrTransactionConverter : JsonConverter<object[]>
+        {
+            public override object[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                try
+                {
+                    return JsonSerializer.Deserialize<Transaction[]>(ref reader);
+                }
+                catch
+                {
+                    return JsonSerializer.Deserialize<string[]>(ref reader); ;
+                }
+            }
+
+            public override void Write(Utf8JsonWriter writer, object[] value, JsonSerializerOptions options)
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 
     /// <summary>Block template header returned by the server.</summary>
@@ -474,10 +473,137 @@ namespace Nimiq
         }
     }
 
-    // JSONRPC Client
+    /// <summary>Mempool information returned by the server.</summary
+    [Serializable]
+    [JsonConverter(typeof(MempoolInfoConverter))]
+    public class MempoolInfo
+    {
+        /// <summary>Total number of pending transactions in mempool.</summary
+        public long total { get; set; }
+        /// <summary>Array containing a subset of fee per byte buckets from <c>[10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0]</c> that currently have more than one transaction.</summary
+        public long[] buckets { get; set; }
+        /// <summary>Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value.</summary
+        public Dictionary<long, long> transactionsPerBucket { get; set; }
 
-    /// <summary>Used in initialization of NimiqClient class.</summary>
-    public class Config
+        private class MempoolInfoConverter : JsonConverter<MempoolInfo>
+        {
+            public override MempoolInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                if (reader.TokenType != JsonTokenType.StartObject)
+                {
+                    throw new JsonException();
+                }
+
+                var result = new MempoolInfo();
+                result.transactionsPerBucket = new Dictionary<long, long>();
+
+                while (reader.Read())
+                {
+                    if (reader.TokenType == JsonTokenType.EndObject)
+                    {
+                        return result;
+                    }
+
+                    if (reader.TokenType != JsonTokenType.PropertyName)
+                    {
+                        throw new JsonException();
+                    }
+
+                    string propertyName = reader.GetString();
+
+                    if (long.TryParse(propertyName, out long key))
+                    {
+                        long value = JsonSerializer.Deserialize<long>(ref reader, options);
+                        result.transactionsPerBucket.Add(key, value);
+                    }
+                    else if (propertyName == nameof(total))
+                    {
+                        result.total = JsonSerializer.Deserialize<long>(ref reader, options);
+                    }
+                    else if (propertyName == nameof(buckets))
+                    {
+                        result.buckets = JsonSerializer.Deserialize<long[]>(ref reader, options);
+                    }
+                    else
+                    {
+                        throw new JsonException($"Unable to convert \"{propertyName}\"");
+                    }
+                }
+
+                throw new JsonException();
+            }
+
+            public override void Write(Utf8JsonWriter writer, MempoolInfo value, JsonSerializerOptions options)
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
+
+    /// <summary>Peer address state returned by the server.</summary>
+    [Serializable]
+    public enum PeerAddressState
+    {
+        /// <summary>New peer.</summary>
+        @new = 1,
+        /// <summary>Established peer.</summary>
+        established = 2,
+        /// <summary>Already tried peer.</summary>
+        tried = 3,
+        /// <summary>Peer failed.</summary>
+        failed = 4,
+        /// <summary>Balled peer.</summary>
+        banned = 5
+    }
+
+    /// <summary>Peer connection state returned by the server.
+    [Serializable]
+    public enum PeerConnectionState
+    {
+        /// <summary>New connection.</summary>
+        @new = 1,
+        /// <summary>Connecting.</summary>
+        connecting = 2,
+        /// <summary>Connected.</summary>
+        connected = 3,
+        /// <summary>Negotiating connection.</summary>
+        negotiating = 4,
+        /// <summary>Connection established.</summary>
+        established = 5,
+        /// <summary>Connection closed.</summary>
+        closed = 6
+    }
+
+    /// <summary>Peer information returned by the server.</summary>
+    [Serializable]
+    public class Peer
+    {
+        /// <summary>Peer id.</summary>
+        public string id { get; set; }
+        /// <summary>Peer address.</summary>
+        public string address { get; set; }
+        /// <summary>Peer address state.</summary>
+        public PeerAddressState addressState { get; set; }
+        /// <summary>Peer connection state.</summary>
+        public PeerConnectionState? connectionState { get; set; }
+        /// <summary>Node version the peer is running.</summary>
+        public int? version { get; set; }
+        /// <summary>Time offset with the peer (in miliseconds).</summary>
+        public int? timeOffset { get; set; }
+        /// <summary>Hash of the head block of the peer.</summary>
+        public Hash headHash { get; set; }
+        /// <summary>Latency to the peer.</summary>
+        public int? latency { get; set; }
+        /// <summary>Received bytes.</summary>
+        public int? rx { get; set; }
+        /// <summary>Sent bytes.</summary>
+        public int? tx { get; set; }
+    }
+
+// JSONRPC Client
+
+/// <summary>Used in initialization of NimiqClient class.</summary>
+public class Config
     {
         /// <summary>Protocol squeme, <c>"http"</c> or <c>"https"</c>.</summary>
         public string scheme;
@@ -805,6 +931,94 @@ namespace Nimiq
         public async Task<bool> Log(string tag, LogLevel level)
         {
             return await Fetch<bool>("log", new object[] { tag, level });
+        }
+
+        /// <summary>Returns information on the current mempool situation. This will provide an overview of the number of transactions sorted into buckets based on their fee per byte (in smallest unit).</summary>
+        /// <returns>Mempool information.</returns>
+        public async Task<MempoolInfo> Mempool()
+        {
+            return await Fetch<MempoolInfo>("mempool");
+        }
+
+        /// <summary>Returns transactions that are currently in the mempool.</summary>
+        /// <param name="fullTransactions">If <c>true</c> includes full transactions, if <c>false</c> includes only transaction hashes.</param>
+        /// <returns>Array of transactions (either represented by the transaction hash or a transaction object).</returns>
+        public async Task<object[]> MempoolContent(bool fullTransactions = false)
+        {
+            if (fullTransactions)
+            {
+                return await Fetch<Transaction[]>("mempoolContent", new object[] { fullTransactions });
+            }
+            else
+            {
+                return await Fetch<string[]>("mempoolContent", new object[] { fullTransactions });
+            }
+        }
+
+        /// <summary>Returns the miner address.</summary>
+        /// <returns>The miner address configured on the node.</returns>
+        public async Task<string> MinerAddress()
+        {
+            return await Fetch<string>("minerAddress");
+        }
+
+        /// <summary>Returns or sets the number of CPU threads for the miner.
+        /// When no parameter is given, it returns the current number of miner threads.
+        /// When a value is given as parameter, it sets the number of miner threads to that value.</summary>
+        /// <param name="threads">The number of threads to allocate for mining.</parameter>
+        /// <returns>The number of threads allocated for mining.</returns>
+        public async Task<int> MinerThreads(long? threads = null)
+        {
+            var parameters = new List<object>();
+            if (threads != null)
+            {
+                parameters.Add(threads);
+            }
+            return await Fetch<int>("minerThreads", parameters.ToArray());
+        }
+
+        /// <summary>Returns or sets the minimum fee per byte.
+        /// When no parameter is given, it returns the current minimum fee per byte.
+        /// When a value is given as parameter, it sets the minimum fee per byte to that value.</summary>
+        /// <param name="fee">The new minimum fee per byte.</param>
+        /// <returns>The new minimum fee per byte.</returns>
+        public async Task<int> MinFeePerByte(int? fee = null)
+        {
+            var parameters = new List<object>();
+            if (fee != null)
+            {
+                parameters.Add(fee);
+            }
+            return await Fetch<int>("minFeePerByte", parameters.ToArray());
+        }
+
+        /// <summary>Returns true if client is actively mining new blocks.
+        /// When no parameter is given, it returns the current state.
+        /// When a value is given as parameter, it sets the current state to that value.</summary>
+        /// <param name="state">The state to be set.</param>
+        /// <returns><c>true</c> if the client is mining, otherwise <c>false</c>.</returns>
+        public async Task<bool> Mining(bool? state = null)
+        {
+            var parameters = new List<object>();
+            if (state != null)
+            {
+                parameters.Add(state);
+            }
+            return await Fetch<bool>("mining", parameters.ToArray());
+        }
+
+        /// <summary>Returns number of peers currently connected to the client.</summary>
+        /// <returns>Number of connected peers.</returns>
+        public async Task<int> PeerCount()
+        {
+            return await Fetch<int>("peerCount");
+        }
+
+        /// <summary>Returns list of peers known to the client.</summary>
+        /// <returns>The list of peers.</returns>
+        public async Task<Peer[]>PeerList()
+        {
+            return await Fetch<Peer[]>("peerList");
         }
     }
 }
