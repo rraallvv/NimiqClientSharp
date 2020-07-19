@@ -284,7 +284,8 @@ namespace NimiqClientTest
 			Assert.AreEqual(100000, result.value);
 			Assert.AreEqual(1, result.fee);
 		}
-
+		*/
+		
 		[TestMethod]
         public async Task TestGetTransactionByBlockHashAndIndex()
         {
@@ -419,6 +420,7 @@ namespace NimiqClientTest
 			Assert.AreEqual(1, result.flags);
 		}
 
+		/*
 		[TestMethod]
         public async Task TestGetTransactionReceipt()
         {
@@ -450,6 +452,7 @@ namespace NimiqClientTest
 
 			Assert.IsNull(result);
 		}
+		*/
 
 		[TestMethod]
         public async Task TestGetTransactionsByAddress()
@@ -483,6 +486,7 @@ namespace NimiqClientTest
 			Assert.AreEqual(0, result.Length);
 		}
 
+		/*
 		[TestMethod]
         public async Task Test_mempoolContentHashesOnly()
         {
@@ -514,11 +518,11 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(3, result.Length);
 			Assert.IsNotNull(result[0]);
-			Assert.AreEqual("5bb722c2afe25c18ba33d453b3ac2c90ac278c595cc92f6188c8b699e8fb006a", (result[0] as? Transaction)?.hash);
+			Assert.AreEqual("5bb722c2afe25c18ba33d453b3ac2c90ac278c595cc92f6188c8b699e8fb006a", ((Transaction)result[0]).hash);
 			Assert.IsNotNull(result[1]);
-			Assert.AreEqual("f59a30e0a7e3348ef569225db1f4c29026aeac4350f8c6e751f669eddce0c718", (result[1] as? Transaction)?.hash);
+			Assert.AreEqual("f59a30e0a7e3348ef569225db1f4c29026aeac4350f8c6e751f669eddce0c718", ((Transaction)result[1]).hash);
 			Assert.IsNotNull(result[2]);
-			Assert.AreEqual("9cd9c1d0ffcaebfcfe86bc2ae73b4e82a488de99c8e3faef92b05432bb94519c", (result[2] as? Transaction)?.hash);
+			Assert.AreEqual("9cd9c1d0ffcaebfcfe86bc2ae73b4e82a488de99c8e3faef92b05432bb94519c", ((Transaction)result[2]).hash);
 		}
 
 		[TestMethod]
@@ -600,6 +604,7 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(false, result);
 		}
+		*/
 
 		[TestMethod]
         public async Task TestHashrate()
@@ -613,6 +618,7 @@ namespace NimiqClientTest
 			Assert.AreEqual(52982.2731, result);
 		}
 
+		/*
 		[TestMethod]
         public async Task TestMinerThreads()
         {
@@ -710,6 +716,7 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(12000, result);
 		}
+		*/
 
 		[TestMethod]
         public async Task TestGetWork()
@@ -742,7 +749,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(503371296, result.target);
 			Assert.AreEqual("nimiq-argon2", result.algorithm);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestGetBlockTemplate()
@@ -974,7 +980,6 @@ namespace NimiqClientTest
 			Assert.AreEqual(null, result);
 		}
 
-		/*
 		[TestMethod]
         public async Task TestGetBlockTransactionCountByNumber()
         {
@@ -1000,7 +1005,6 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(null, result);
 		}
-		*/
 
 		[TestMethod]
         public async Task TestGetBlockByHash()
@@ -1157,6 +1161,7 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(5, result);
 		}
+		*/
 
 		[TestMethod]
         public async Task TestLog()
@@ -1171,6 +1176,5 @@ namespace NimiqClientTest
 
 			Assert.AreEqual(true, result);
 		}		
-        */
     }
 }

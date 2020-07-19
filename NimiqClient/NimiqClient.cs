@@ -176,6 +176,46 @@ namespace Nimiq
         }
     }
 
+    /// <summary>Consensus state returned by the server.</summary>
+    [Serializable]
+    [JsonConverter(typeof(ConsensusStateConverter))]
+    public class ConsensusState
+    {
+        /// <summary>Connecting.</summary>
+        public static ConsensusState trace { get { return new ConsensusState("trace"); } }
+        /// <summary>Syncing blocks.</summary>
+        public static ConsensusState verbose { get { return new ConsensusState("verbose"); } }
+        /// <summary>Consensus established.</summary>
+        public static ConsensusState debug { get { return new ConsensusState("debug"); } }
+
+        private class ConsensusStateConverter : JsonConverter<ConsensusState>
+        {
+            public override ConsensusState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                return new ConsensusState(reader.GetString());
+            }
+
+            public override void Write(Utf8JsonWriter writer, ConsensusState value, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(value);
+            }
+        }
+
+        private ConsensusState(string value) { Value = value; }
+
+        private string Value { get; set; }
+
+        public static implicit operator string(ConsensusState level)
+        {
+            return level.Value;
+        }
+
+        public static explicit operator ConsensusState(string level)
+        {
+            return new ConsensusState(level);
+        }
+    }
+
     /// <summary>Nimiq wallet returned by the server.</summary>
     [Serializable]
     public class Wallet
@@ -352,6 +392,88 @@ namespace Nimiq
         public long target { get; set; }
     }
 
+    /// <summary>Transaction receipt returned by the server.</summary>
+    [Serializable]
+    public class TransactionReceipt
+    {
+        /// <summary>Hex-encoded hash of the transaction.</summary>
+        public Hash transactionHash { get; set; }
+        /// <summary>Integer of the transactions index position in the block.</summary>
+        public long transactionIndex { get; set; }
+        /// <summary>Hex-encoded hash of the block where this transaction was in.</summary>
+        public Hash blockHash { get; set; }
+        /// <summary>Block number where this transaction was in.</summary>
+        public long blockNumber { get; set; }
+        /// <summary>Number of confirmations for this transaction (number of blocks on top of the block where this transaction was in).</summary>
+        public long confirmations { get; set; }
+        /// <summary>Timestamp of the block where this transaction was in.</summary>
+        public long timestamp { get; set; }
+    }
+
+    /// <summary>Work instructions receipt returned by the server.</summary>
+    [Serializable]
+    public class WorkInstructions
+    {
+        /// <summary>Hex-encoded block header. This is what should be passed through the hash function.
+        /// The last 4 bytes describe the nonce, the 4 bytes before are the current timestamp.
+        /// Most implementations allow the miner to arbitrarily choose the nonce and to update the timestamp without requesting new work instructions.</summary>
+        public string data { get; set; }
+        /// <summary>Hex-encoded block without the header. When passing a mining result to submitBlock, append the suffix to the data string with selected nonce.</summary>
+        public string suffix { get; set; }
+        /// <summary>Compact form of the hash target to submit a block to this client.</summary>
+        public long target { get; set; }
+        /// <summary>Field to describe the algorithm used to mine the block. Always nimiq-argon2 for now.</summary>
+        public string algorithm { get; set; }
+    }
+
+    /// <summary>Used to set the log level in the JSONRPC server.</summary>
+    [Serializable]
+    [JsonConverter(typeof(LogLevelConverter))]
+    public class LogLevel
+    {
+        /// <summary>Trace level log.</summary>
+        public static LogLevel trace { get { return new LogLevel("trace"); } }
+        /// <summary>Verbose level log.</summary>
+        public static LogLevel verbose { get { return new LogLevel("verbose"); } }
+        /// <summary>Debugging level log.</summary>
+        public static LogLevel debug { get { return new LogLevel("debug"); } }
+        /// <summary>Info level log.</summary>
+        public static LogLevel info { get { return new LogLevel("info"); } }
+        /// <summary>Warning level log.</summary>
+        public static LogLevel warn { get { return new LogLevel("warn"); } }
+        /// <summary>Error level log.</summary>
+        public static LogLevel error { get { return new LogLevel("error"); } }
+        /// <summary>Assertions level log.</summary>
+        public static LogLevel assert { get { return new LogLevel("assert"); } }
+
+        private class LogLevelConverter : JsonConverter<LogLevel>
+        {
+            public override LogLevel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                return new LogLevel(reader.GetString());
+            }
+
+            public override void Write(Utf8JsonWriter writer, LogLevel value, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(value);
+            }
+        }
+
+        private LogLevel(string value) { Value = value; }
+
+        private string Value { get; set; }
+
+        public static implicit operator string(LogLevel level)
+        {
+            return level.Value;
+        }
+
+        public static explicit operator LogLevel(string level)
+        {
+            return new LogLevel(level);
+        }
+    }
+
     // JSONRPC Client
 
     /// <summary>Used in initialization of NimiqClient class.</summary>
@@ -495,9 +617,9 @@ namespace Nimiq
 
         /// <summary>Returns information on the current consensus state.</summary>
         /// <returns>Consensus state. <c>"established"</c> is the value for a good state, other values indicate bad.</returns>
-        public async Task<string> Consensus()
+        public async Task<ConsensusState> Consensus()
         {
-            return await Fetch<string>("consensus");
+            return await Fetch<ConsensusState>("consensus");
         }
 
         /// <summary>Returns or overrides a constant value.
@@ -600,6 +722,89 @@ namespace Nimiq
         public async Task<long?> GetBlockTransactionCountByHash(Hash hash)
         {
             return await Fetch<long?>("getBlockTransactionCountByHash", new object[] { hash });
+        }
+
+        /// <summary>Returns the number of transactions in a block matching the given block number.</summary>
+        /// <param name="height">Height of the block.</param>
+        /// <returns>Number of transactions in the block found, or <c>null</c>, when no block was found.</returns>
+        public async Task<long?> GetBlockTransactionCountByNumber(long height)
+        {
+            return await Fetch<long?>("getBlockTransactionCountByNumber", new object[] { height });
+        }
+
+        /// <summary>Returns information about a transaction by block hash and transaction index position.</summary>
+        /// <param name="hash">Hash of the block containing the transaction.</param>
+        /// <param name="index">Index of the transaction in the block.</param>
+        /// <returns>A transaction object or <c>null</c> when no transaction was found.<returns>
+        public async Task<Transaction> GetTransactionByBlockHashAndIndex(Hash hash, long index)
+        {
+            return await Fetch<Transaction>("getTransactionByBlockHashAndIndex", new object[] { hash, index });
+        }
+
+        /// <summary>Returns information about a transaction by block number and transaction index position.</summary>
+        /// <param name="height">Height of the block containing the transaction.</param>
+        /// <param name="index">Index of the transaction in the block.</param>
+        /// <returns>A transaction object or <c>null</c> when no transaction was found.<returns>
+        public async Task<Transaction> GetTransactionByBlockNumberAndIndex(long height, long index)
+        {
+            return await Fetch<Transaction>("getTransactionByBlockNumberAndIndex", new object[] { height, index });
+        }
+
+        /// <summary>Returns the information about a transaction requested by transaction hash.</summary>
+        /// <param name="hash">Hash of a transaction.</param>
+        /// <returns>A transaction object or <c>null</c> when no transaction was found.</returns>
+        public async Task<Transaction> GetTransactionByHash(Hash hash)
+        {
+            return await Fetch<Transaction>("getTransactionByHash", new object[] { hash });
+        }
+
+        /// <summary>Returns the receipt of a transaction by transaction hash.</summary>
+        /// <param name="hash">Hash of a transaction.</param>
+        /// <returns>A transaction receipt object, or <c>null</c> when no receipt was found.<returns>
+        public async Task<TransactionReceipt> GetTransactionReceipt(Hash hash)
+        {
+            return await Fetch<TransactionReceipt>("getTransactionReceipt", new object[] { hash });
+        }
+
+        /// <summary>Returns the latest transactions successfully performed by or for an address.
+        /// Note that this information might change when blocks are rewinded on the local state due to forks.</summary>
+        /// <param name="address">Address of which transactions should be gathered.</param>
+        /// <param name="numberOfTransactions">Number of transactions that shall be returned.</param>
+        /// <returns>Array of transactions linked to the requested address.</returns>
+        public async Task<Transaction[]> GetTransactionsByAddress(Address address, long numberOfTransactions = 1000)
+        {
+            return await Fetch<Transaction[]>("getTransactionsByAddress", new object[] { address, numberOfTransactions });
+        }
+
+        /// <summary>Returns instructions to mine the next block. This will consider pool instructions when connected to a pool.</summary>
+        /// <param name="address">The address to use as a miner for this block. This overrides the address provided during startup or from the pool.</param>
+        /// <param name="extraData">Hex-encoded value for the extra data field. This overrides the extra data provided during startup or from the pool.</param>
+        /// <returns>Mining work instructions.</returns>
+        public async Task<WorkInstructions> GetWork(Address address = null, string extraData = "")
+        {
+            var parameters = new List<object>();
+            if (address != null)
+            {
+                parameters.Add(address);
+                parameters.Add(extraData);
+            }
+            return await Fetch<WorkInstructions>("getWork", parameters.ToArray());
+        }
+
+        /// <summary>Returns the number of hashes per second that the node is mining with.</summary>
+        /// <returns>Number of hashes per second.</returns>
+        public async Task<double> Hashrate()
+        {
+            return await Fetch<double>("hashrate");
+        }
+
+        /// <summary>Sets the log level of the node.</summary>
+        /// <param name="tag">Tag: If `"*"` the log level is set globally, otherwise the log level is applied only on this tag.</param>
+        /// <param name="level">Minimum log level to display.</param>
+        /// <returns><c>true</c> if the log level was changed, <c>false</c> otherwise.</returns>
+        public async Task<bool> Log(string tag, LogLevel level)
+        {
+            return await Fetch<bool>("log", new object[] { tag, level });
         }
     }
 }
