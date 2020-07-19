@@ -556,12 +556,22 @@ namespace Nimiq
             return await Fetch<long>("getBalance", new object[] { address });
         }
 
-        /// Returns information about a block by hash.
-        /// - Parameter hash: Hash of the block to gather information on.
-        /// - Parameter fullTransactions: If `true` it returns the full transaction objects, if `false` only the hashes of the transactions.
-        /// - Returns: A block object or `nil` when no block was found.
-        public async Task<Block> GetBlockByHash(Hash hash, Boolean fullTransactions = false) {
+        /// <summary>Returns information about a block by hash.</summary>
+        /// <param name="hash">Hash of the block to gather information on.</param>
+        /// <param name="fullTransactions">If <c>true</c> it returns the full transaction objects, if <c>false</c> only the hashes of the transactions.</param>
+        /// <returns>A block object or <c>nil</c> when no block was found.</returns>
+        public async Task<Block> GetBlockByHash(Hash hash, bool fullTransactions = false)
+        {
             return await Fetch<Block>("getBlockByHash", new object[] { hash, fullTransactions });
+        }
+
+        /// <summary>Returns information about a block by block number.</summary>
+        /// <param name="height">The height of the block to gather information on.</param>
+        /// <param name="fullTransactions">If <c>true</c> it returns the full transaction objects, if <c>false</c> only the hashes of the transactions.</param>
+        /// <returns>A block object or `nil` when no block was found.</returns>
+        public async Task<Block> GetBlockByNumber(int height, bool fullTransactions = false)
+        {
+            return await Fetch<Block>("getBlockByNumber", new object[] { height, fullTransactions });
         }
     }
 }

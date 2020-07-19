@@ -27,8 +27,8 @@ namespace NimiqClientTest
             var json = content.ReadAsStringAsync().Result;
 
             latestRequest = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-            latestRequestMethod = (string)((JsonElement)latestRequest["method"]).TryGetObject();
-            latestRequestParams = (object[])((JsonElement)latestRequest["params"]).TryGetObject();
+            latestRequestMethod = (string)((JsonElement)latestRequest["method"]).GetObject();
+            latestRequestParams = (object[])((JsonElement)latestRequest["params"]).GetObject();
 
             // load test data
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK)

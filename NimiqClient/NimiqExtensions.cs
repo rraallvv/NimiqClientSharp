@@ -7,7 +7,7 @@ namespace Nimiq
     static public class Extensions
     {
         /// <summary>Convert a JsonElement into its underlying objects.</summary>
-        public static object TryGetObject(this JsonElement jsonElement)
+        public static object GetObject(this JsonElement jsonElement)
         {
             object result = null;
 
@@ -17,7 +17,21 @@ namespace Nimiq
                     result = null;
                     break;
                 case JsonValueKind.Number:
-                    result = jsonElement.GetDouble();
+                    int intResult;
+                    long longResult;
+                    double doubleResult;
+                    if (jsonElement.TryGetInt32(out intResult))
+                    {
+                        result = intResult;
+                    }
+                    else if (jsonElement.TryGetInt64(out longResult))
+                    {
+                        result = longResult;
+                    }
+                    else if (jsonElement.TryGetDouble(out doubleResult))
+                    {
+                        result = doubleResult;
+                    }
                     break;
                 case JsonValueKind.False:
                     result = false;
@@ -33,11 +47,11 @@ namespace Nimiq
                     break;
                 case JsonValueKind.Object:
                     result = jsonElement.EnumerateObject()
-                        .ToDictionary(k => k.Name, p => TryGetObject(p.Value));
+                        .ToDictionary(k => k.Name, p => GetObject(p.Value));
                     break;
                 case JsonValueKind.Array:
                     result = jsonElement.EnumerateArray()
-                        .Select(o => TryGetObject(o))
+                        .Select(o => GetObject(o))
                         .ToArray();
                     break;
             }
