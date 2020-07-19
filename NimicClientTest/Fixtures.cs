@@ -48,7 +48,7 @@ namespace NimiqClientTest
                         }
                     ],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string BlockNumber()
@@ -58,7 +58,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 748883,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string BlockTransactionCountFound()
@@ -68,7 +68,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 2,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string BlockTransactionCountNotFound()
@@ -78,7 +78,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": null,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string ConsensusSyncing()
@@ -88,7 +88,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": ""syncing"",
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string Constant()
@@ -98,7 +98,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 5,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string CreateAccount()
@@ -112,7 +112,7 @@ namespace NimiqClientTest
                         ""publicKey"": ""4f6d35cc47b77bf696b6cce72217e52edff972855bd17396b004a8453b020747""
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string CreateRawTransactionBasic()
@@ -122,7 +122,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": ""00c3c0d1af80b84c3b3de4e3d79d5c8cc950e044098c969953d68bf9cee68d7b53305dbaac7514a06dae935e40d599caf1bd8a243c00000000000186a00000000000000001000af84c01239b16cee089836c2af5c7b1dbb22cdc0b4864349f7f3805909aa8cf24e4c1ff0461832e86f3624778a867d5f2ba318f92918ada7ae28d70d40c4ef1d6413802"",
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetAccountBasic()
@@ -137,7 +137,7 @@ namespace NimiqClientTest
                         ""type"": 0
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetAccountVesting()
@@ -158,7 +158,7 @@ namespace NimiqClientTest
                         ""vestingTotalAmount"": 52500000000000
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetAccountVestingHtlc()
@@ -182,7 +182,7 @@ namespace NimiqClientTest
                         ""totalAmount"": 1000000000
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetBalance()
@@ -192,7 +192,7 @@ namespace NimiqClientTest
                     ""id"": 1,
                     ""jsonrpc"": ""2.0"",
                     ""result"": 1200000
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetBlockFound()
@@ -213,7 +213,7 @@ namespace NimiqClientTest
                         ""confirmations"": 739224,
                         ""miner"": ""638ea89b26961884ff3b1b4a5a65968c28be7599"",
                         ""minerAddress"": ""NQ94 CE7A H6R6 JQC8 9YRT 3D55 LRCN HGLB UVCR"",
-                        ""extraData"": "",
+                        ""extraData"": """",
                         ""size"": 643,
                         ""transactions"": [
                             ""78957b87ab5546e11e9540ce5a37ebbf93a0ebd73c0ce05f137288f30ee9f430"",
@@ -221,7 +221,7 @@ namespace NimiqClientTest
                         ]
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetBlockNotFound()
@@ -231,7 +231,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": null,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetBlockWithTransactions()
@@ -252,7 +252,7 @@ namespace NimiqClientTest
                         ""confirmations"": 739501,
                         ""miner"": ""638ea89b26961884ff3b1b4a5a65968c28be7599"",
                         ""minerAddress"": ""NQ94 CE7A H6R6 JQC8 9YRT 3D55 LRCN HGLB UVCR"",
-                        ""extraData"": "",
+                        ""extraData"": """",
                         ""size"": 643,
                         ""transactions"": [
                             {
@@ -290,7 +290,7 @@ namespace NimiqClientTest
                         ]
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetRawTransactionInfoBasic()
@@ -313,7 +313,7 @@ namespace NimiqClientTest
                         ""inMempool"": false
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionContractCreation()
@@ -337,7 +337,7 @@ namespace NimiqClientTest
                         ""flags"": 1
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionFull()
@@ -362,7 +362,7 @@ namespace NimiqClientTest
                         ""flags"": 0
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionNotFound()
@@ -372,7 +372,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": null,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionReceiptNotFound()
@@ -382,7 +382,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": null,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionReceiptFound()
@@ -399,7 +399,7 @@ namespace NimiqClientTest
                         ""timestamp"": 1523412456
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionsNotFound()
@@ -409,7 +409,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": [],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetTransactionsFound()
@@ -465,7 +465,7 @@ namespace NimiqClientTest
                         }
                     ],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetWorkBlockTemplate()
@@ -487,7 +487,7 @@ namespace NimiqClientTest
                         ""body"": {
                             ""hash"": ""17e250f1977ae85bdbe09468efef83587885419ee1074ddae54d3fb5a96e1f54"",
                             ""minerAddr"": ""b7cc7f01e0e6f0e07dd9249dc598f4e5ee8801f5"",
-                            ""extraData"": "",
+                            ""extraData"": """",
                             ""transactions"": [
                                 ""009207144f80a4a479b6954c342ef61747c018d368b4bb86dcb70bfc19381e0c9323c5b9092959ee29b05394e184685e3ff7d3c2a60000000029f007a6000000000000008a000dc2fa0144eccc3af5be34553193aacd543b39b21a79d32c975a9e3f958a9516ff92f134f15ae5a70cadcfcf89d3ced84dd9569d04e40d6d138e9e504ed8e70f31a3d407""
                             ],
@@ -498,7 +498,7 @@ namespace NimiqClientTest
                         }
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string GetWork()
@@ -513,7 +513,7 @@ namespace NimiqClientTest
                         ""algorithm"": ""nimiq-argon2""
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string Hashrate()
@@ -523,7 +523,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 52982.2731,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string Log()
@@ -533,7 +533,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": true,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MempoolEmpty()
@@ -546,7 +546,7 @@ namespace NimiqClientTest
                         ""total"": 0
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string Mempool()
@@ -560,7 +560,7 @@ namespace NimiqClientTest
                         ""total"": 3
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MempoolContentFullTransactions()
@@ -604,7 +604,7 @@ namespace NimiqClientTest
                         }
                     ],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MempoolContentHashesOnly()
@@ -618,7 +618,7 @@ namespace NimiqClientTest
                         ""9cd9c1d0ffcaebfcfe86bc2ae73b4e82a488de99c8e3faef92b05432bb94519c""
                     ],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MinFeePerByte()
@@ -628,7 +628,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 0,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MinerAddress()
@@ -638,7 +638,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": ""NQ39 NY67 X0F0 UTQE 0YER 4JEU B67L UPP8 G0FM"",
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MinerThreads()
@@ -648,7 +648,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 2,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string MiningState()
@@ -658,7 +658,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": false,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PeerCount()
@@ -668,7 +668,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 6,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PeerListEmpty()
@@ -678,7 +678,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": [],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PeerList()
@@ -706,7 +706,7 @@ namespace NimiqClientTest
                         }
                     ],
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PeerStateError()
@@ -719,7 +719,7 @@ namespace NimiqClientTest
                         ""message"": ""Invalid or unknown peer address""
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PeerStateFailed()
@@ -733,7 +733,7 @@ namespace NimiqClientTest
                         ""addressState"": 4
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PeerStateNormal()
@@ -754,7 +754,7 @@ namespace NimiqClientTest
                         ""tx"": 2696
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PoolConfirmedBalance()
@@ -764,7 +764,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 12000,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PoolConnectionState()
@@ -774,7 +774,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": 2,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PoolNoPool()
@@ -784,7 +784,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": null,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string PoolSushipool()
@@ -794,7 +794,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": ""us.sushipool.com:443"",
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string SendTransaction()
@@ -804,7 +804,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": ""81cf3f07b6b0646bb16833d57cda801ad5957e264b64705edeef6191fea0ad63"",
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string SubmitBlock()
@@ -813,7 +813,7 @@ namespace NimiqClientTest
                 {
                     ""jsonrpc"": ""2.0"",
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string SyncingNotSyncing()
@@ -823,7 +823,7 @@ namespace NimiqClientTest
                     ""jsonrpc"": ""2.0"",
                     ""result"": false,
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
 
         public static string Syncing()
@@ -837,7 +837,7 @@ namespace NimiqClientTest
                         ""highestBlock"": 586493
                     },
                     ""id"": 1
-                }";
+                }".Replace("\n", "");
         }
     }
 }

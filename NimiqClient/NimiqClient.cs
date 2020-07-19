@@ -4,16 +4,24 @@ using System.Text;
 using System.Text.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace Nimiq
 {
     // JSONRPC Models
 
+    /// <summary>Can be both a hexadecimal representation or a human readable address.</summary>
+    using Address = String;
+
+    /// <summary>Hexadecimal string containing a hash value.</summary>
+    using Hash = String;
+
     /// <summary>Error returned in the response for the JSONRPC the server.</summary>
     [Serializable]
     public class ResponseError
     {
-        public int code { get; set; }
+        public long code { get; set; }
         public string message { get; set; }
     }
 
@@ -23,13 +31,13 @@ namespace Nimiq
     {
         public string jsonrpc { get; set; }
         public T result { get; set; }
-        public int id { get; set; }
+        public long id { get; set; }
         public ResponseError error { get; set; }
     }
 
     /// <summaryType of a Nimiq account.</summary>
     [Serializable]
-    public enum AccountType : int
+    public enum AccountType : long
     {
         /// <summaryNormal Nimiq account.</summary>
         basic = 0,
@@ -47,7 +55,7 @@ namespace Nimiq
         /// <summary>User friendly address (NQ-address).</summary>
         public string address { get; set; }
         /// <summary>Balance of the account (in smallest unit).</summary>
-        public int balance { get; set; }
+        public long balance { get; set; }
         /// <summary>The account type associated with the account.</summary>
         public AccountType type { get; set; }
     }
@@ -60,13 +68,13 @@ namespace Nimiq
         /// <summary>User friendly address (NQ-address) of the owner of the vesting contract.</summary>
         public string ownerAddress { get; set; }
         /// <summary>The block that the vesting contracted commenced.</summary>
-        public int vestingStart { get; set; }
+        public long vestingStart { get; set; }
         /// <summary>The number of blocks after which some part of the vested funds is released.</summary>
-        public int vestingStepBlocks { get; set; }
+        public long vestingStepBlocks { get; set; }
         /// <summary>The amount (in smallest unit) released every vestingStepBlocks blocks.</summary>
-        public int vestingStepAmount { get; set; }
+        public long vestingStepAmount { get; set; }
         /// <summary>The total amount (in smallest unit) that was provided at the contract creation.</summary>
-        public int vestingTotalAmount { get; set; }
+        public long vestingTotalAmount { get; set; }
     }
 
     /// <summary>Hashed Timelock Contract object returned by the server.
@@ -83,13 +91,13 @@ namespace Nimiq
         /// <summary>Hex-encoded 32 byte hash root.</summary>
         public string hashRoot { get; set; }
         /// <summary>Hash algorithm.</summary>
-        public int hashAlgorithm { get; set; }
+        public long hashAlgorithm { get; set; }
         /// <summary>Number of hashes this HTLC is split into.</summary>
-        public int hashCount { get; set; }
+        public long hashCount { get; set; }
         /// <summary>Block after which the contract can only be used by the original sender to recover funds.</summary>
-        public int timeout { get; set; }
+        public long timeout { get; set; }
         /// <summary>The total amount (in smallest unit) that was provided at the contract creation.</summary>
-        public int totalAmount { get; set; }
+        public long totalAmount { get; set; }
     }
 
     /// <summary>Nimiq account returned by the server. The especific type can obtained with the cast operator.<summary>
@@ -99,80 +107,249 @@ namespace Nimiq
 
         public string id { get; set; }
         public string address { get; set; }
-        public int balance { get; set; }
+        public long balance { get; set; }
         public AccountType type { get; set; }
         public string owner { get; set; }
         public string ownerAddress { get; set; }
-        public int vestingStart { get; set; }
-        public int vestingStepBlocks { get; set; }
-        public int vestingStepAmount { get; set; }
-        public int vestingTotalAmount { get; set; }
+        public long vestingStart { get; set; }
+        public long vestingStepBlocks { get; set; }
+        public long vestingStepAmount { get; set; }
+        public long vestingTotalAmount { get; set; }
         public string sender { get; set; }
         public string senderAddress { get; set; }
         public string recipient { get; set; }
         public string recipientAddress { get; set; }
         public string hashRoot { get; set; }
-        public int hashAlgorithm { get; set; }
-        public int hashCount { get; set; }
-        public int timeout { get; set; }
-        public int totalAmount { get; set; }
+        public long hashAlgorithm { get; set; }
+        public long hashCount { get; set; }
+        public long timeout { get; set; }
+        public long totalAmount { get; set; }
 
-        /// <summary>Converts to normal account.<summary>
-        /// <param name="account">Raw account type with all fields.</param>
-        /// <returns>Normal account type.</returns>
-        public static explicit operator Account(RawAccount account)
+        public object Account
         {
-            return new Account()
+            get {
+                switch (type)
+                {
+                    case AccountType.basic:
+                        return new Account()
+                        {
+                            id = id,
+                            address = address,
+                            balance = balance,
+                            type = type,
+                        };
+                    case AccountType.vesting:
+                        return new VestingContract()
+                        {
+                            id = id,
+                            address = address,
+                            balance = balance,
+                            type = type,
+                            owner = owner,
+                            ownerAddress = ownerAddress,
+                            vestingStart = vestingStart,
+                            vestingStepBlocks = vestingStepBlocks,
+                            vestingStepAmount = vestingStepAmount,
+                            vestingTotalAmount = vestingTotalAmount
+                        };
+
+                    case AccountType.htlc:
+                        return new HTLC()
+                        {
+                            id = id,
+                            address = address,
+                            balance = balance,
+                            type = type,
+                            sender = sender,
+                            senderAddress = senderAddress,
+                            recipient = recipient,
+                            recipientAddress = recipientAddress,
+                            hashRoot = hashRoot,
+                            hashAlgorithm = hashAlgorithm,
+                            hashCount = hashCount,
+                            timeout = timeout,
+                            totalAmount = totalAmount
+                        };
+                }
+                return null;
+            }
+        }
+    }
+
+    /// <summary>Nimiq wallet returned by the server.</summary>
+    [Serializable]
+    public class Wallet
+    {
+        /// <summary>Hex-encoded 20 byte address.</summary>
+        public string id { get; set; }
+        /// <summary>User friendly address (NQ-address).</summary>
+        public string address { get; set; }
+        /// <summary>Hex-encoded 32 byte Ed25519 public key.</summary>
+        public string publicKey { get; set; }
+        /// <summary>Hex-encoded 32 byte Ed25519 private key.</summary>
+        public string privateKey { get; set; }
+    }
+
+    /// <summary>Used to pass the data to send transaccions.</summary>
+    public class OutgoingTransaction
+    {
+        /// <summary>The address the transaction is send from.</summary>
+        public Address from { get; set; }
+        /// <summary>The account type at the given address.</summary>
+        public AccountType fromType { get; set; } = AccountType.basic;
+        /// <summary>The address the transaction is directed to.</summary>
+        public Address to { get; set; }
+        /// <summary>The account type at the given address.</summary>
+        public AccountType toType { get; set; } = AccountType.basic;
+        /// <summary>Integer of the value (in smallest unit) sent with this transaction.</summary>
+        public long value { get; set; }
+        /// <summary>Integer of the fee (in smallest unit) for this transaction.</summary>
+        public long fee { get; set; }
+        /// <summary>Hex-encoded contract parameters or a message.</summary>
+        public string data { get; set; } = null;
+
+        /*
+        /// <summary>OutgoingTransaction initialization.</summary>
+        /// <param name="from">The address the transaction is send from.</params>
+        /// <param name="fromType">The account type at the given address.</params>
+        /// <param name="to">The address the transaction is directed to.</params>
+        /// <param name="toType">The account type at the given address.</params>
+        /// <param name="value">Integer of the value (in smallest unit) sent with this transaction.</params>
+        /// <param name="fee">Integer of the fee (in smallest unit) for this transaction.</params>
+        /// <param name="data">Hex-encoded contract parameters or a message.</params>
+        public init(from: Address, fromType: AccountType? = .basic, to: Address, toType: AccountType? = .basic, value: Int, fee: Int, data: String? = nil)
+        {
+            self.from = from
+            self.fromType = fromType
+            self.to = to
+            self.toType = toType
+            self.value = value
+            self.fee = fee
+            self.data = data
+        }
+        */
+    }
+
+    /// <summary>Transaction returned by the server.
+    [Serializable]
+    public class Transaction
+    {
+        /// <summary>Hex-encoded hash of the transaction.</summary>
+        public Hash hash { get; set; }
+        /// <summary>Hex-encoded hash of the block containing the transaction.</summary>
+        public Hash blockHash { get; set; }
+        /// <summary>Height of the block containing the transaction.</summary>
+        public long blockNumber { get; set; }
+        /// <summary>UNIX timestamp of the block containing the transaction.</summary>
+        public long timestamp { get; set; }
+        /// <summary>Number of confirmations of the block containing the transaction.</summary>
+        public long confirmations { get; set; } = 0;
+        /// <summary>Index of the transaction in the block.</summary>
+        public long transactionIndex { get; set; }
+        /// <summary>Hex-encoded address of the sending account.</summary>
+        public string from { get; set; }
+        /// <summary>Nimiq user friendly address (NQ-address) of the sending account.</summary>
+        public Address fromAddress { get; set; }
+        /// <summary>Hex-encoded address of the recipient account.</summary>
+        public string to { get; set; }
+        /// <summary>Nimiq user friendly address (NQ-address) of the recipient account.</summary>
+        public Address toAddress { get; set; }
+        /// <summary>Integer of the value (in smallest unit) sent with this transaction.</summary>
+        public long value { get; set; }
+        /// <summary>Integer of the fee (in smallest unit) for this transaction.</summary>
+        public long fee { get; set; }
+        /// <summary>Hex-encoded contract parameters or a message.</summary>
+        public string data { get; set; } = null;
+        /// <summary>Bit-encoded transaction flags.</summary>
+        public long flags { get; set; }
+    }
+
+    /// <summary>Transaction returned by the server. Can be of type Hash or Transaction.</summary>
+    class HashOrTransactionConverter : JsonConverter<object[]>
+    {
+        public override object[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            try
             {
-                id = account.id,
-                address = account.address,
-                balance = account.balance,
-                type = account.type,
-            };
+                return JsonSerializer.Deserialize<Transaction[]>(ref reader);
+            }
+            catch
+            {
+                return JsonSerializer.Deserialize<string[]>(ref reader); ;
+            }
         }
 
-        /// <summary>Converts to vesting contract account.<summary>
-        /// <param name="account">Raw account type with all fields.</param>
-        /// <returns>Vesting contract account type.</returns>
-        public static explicit operator VestingContract(RawAccount account)
+        public override void Write(Utf8JsonWriter writer, object[] value, JsonSerializerOptions options)
         {
-            return new VestingContract()
-            {
-                id = account.id,
-                address = account.address,
-                balance = account.balance,
-                type = account.type,
-                owner = account.owner,
-                ownerAddress = account.ownerAddress,
-                vestingStart = account.vestingStart,
-                vestingStepBlocks = account.vestingStepBlocks,
-                vestingStepAmount = account.vestingStepAmount,
-                vestingTotalAmount = account.vestingTotalAmount
-            };
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>Block returned by the server.</summary>
+    [Serializable]
+    public class Block
+    {
+        /// <summary>Height of the block.</summary>
+        public long number { get; set; }
+        /// <summary>Hex-encoded 32-byte hash of the block.</summary>
+        public Hash hash { get; set; }
+        /// <summary>Hex-encoded 32-byte Proof-of-Work hash of the block.</summary>
+        public Hash pow { get; set; }
+        /// <summary>Hex-encoded 32-byte hash of the predecessor block.</summary>
+        public Hash parentHash { get; set; }
+        /// <summary>The nonce of the block used to fulfill the Proof-of-Work.</summary>
+        public long nonce { get; set; }
+        /// <summary>Hex-encoded 32-byte hash of the block body Merkle root.</summary>
+        public Hash bodyHash { get; set; }
+        /// <summary>Hex-encoded 32-byte hash of the accounts tree root.</summary>
+        public Hash accountsHash { get; set; }
+        /// <summary>Block difficulty, encoded as decimal number in string.</summary>
+        public string difficulty { get; set; }
+        /// <summary>UNIX timestamp of the block</summary>
+        public long timestamp { get; set; }
+        /// <summary>Number of confirmations for this transaction (number of blocks on top of the block where this transaction was in).</summary>
+        public long confirmations { get; set; }
+        /// <summary>Hex-encoded 20 byte address of the miner of the block.</summary>
+        public string miner { get; set; }
+        /// <summary>User friendly address (NQ-address) of the miner of the block.</summary>
+        public Address minerAddress { get; set; }
+        /// <summary>Hex-encoded value of the extra data field, maximum of 255 bytes.</summary>
+        public string extraData { get; set; }
+        /// <summary>Block size in byte.</summary>
+        public long size { get; set; }
+        /// <summary>Array of transactions. Either represented by the transaction hash or a Transaction object.</summary>
+        [JsonConverter(typeof(HashOrTransactionConverter))]
+        public object[] transactions { get; set; }
+
+        /*
+
+        private enum CodingKeys : String, CodingKey {
+            case number, hash, pow, parentHash, nonce, bodyHash, accountsHash, difficulty, timestamp, confirmations, miner, minerAddress, extraData, size, transactions
         }
 
-        /// <summary>Converts to HTLC account.<summary>
-        /// <param name="account">Raw account type with all fields.</param>
-        /// <returns>HTLC account type.</returns>
-        public static explicit operator HTLC(RawAccount account)
-        {
-            return new HTLC()
-            {
-                id = account.id,
-                address = account.address,
-                balance = account.balance,
-                type = account.type,
-                sender = account.sender,
-                senderAddress = account.senderAddress,
-                recipient = account.recipient,
-                recipientAddress = account.recipientAddress,
-                hashRoot = account.hashRoot,
-                hashAlgorithm = account.hashAlgorithm,
-                hashCount = account.hashCount,
-                timeout = account.timeout,
-                totalAmount = account.totalAmount
-            };
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            number = try container.decode(Int.self, forKey: .number)
+            hash = try container.decode(Hash.self, forKey: .hash)
+            pow = try container.decode(Hash.self, forKey: .pow)
+            parentHash = try container.decode(Hash.self, forKey: .parentHash)
+            nonce = try container.decode(Int.self, forKey: .nonce)
+            bodyHash = try container.decode(Hash.self, forKey: .bodyHash)
+            accountsHash = try container.decode(Hash.self, forKey: .accountsHash)
+            difficulty = try container.decode(String.self, forKey: .difficulty)
+            timestamp = try container.decode(Int.self, forKey: .timestamp)
+            confirmations = try container.decode(Int.self, forKey: .confirmations)
+            miner = try container.decode(String.self, forKey: .miner)
+            minerAddress = try container.decode(Address.self, forKey: .minerAddress)
+            extraData = try container.decode(String.self, forKey: .extraData)
+            size = try container.decode(Int.self, forKey: .size)
+            do {
+                transactions = try container.decode([Transaction].self, forKey: .transactions)
+            } catch {
+                transactions = try container.decode([Hash].self, forKey: .transactions)
+            }
         }
+        */
     }
 
     // JSONRPC Client
@@ -185,7 +362,7 @@ namespace Nimiq
         /// <summary>Host IP address.</summary>
         public string host;
         /// <summary>Host port.</summary>
-        public int port;
+        public long port;
         /// <summary>Authorized user.</summary>
         public string user;
         /// <summary>Password for the authorized user.</summary>
@@ -202,7 +379,7 @@ namespace Nimiq
     public class NimiqClient
     {
         /// <summary>Number in the sequence for the of the next request.</summary>
-        public int id = 0;
+        public long id = 0;
 
         /// <summary>URL of the JSONRPC server.
         /// - Format: <c>scheme://user:password@host:port</c><summary>
@@ -232,7 +409,7 @@ namespace Nimiq
         /// <param name="host">Host IP address.</param>
         /// <param name="port">Host port.</param>
         /// <param name="client">Used to make all requests. If ommited the an instance of HttpClient is automaticaly create.</param>
-        public NimiqClient(string scheme, string user, string password, string host, int port, HttpClient client = null)
+        public NimiqClient(string scheme, string user, string password, string host, long port, HttpClient client = null)
         {
             Init(scheme, user, password, host, port, client);
         }
@@ -244,7 +421,7 @@ namespace Nimiq
         /// <param name="host">Host IP address.</param>
         /// <param name="port">Host port.</param>
         /// <param name="client">Used to make all requests. If ommited the an instance of HttpClient is automaticaly create.</param>
-        private void Init(string scheme, string user, string password, string host, int port, HttpClient client = null)
+        private void Init(string scheme, string user, string password, string host, long port, HttpClient client = null)
         {
             url = $@"{scheme}://{user}:{password}@{host}:{port}";
             if (client != null)
@@ -259,7 +436,7 @@ namespace Nimiq
 
         /// <summary>Used in all JSONRPC requests to fetch the data.</summary>
         /// <param name="method">JSONRPC method.</param>
-        /// <param name="params">Parameters used by the request.</param>
+        /// <param name="parameters">Parameters used by the request.</param>
         /// <returns>If succesfull, returns the model reperestation of the result, <c>nil</c> otherwise.</returns>
         private async Task<T> Fetch<T>(string method, object[] parameters)
         {
@@ -300,33 +477,91 @@ namespace Nimiq
             return responseObject.result;
         }
 
+        /// <summary>Returns a list of addresses owned by client.</summary>
+        /// <returns>Array of Accounts owned by the client.</returns>
+        public async Task<object[]> Accounts()
+        {
+            var result = await Fetch<RawAccount[]>("accounts", new object[0]);
+            return result.Select(o => o.Account).ToArray();
+        }
+
+        /// <summary>Returns the height of most recent block.</summary>
+        /// <returns>The current block height the client is on.</returns>
+        public async Task<long> BlockNumber()
+        {
+            return await Fetch<long>("blockNumber", new object[0]);
+        }
+
         /// <summary>Returns information on the current consensus state.</summary>
         /// <returns>Consensus state. <c>"established"</c> is the value for a good state, other values indicate bad.</returns>
-        public async Task<string> Consensus() {
+        public async Task<string> Consensus()
+        {
             return await Fetch<string>("consensus", new object[0]);
         }
 
-        /// <summary>Returns a list of addresses owned by client.</summary>
-        /// <returns>Array of Accounts owned by the client.</returns>
-        public async Task<object[]> Accounts() {
-            var result = await Fetch<object[]>("accounts", new object[0]);
-            var converted = new object[0];
-            for (int i = 0; i < result.Length; i++) {
-                RawAccount account = (RawAccount)result[i];
-                switch (account.type)
-                {
-                    case AccountType.basic:
-                        converted[i] = (Account)account;
-                        break;
-                    case AccountType.vesting:
-                        converted[i] = (VestingContract)account;
-                        break;
-                    case AccountType.htlc:
-                        converted[i] = (HTLC)account;
-                        break;
-                }
+        /// <summary>Returns or overrides a constant value.
+        /// When no parameter is given, it returns the value of the constant. When giving a value as parameter,
+        /// it sets the constant to the given value. To reset the constant use <c>resetConstant()</c> instead.<summary>
+        /// <param name="string">The class and name of the constant (format should be <c>"Class.CONSTANT"</c>).</parameter>
+        /// <param name="value">The new value of the constant.</parameter>
+        /// <returns>The value of the constant.</returns>
+        public async Task<long> Constant(string constant, long? value = null) {
+            var parameters = new object [] { constant };
+            if (value != null) {
+                parameters[parameters.Length] = value.Value;
             }
-            return converted;
+            return await Fetch<long>("constant", parameters);
+        }
+
+        /// <summary>Creates a new account and stores its private key in the client store.</summary>
+        /// <returns>Information on the wallet that was created using the command.</returns>
+        public async Task<Wallet> CreateAccount()
+        {
+            return await Fetch<Wallet>("createAccount", new object[0]);
+        }
+
+        /// <summary>Creates and signs a transaction without sending it.
+        /// The transaction can then be send via <c>sendRawTransaction()</c> without accidentally replaying it.</summary>
+        /// <param name="transaction">The transaction object.</parameter>
+        /// <returns>Hex-encoded transaction.</returns>
+        public async Task<string> CreateRawTransaction(OutgoingTransaction transaction)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "from", transaction.from },
+                { "fromType", transaction.fromType },
+                { "to", transaction.to },
+                { "toType", transaction.toType },
+                { "value", transaction.value },
+                { "fee", transaction.fee },
+                { "data", transaction.data }
+            };
+            return await Fetch<string>("createRawTransaction", new object[] { parameters });
+        }
+
+        /// <summary>Returns details for the account of given address.</summary>
+        /// <param name="address">Address to get account details.</param>
+        /// <returns>Details about the account. Returns the default empty basic account for non-existing accounts.</returns>
+        public async Task<object> GetAccount(Address address)
+        {
+            var result = (RawAccount) await Fetch<object>("getAccount", new object[] { address });
+            return result.Account;
+        }
+
+        /// <summary>Returns the balance of the account of given address.</summary>
+        /// <param name="address">Address to check for balance.</param>
+        /// <returns>The current balance at the specified address (in smalest unit).</returns>
+        public async Task<long> GetBalance(Address address)
+        {
+            return await Fetch<long>("getBalance", new object[] { address });
+        }
+
+        /// Returns information about a block by hash.
+        /// - Parameter hash: Hash of the block to gather information on.
+        /// - Parameter fullTransactions: If `true` it returns the full transaction objects, if `false` only the hashes of the transactions.
+        /// - Returns: A block object or `nil` when no block was found.
+        public async Task<Block> GetBlockByHash(Hash hash, Boolean fullTransactions = false) {
+            return await Fetch<Block>("getBlockByHash", new object[] { hash, fullTransactions });
         }
     }
 }
