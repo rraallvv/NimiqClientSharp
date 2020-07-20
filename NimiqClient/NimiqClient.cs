@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Linq;
+using System.Net.Http.Headers;
 
 namespace Nimiq
 {
@@ -673,14 +674,23 @@ namespace Nimiq
     {
         /// <summary>Protocol squeme, <c>"http"</c> or <c>"https"</c>.</summary>
         public string scheme;
-        /// <summary>Host IP address.</summary>
-        public string host;
-        /// <summary>Host port.</summary>
-        public long port;
         /// <summary>Authorized user.</summary>
         public string user;
         /// <summary>Password for the authorized user.</summary>
         public string password;
+        /// <summary>Host IP address.</summary>
+        public string host;
+        /// <summary>Host port.</summary>
+        public long port;
+
+        public Config(string scheme = "http", string user = "", string password = "", string host = "127.0.0.1", long port = 8648)
+        {
+            this.scheme = scheme;
+            this.user = user;
+            this.password = password;
+            this.host = host;
+            this.port = port;
+        }
     }
 
     /// <summary>The client couldn't parse the JSON object.</summary>
@@ -702,8 +712,10 @@ namespace Nimiq
         public long id = 0;
 
         /// <summary>URL of the JSONRPC server.
-        /// - Format: <c>scheme://user:password@host:port</c><summary>
         private string url;
+
+        /// <summary>Base64 string containing authentication parameters</summary>
+        private string auth;
 
         /// <summary>HttpClient used for HTTP requests send to the JSONRPC server.</summary>
         private HttpClient client = null;
@@ -730,7 +742,7 @@ namespace Nimiq
         /// <param name="host">Host IP address.</param>
         /// <param name="port">Host port.</param>
         /// <param name="client">Used to make all requests. If ommited the an instance of HttpClient is automaticaly create.</param>
-        public NimiqClient(string scheme, string user, string password, string host, long port, HttpClient client = null)
+        public NimiqClient(string scheme = "http", string user = "", string password = "", string host = "127.0.0.1", long port = 8648, HttpClient client = null)
         {
             Init(scheme, user, password, host, port, client);
         }
@@ -744,7 +756,8 @@ namespace Nimiq
         /// <param name="client">Used to make all requests. If ommited the an instance of HttpClient is automaticaly create.</param>
         private void Init(string scheme, string user, string password, string host, long port, HttpClient client = null)
         {
-            url = $@"{scheme}://{user}:{password}@{host}:{port}";
+            url = $@"{scheme}://{host}:{port}";
+            auth = Convert.ToBase64String(new UTF8Encoding().GetBytes($"{user}:{password}"));
             if (client != null)
             {
                 this.client = client;
@@ -768,6 +781,7 @@ namespace Nimiq
                 // prepare the request
                 var serializedParams = JsonSerializer.Serialize(parameters ?? new object[0]);
                 var contentData = new StringContent($@"{{""jsonrpc"": ""2.0"", ""method"": ""{method}"", ""params"": {serializedParams}, ""id"": {id}}}", Encoding.UTF8, "application/json");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
                 // send the request
                 var response = await client.PostAsync(url, contentData);
                 var content = response.Content;

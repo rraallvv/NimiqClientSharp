@@ -21,10 +21,10 @@ namespace NimiqClientTest
             // init our JSON RPC client with that
             client = new NimiqClient(
                 "http",
-                "user",
-                "password",
-                "127.0.0.1",
-                8648,
+				"user",
+				"password",
+				"127.0.0.1",
+				8648,
                 httpClient
             );
         }

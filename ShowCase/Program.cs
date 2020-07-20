@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Text;
 using Nimiq;
 
 class Program
@@ -14,12 +12,12 @@ class Program
 
     static async Task MainAsync()
     {
-        var client = new NimiqClient();
+        var client = new NimiqClient(new Config());
         try
         {
             Console.WriteLine(await client.Consensus());
         }
-        catch (HttpRequestException e)
+        catch (Exception e)
         {
             Console.WriteLine("\nException Caught!");
             Console.WriteLine("Message :{0} ", e.Message);
