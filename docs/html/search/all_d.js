@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['parenthash_101',['parentHash',['../class_nimiq_1_1_block.html#a42eaff36bd68aee7471e006e6bc7b31b',1,'Nimiq::Block']]],
-  ['password_102',['password',['../class_nimiq_1_1_config.html#a33b965edb93664a99f639366170c408c',1,'Nimiq::Config']]],
+  ['parenthash_101',['ParentHash',['../class_nimiq_1_1_block.html#afb994b7b9c6c0ad9603640af83cba0ac',1,'Nimiq::Block']]],
+  ['password_102',['Password',['../class_nimiq_1_1_config.html#a56e8786eda22eed1ffa81d6d6e6bd339',1,'Nimiq::Config']]],
   ['peer_103',['Peer',['../class_nimiq_1_1_peer.html',1,'Nimiq']]],
   ['peeraddressstate_104',['PeerAddressState',['../namespace_nimiq.html#a9e9f9398f82eec217dc40134586aa01f',1,'Nimiq']]],
   ['peerconnectionstate_105',['PeerConnectionState',['../namespace_nimiq.html#aabe5a44cff058c6e2fcfa499e27ea77a',1,'Nimiq']]],
@@ -12,10 +12,10 @@ var searchData=
   ['pool_110',['Pool',['../class_nimiq_1_1_nimiq_client.html#a0a0a461eeaf5f62a0367bfee91a799b0',1,'Nimiq::NimiqClient']]],
   ['poolconfirmedbalance_111',['PoolConfirmedBalance',['../class_nimiq_1_1_nimiq_client.html#aa8644c02b9283e12678326efe6ed8eb9',1,'Nimiq::NimiqClient']]],
   ['poolconnectionstate_112',['PoolConnectionState',['../class_nimiq_1_1_nimiq_client.html#a8babf8c4772e964fa5d3937e9956bcd7',1,'Nimiq.NimiqClient.PoolConnectionState()'],['../namespace_nimiq.html#aae2e393eeec59a06ed87beea4aeada02',1,'Nimiq.PoolConnectionState()']]],
-  ['port_113',['port',['../class_nimiq_1_1_config.html#a43032974a20ccf98407916a8ea1c3569',1,'Nimiq::Config']]],
-  ['pow_114',['pow',['../class_nimiq_1_1_block.html#a1a0996bd9f9489997c387561ccefffe7',1,'Nimiq::Block']]],
-  ['prevhash_115',['prevHash',['../class_nimiq_1_1_block_template_header.html#a18dd87a45ed6cf38136ba33dd1edb68b',1,'Nimiq::BlockTemplateHeader']]],
-  ['privatekey_116',['privateKey',['../class_nimiq_1_1_wallet.html#a7a9304306990b10441243c0edb5694a0',1,'Nimiq::Wallet']]],
-  ['prunedaccounts_117',['prunedAccounts',['../class_nimiq_1_1_block_template_body.html#a599ee071dbe46af3560f6f2a20e116a6',1,'Nimiq::BlockTemplateBody']]],
-  ['publickey_118',['publicKey',['../class_nimiq_1_1_wallet.html#ad4260099a2988590fc2da6cefb79425e',1,'Nimiq::Wallet']]]
+  ['port_113',['Port',['../class_nimiq_1_1_config.html#a368afceba7c381a574040f28b31f0ad6',1,'Nimiq::Config']]],
+  ['pow_114',['Pow',['../class_nimiq_1_1_block.html#a7c7023bbabcfbbc25b9204291956e043',1,'Nimiq::Block']]],
+  ['prevhash_115',['PrevHash',['../class_nimiq_1_1_block_template_header.html#aa2b4f27585968f696aced5747340d7f4',1,'Nimiq::BlockTemplateHeader']]],
+  ['privatekey_116',['PrivateKey',['../class_nimiq_1_1_wallet.html#a34e7a8e97a41cf4e004d524084cd4aac',1,'Nimiq::Wallet']]],
+  ['prunedaccounts_117',['PrunedAccounts',['../class_nimiq_1_1_block_template_body.html#ac382aad2aa8c584b5f3249d15b04e648',1,'Nimiq::BlockTemplateBody']]],
+  ['publickey_118',['PublicKey',['../class_nimiq_1_1_wallet.html#aef78c1f6698dba3e0e78969a19958962',1,'Nimiq::Wallet']]]
 ];

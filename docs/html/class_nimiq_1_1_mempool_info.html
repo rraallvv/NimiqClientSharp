@@ -74,27 +74,97 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Mempool information returned by the server.&lt;/summary  
+<p>Mempool information returned by the server.  
  <a href="class_nimiq_1_1_mempool_info.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a62e1fa603b57e128594a34657015fa8f"><td class="memItemLeft" align="right" valign="top"><a id="a62e1fa603b57e128594a34657015fa8f"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_mempool_info.html#a62e1fa603b57e128594a34657015fa8f">total</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a62e1fa603b57e128594a34657015fa8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of pending transactions in mempool.&lt;/summary <br /></td></tr>
-<tr class="separator:a62e1fa603b57e128594a34657015fa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6aec078fabd837d97a97497e0052b8c"><td class="memItemLeft" align="right" valign="top"><a id="ab6aec078fabd837d97a97497e0052b8c"></a>
-long[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_mempool_info.html#ab6aec078fabd837d97a97497e0052b8c">buckets</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ab6aec078fabd837d97a97497e0052b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array containing a subset of fee per byte buckets from <code>[10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0]</code> that currently have more than one transaction.&lt;/summary <br /></td></tr>
-<tr class="separator:ab6aec078fabd837d97a97497e0052b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae62baf67855def018d1d42d49b35de49"><td class="memItemLeft" align="right" valign="top"><a id="ae62baf67855def018d1d42d49b35de49"></a>
-Dictionary&lt; long, long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_mempool_info.html#ae62baf67855def018d1d42d49b35de49">transactionsPerBucket</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ae62baf67855def018d1d42d49b35de49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value.&lt;/summary <br /></td></tr>
-<tr class="separator:ae62baf67855def018d1d42d49b35de49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafc5ebff32b0348de1466e31a9ec384a"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_mempool_info.html#aafc5ebff32b0348de1466e31a9ec384a">Total</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aafc5ebff32b0348de1466e31a9ec384a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of pending transactions in mempool.  <a href="class_nimiq_1_1_mempool_info.html#aafc5ebff32b0348de1466e31a9ec384a">More...</a><br /></td></tr>
+<tr class="separator:aafc5ebff32b0348de1466e31a9ec384a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa482e2ec4815a807e5f4011c20eb4f75"><td class="memItemLeft" align="right" valign="top">long[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_mempool_info.html#aa482e2ec4815a807e5f4011c20eb4f75">Buckets</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aa482e2ec4815a807e5f4011c20eb4f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array containing a subset of fee per byte buckets from <code>[10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0]</code> that currently have more than one transaction.  <a href="class_nimiq_1_1_mempool_info.html#aa482e2ec4815a807e5f4011c20eb4f75">More...</a><br /></td></tr>
+<tr class="separator:aa482e2ec4815a807e5f4011c20eb4f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1434bcb450ab373d1903d6f7caef12a"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; long, long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_mempool_info.html#ab1434bcb450ab373d1903d6f7caef12a">TransactionsPerBucket</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab1434bcb450ab373d1903d6f7caef12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value.  <a href="class_nimiq_1_1_mempool_info.html#ab1434bcb450ab373d1903d6f7caef12a">More...</a><br /></td></tr>
+<tr class="separator:ab1434bcb450ab373d1903d6f7caef12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Mempool information returned by the server.&lt;/summary </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>Mempool information returned by the server. </p>
+</div><h2 class="groupheader">Property Documentation</h2>
+<a id="aa482e2ec4815a807e5f4011c20eb4f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa482e2ec4815a807e5f4011c20eb4f75">&#9670;&nbsp;</a></span>Buckets</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long [] Nimiq.MempoolInfo.Buckets</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Array containing a subset of fee per byte buckets from <code>[10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0]</code> that currently have more than one transaction. </p>
+
+</div>
+</div>
+<a id="aafc5ebff32b0348de1466e31a9ec384a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafc5ebff32b0348de1466e31a9ec384a">&#9670;&nbsp;</a></span>Total</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Nimiq.MempoolInfo.Total</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total number of pending transactions in mempool. </p>
+
+</div>
+</div>
+<a id="ab1434bcb450ab373d1903d6f7caef12a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1434bcb450ab373d1903d6f7caef12a">&#9670;&nbsp;</a></span>TransactionsPerBucket</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dictionary&lt;long, long&gt; Nimiq.MempoolInfo.TransactionsPerBucket</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>NimiqClient/NimiqClient.cs</li>
 </ul>
 </div><!-- contents -->

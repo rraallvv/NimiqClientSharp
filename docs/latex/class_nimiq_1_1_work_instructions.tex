@@ -8,13 +8,13 @@ Work instructions receipt returned by the server.
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
-string \mbox{\hyperlink{class_nimiq_1_1_work_instructions_a75cd5df9b2b0d21751a937b4d6d77996}{data}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+string \mbox{\hyperlink{class_nimiq_1_1_work_instructions_a57b46193090e8e73ae575bc24be8a88b}{Data}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Hex-\/encoded block header. This is what should be passed through the hash function. The last 4 bytes describe the nonce, the 4 bytes before are the current timestamp. Most implementations allow the miner to arbitrarily choose the nonce and to update the timestamp without requesting new work instructions. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{class_nimiq_1_1_work_instructions_a2ceed87f5a7db26f62b11b435b77879a}{suffix}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+string \mbox{\hyperlink{class_nimiq_1_1_work_instructions_ab4a8d00662ed844a173a147134cdecd7}{Suffix}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Hex-\/encoded block without the header. When passing a mining result to submit\+Block, append the suffix to the data string with selected nonce. \end{DoxyCompactList}\item 
-long \mbox{\hyperlink{class_nimiq_1_1_work_instructions_a05e0c0de88ea61271806a66c5feaa81c}{target}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+long \mbox{\hyperlink{class_nimiq_1_1_work_instructions_ab7b7d691f9c00948bb74b93b641a5f40}{Target}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Compact form of the hash target to submit a block to this client. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{class_nimiq_1_1_work_instructions_aef44869d1c829ba79f4e09a3956334d6}{algorithm}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+string \mbox{\hyperlink{class_nimiq_1_1_work_instructions_ac425c42724b0b2b2a7501300f2d2a800}{Algorithm}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Field to describe the algorithm used to mine the block. Always nimiq-\/argon2 for now. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -24,41 +24,41 @@ Work instructions receipt returned by the server.
 
 
 \doxysubsection{Property Documentation}
-\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_aef44869d1c829ba79f4e09a3956334d6}\label{class_nimiq_1_1_work_instructions_aef44869d1c829ba79f4e09a3956334d6}} 
-\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!algorithm@{algorithm}}
-\index{algorithm@{algorithm}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
-\doxysubsubsection{\texorpdfstring{algorithm}{algorithm}}
-{\footnotesize\ttfamily string Nimiq.\+Work\+Instructions.\+algorithm\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_ac425c42724b0b2b2a7501300f2d2a800}\label{class_nimiq_1_1_work_instructions_ac425c42724b0b2b2a7501300f2d2a800}} 
+\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!Algorithm@{Algorithm}}
+\index{Algorithm@{Algorithm}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
+\doxysubsubsection{\texorpdfstring{Algorithm}{Algorithm}}
+{\footnotesize\ttfamily string Nimiq.\+Work\+Instructions.\+Algorithm\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
 
 Field to describe the algorithm used to mine the block. Always nimiq-\/argon2 for now. 
 
-\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_a75cd5df9b2b0d21751a937b4d6d77996}\label{class_nimiq_1_1_work_instructions_a75cd5df9b2b0d21751a937b4d6d77996}} 
-\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!data@{data}}
-\index{data@{data}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
-\doxysubsubsection{\texorpdfstring{data}{data}}
-{\footnotesize\ttfamily string Nimiq.\+Work\+Instructions.\+data\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_a57b46193090e8e73ae575bc24be8a88b}\label{class_nimiq_1_1_work_instructions_a57b46193090e8e73ae575bc24be8a88b}} 
+\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!Data@{Data}}
+\index{Data@{Data}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily string Nimiq.\+Work\+Instructions.\+Data\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
 
 Hex-\/encoded block header. This is what should be passed through the hash function. The last 4 bytes describe the nonce, the 4 bytes before are the current timestamp. Most implementations allow the miner to arbitrarily choose the nonce and to update the timestamp without requesting new work instructions. 
 
-\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_a2ceed87f5a7db26f62b11b435b77879a}\label{class_nimiq_1_1_work_instructions_a2ceed87f5a7db26f62b11b435b77879a}} 
-\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!suffix@{suffix}}
-\index{suffix@{suffix}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
-\doxysubsubsection{\texorpdfstring{suffix}{suffix}}
-{\footnotesize\ttfamily string Nimiq.\+Work\+Instructions.\+suffix\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_ab4a8d00662ed844a173a147134cdecd7}\label{class_nimiq_1_1_work_instructions_ab4a8d00662ed844a173a147134cdecd7}} 
+\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!Suffix@{Suffix}}
+\index{Suffix@{Suffix}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
+\doxysubsubsection{\texorpdfstring{Suffix}{Suffix}}
+{\footnotesize\ttfamily string Nimiq.\+Work\+Instructions.\+Suffix\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
 
 Hex-\/encoded block without the header. When passing a mining result to submit\+Block, append the suffix to the data string with selected nonce. 
 
-\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_a05e0c0de88ea61271806a66c5feaa81c}\label{class_nimiq_1_1_work_instructions_a05e0c0de88ea61271806a66c5feaa81c}} 
-\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!target@{target}}
-\index{target@{target}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
-\doxysubsubsection{\texorpdfstring{target}{target}}
-{\footnotesize\ttfamily long Nimiq.\+Work\+Instructions.\+target\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+\mbox{\Hypertarget{class_nimiq_1_1_work_instructions_ab7b7d691f9c00948bb74b93b641a5f40}\label{class_nimiq_1_1_work_instructions_ab7b7d691f9c00948bb74b93b641a5f40}} 
+\index{Nimiq.WorkInstructions@{Nimiq.WorkInstructions}!Target@{Target}}
+\index{Target@{Target}!Nimiq.WorkInstructions@{Nimiq.WorkInstructions}}
+\doxysubsubsection{\texorpdfstring{Target}{Target}}
+{\footnotesize\ttfamily long Nimiq.\+Work\+Instructions.\+Target\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
 

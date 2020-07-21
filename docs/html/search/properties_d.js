@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['recipient_312',['recipient',['../class_nimiq_1_1_h_t_l_c.html#a280c0b0a59b9578f6276661373b9ebbc',1,'Nimiq::HTLC']]],
-  ['recipientaddress_313',['recipientAddress',['../class_nimiq_1_1_h_t_l_c.html#a8b9ae058d3f7142cedd812b70cc7d485',1,'Nimiq::HTLC']]],
-  ['rx_314',['rx',['../class_nimiq_1_1_peer.html#a3bb45e25321505cb2226385b54265e6c',1,'Nimiq::Peer']]]
+  ['recipient_309',['Recipient',['../class_nimiq_1_1_h_t_l_c.html#afd2bc2a6f2b1e06d4e80d569df742a1d',1,'Nimiq::HTLC']]],
+  ['recipientaddress_310',['RecipientAddress',['../class_nimiq_1_1_h_t_l_c.html#a7bbb53175aa3e6965f057f8336894c67',1,'Nimiq::HTLC']]],
+  ['rx_311',['Rx',['../class_nimiq_1_1_peer.html#a4ee3006c17235b5c31c8cf34337c3fa9',1,'Nimiq::Peer']]]
 ];

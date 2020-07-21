@@ -78,24 +78,24 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a75cd5df9b2b0d21751a937b4d6d77996"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#a75cd5df9b2b0d21751a937b4d6d77996">data</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a75cd5df9b2b0d21751a937b4d6d77996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hex-encoded block header. This is what should be passed through the hash function. The last 4 bytes describe the nonce, the 4 bytes before are the current timestamp. Most implementations allow the miner to arbitrarily choose the nonce and to update the timestamp without requesting new work instructions.  <a href="class_nimiq_1_1_work_instructions.html#a75cd5df9b2b0d21751a937b4d6d77996">More...</a><br /></td></tr>
-<tr class="separator:a75cd5df9b2b0d21751a937b4d6d77996"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ceed87f5a7db26f62b11b435b77879a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#a2ceed87f5a7db26f62b11b435b77879a">suffix</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a2ceed87f5a7db26f62b11b435b77879a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hex-encoded block without the header. When passing a mining result to submitBlock, append the suffix to the data string with selected nonce.  <a href="class_nimiq_1_1_work_instructions.html#a2ceed87f5a7db26f62b11b435b77879a">More...</a><br /></td></tr>
-<tr class="separator:a2ceed87f5a7db26f62b11b435b77879a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05e0c0de88ea61271806a66c5feaa81c"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#a05e0c0de88ea61271806a66c5feaa81c">target</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a05e0c0de88ea61271806a66c5feaa81c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compact form of the hash target to submit a block to this client.  <a href="class_nimiq_1_1_work_instructions.html#a05e0c0de88ea61271806a66c5feaa81c">More...</a><br /></td></tr>
-<tr class="separator:a05e0c0de88ea61271806a66c5feaa81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef44869d1c829ba79f4e09a3956334d6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#aef44869d1c829ba79f4e09a3956334d6">algorithm</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:aef44869d1c829ba79f4e09a3956334d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field to describe the algorithm used to mine the block. Always nimiq-argon2 for now.  <a href="class_nimiq_1_1_work_instructions.html#aef44869d1c829ba79f4e09a3956334d6">More...</a><br /></td></tr>
-<tr class="separator:aef44869d1c829ba79f4e09a3956334d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57b46193090e8e73ae575bc24be8a88b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#a57b46193090e8e73ae575bc24be8a88b">Data</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a57b46193090e8e73ae575bc24be8a88b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hex-encoded block header. This is what should be passed through the hash function. The last 4 bytes describe the nonce, the 4 bytes before are the current timestamp. Most implementations allow the miner to arbitrarily choose the nonce and to update the timestamp without requesting new work instructions.  <a href="class_nimiq_1_1_work_instructions.html#a57b46193090e8e73ae575bc24be8a88b">More...</a><br /></td></tr>
+<tr class="separator:a57b46193090e8e73ae575bc24be8a88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4a8d00662ed844a173a147134cdecd7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#ab4a8d00662ed844a173a147134cdecd7">Suffix</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab4a8d00662ed844a173a147134cdecd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hex-encoded block without the header. When passing a mining result to submitBlock, append the suffix to the data string with selected nonce.  <a href="class_nimiq_1_1_work_instructions.html#ab4a8d00662ed844a173a147134cdecd7">More...</a><br /></td></tr>
+<tr class="separator:ab4a8d00662ed844a173a147134cdecd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b7d691f9c00948bb74b93b641a5f40"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#ab7b7d691f9c00948bb74b93b641a5f40">Target</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab7b7d691f9c00948bb74b93b641a5f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compact form of the hash target to submit a block to this client.  <a href="class_nimiq_1_1_work_instructions.html#ab7b7d691f9c00948bb74b93b641a5f40">More...</a><br /></td></tr>
+<tr class="separator:ab7b7d691f9c00948bb74b93b641a5f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac425c42724b0b2b2a7501300f2d2a800"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimiq_1_1_work_instructions.html#ac425c42724b0b2b2a7501300f2d2a800">Algorithm</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ac425c42724b0b2b2a7501300f2d2a800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field to describe the algorithm used to mine the block. Always nimiq-argon2 for now.  <a href="class_nimiq_1_1_work_instructions.html#ac425c42724b0b2b2a7501300f2d2a800">More...</a><br /></td></tr>
+<tr class="separator:ac425c42724b0b2b2a7501300f2d2a800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Work instructions receipt returned by the server. </p>
 </div><h2 class="groupheader">Property Documentation</h2>
-<a id="aef44869d1c829ba79f4e09a3956334d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef44869d1c829ba79f4e09a3956334d6">&#9670;&nbsp;</a></span>algorithm</h2>
+<a id="ac425c42724b0b2b2a7501300f2d2a800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac425c42724b0b2b2a7501300f2d2a800">&#9670;&nbsp;</a></span>Algorithm</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -104,7 +104,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Nimiq.WorkInstructions.algorithm</td>
+          <td class="memname">string Nimiq.WorkInstructions.Algorithm</td>
         </tr>
       </table>
   </td>
@@ -118,8 +118,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a75cd5df9b2b0d21751a937b4d6d77996"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75cd5df9b2b0d21751a937b4d6d77996">&#9670;&nbsp;</a></span>data</h2>
+<a id="a57b46193090e8e73ae575bc24be8a88b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b46193090e8e73ae575bc24be8a88b">&#9670;&nbsp;</a></span>Data</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,7 +128,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Nimiq.WorkInstructions.data</td>
+          <td class="memname">string Nimiq.WorkInstructions.Data</td>
         </tr>
       </table>
   </td>
@@ -142,8 +142,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a2ceed87f5a7db26f62b11b435b77879a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ceed87f5a7db26f62b11b435b77879a">&#9670;&nbsp;</a></span>suffix</h2>
+<a id="ab4a8d00662ed844a173a147134cdecd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4a8d00662ed844a173a147134cdecd7">&#9670;&nbsp;</a></span>Suffix</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +152,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Nimiq.WorkInstructions.suffix</td>
+          <td class="memname">string Nimiq.WorkInstructions.Suffix</td>
         </tr>
       </table>
   </td>
@@ -166,8 +166,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a05e0c0de88ea61271806a66c5feaa81c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05e0c0de88ea61271806a66c5feaa81c">&#9670;&nbsp;</a></span>target</h2>
+<a id="ab7b7d691f9c00948bb74b93b641a5f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b7d691f9c00948bb74b93b641a5f40">&#9670;&nbsp;</a></span>Target</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +176,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long Nimiq.WorkInstructions.target</td>
+          <td class="memname">long Nimiq.WorkInstructions.Target</td>
         </tr>
       </table>
   </td>

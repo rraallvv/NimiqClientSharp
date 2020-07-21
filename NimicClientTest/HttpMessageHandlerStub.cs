@@ -11,29 +11,29 @@ namespace NimiqClientTest
     public class HttpMessageHandlerStub : HttpMessageHandler
     {
         // test data
-        public static string testData;
-        public static Dictionary<string, object> latestRequest;
-        public static string latestRequestMethod;
-        public static object[] latestRequestParams;
+        public static string TestData { get; set; }
+        public static Dictionary<string, object> LatestRequest { get; set; }
+        public static string LatestRequestMethod { get; set; }
+        public static object[] LatestRequestParams { get; set; }
 
         // send back the resonse
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            latestRequest = null;
-            latestRequestMethod = null;
-            latestRequestParams = null;
+            LatestRequest = null;
+            LatestRequestMethod = null;
+            LatestRequestParams = null;
 
             var content = request.Content;
             var json = content.ReadAsStringAsync().Result;
 
-            latestRequest = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-            latestRequestMethod = (string)((JsonElement)latestRequest["method"]).GetObject();
-            latestRequestParams = (object[])((JsonElement)latestRequest["params"]).GetObject();
+            LatestRequest = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+            LatestRequestMethod = (string)((JsonElement)LatestRequest["method"]).GetObject();
+            LatestRequestParams = (object[])((JsonElement)LatestRequest["params"]).GetObject();
 
             // load test data
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(testData)
+                Content = new StringContent(TestData)
             };
 
             return await Task.FromResult(responseMessage);

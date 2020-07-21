@@ -1,9 +1,9 @@
 var searchData=
 [
   ['failed_42',['failed',['../namespace_nimiq.html#a9e9f9398f82eec217dc40134586aa01fa26934eb377001f66e37289a5c93fe284',1,'Nimiq']]],
-  ['fee_43',['fee',['../class_nimiq_1_1_outgoing_transaction.html#a45e986a5084ccb8cb0b7436b8ad1fc7c',1,'Nimiq.OutgoingTransaction.fee()'],['../class_nimiq_1_1_transaction.html#a7c5a4c1a10db9a2c9bece53c3f9f8bd9',1,'Nimiq.Transaction.fee()']]],
-  ['flags_44',['flags',['../class_nimiq_1_1_transaction.html#a3eaa0cafe02bf2876713fd87aa459bdf',1,'Nimiq::Transaction']]],
-  ['from_45',['from',['../class_nimiq_1_1_outgoing_transaction.html#ae78294e4bf4d90ed5393a9b17f17877a',1,'Nimiq.OutgoingTransaction.from()'],['../class_nimiq_1_1_transaction.html#a3297d10ca249d9c765d660b3fef33444',1,'Nimiq.Transaction.from()']]],
-  ['fromaddress_46',['fromAddress',['../class_nimiq_1_1_transaction.html#a29d98ec55f4acf70cbaef31dbbab46f2',1,'Nimiq::Transaction']]],
-  ['fromtype_47',['fromType',['../class_nimiq_1_1_outgoing_transaction.html#a1fb5596ccde8925510a622dc49d4a76d',1,'Nimiq::OutgoingTransaction']]]
+  ['fee_43',['Fee',['../class_nimiq_1_1_outgoing_transaction.html#af32cb13e8d8b837cbb3716eb9b3961f9',1,'Nimiq.OutgoingTransaction.Fee()'],['../class_nimiq_1_1_transaction.html#af3020aa39e566850f06844b4386b5a42',1,'Nimiq.Transaction.Fee()']]],
+  ['flags_44',['Flags',['../class_nimiq_1_1_transaction.html#a7266e79793832dcab8cdf380e7749753',1,'Nimiq::Transaction']]],
+  ['from_45',['From',['../class_nimiq_1_1_outgoing_transaction.html#a0dc0b4fefd2506b50b7074047e54d1b2',1,'Nimiq.OutgoingTransaction.From()'],['../class_nimiq_1_1_transaction.html#a24816129078b2dd563e0082fbc054310',1,'Nimiq.Transaction.From()']]],
+  ['fromaddress_46',['FromAddress',['../class_nimiq_1_1_transaction.html#ac5588ba425e5a08c48f9c3a0e16d00f3',1,'Nimiq::Transaction']]],
+  ['fromtype_47',['FromType',['../class_nimiq_1_1_outgoing_transaction.html#ada5bb99acf88ab9e9ee242ee0b495063',1,'Nimiq::OutgoingTransaction']]]
 ];

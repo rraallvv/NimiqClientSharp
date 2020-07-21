@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['confirmations_269',['confirmations',['../class_nimiq_1_1_transaction.html#abb3f6c84bef1866dc6050006e36d1b23',1,'Nimiq.Transaction.confirmations()'],['../class_nimiq_1_1_block.html#aae1b49ced9990e330406963b95d52361',1,'Nimiq.Block.confirmations()'],['../class_nimiq_1_1_transaction_receipt.html#a1dabbd4b2052712b9c4744400eb99500',1,'Nimiq.TransactionReceipt.confirmations()']]],
-  ['connect_270',['connect',['../class_nimiq_1_1_peer_state_command.html#a6db115e056c2671f5033d9da22a84604',1,'Nimiq::PeerStateCommand']]],
-  ['connectionstate_271',['connectionState',['../class_nimiq_1_1_peer.html#a544f6812ebdcce83b8af5a0dd2dcec24',1,'Nimiq::Peer']]],
-  ['currentblock_272',['currentBlock',['../class_nimiq_1_1_sync_status.html#a16446fab5c028f5082d547c4768c0e6a',1,'Nimiq::SyncStatus']]]
+  ['confirmations_263',['Confirmations',['../class_nimiq_1_1_transaction.html#a187a908082d5d1b94bb880d98da124eb',1,'Nimiq.Transaction.Confirmations()'],['../class_nimiq_1_1_block.html#ab8a5f831d27b2a807a5cb471a5b45b3a',1,'Nimiq.Block.Confirmations()'],['../class_nimiq_1_1_transaction_receipt.html#a2b5f6c3e9fd872e565566fdf85594275',1,'Nimiq.TransactionReceipt.Confirmations()']]],
+  ['connect_264',['Connect',['../class_nimiq_1_1_peer_state_command.html#ad70db2ccde66ed64804f8989d47a61f9',1,'Nimiq::PeerStateCommand']]],
+  ['connectionstate_265',['ConnectionState',['../class_nimiq_1_1_peer.html#a39d23253fec87862418345adbd738c7d',1,'Nimiq::Peer']]],
+  ['currentblock_266',['CurrentBlock',['../class_nimiq_1_1_sync_status.html#a344294be5f3138705059b5bb1dc670ce',1,'Nimiq::SyncStatus']]]
 ];

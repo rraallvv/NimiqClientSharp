@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['data_35',['data',['../class_nimiq_1_1_outgoing_transaction.html#a0dde98aed1a74607c15ea220d403918d',1,'Nimiq.OutgoingTransaction.data()'],['../class_nimiq_1_1_transaction.html#a9b538c1cea7cb175e4608afe048bb77e',1,'Nimiq.Transaction.data()'],['../class_nimiq_1_1_work_instructions.html#a75cd5df9b2b0d21751a937b4d6d77996',1,'Nimiq.WorkInstructions.data()']]],
-  ['debug_36',['debug',['../class_nimiq_1_1_consensus_state.html#a8ab3bf951055f14e47c0908b7a26453e',1,'Nimiq.ConsensusState.debug()'],['../class_nimiq_1_1_log_level.html#a564d3752a01e5eddf6a767cf9e9bd053',1,'Nimiq.LogLevel.debug()']]],
-  ['difficulty_37',['difficulty',['../class_nimiq_1_1_block.html#a25796b2dc40946245ae99a8a0146eb9b',1,'Nimiq::Block']]],
-  ['disconnect_38',['disconnect',['../class_nimiq_1_1_peer_state_command.html#ac0c47715a9843ee2a83791bc0cd29cc4',1,'Nimiq::PeerStateCommand']]]
+  ['data_35',['Data',['../class_nimiq_1_1_outgoing_transaction.html#a57de31bf555a3421e721909dcf254119',1,'Nimiq.OutgoingTransaction.Data()'],['../class_nimiq_1_1_transaction.html#a07dd1f7627b73c0ab6d4692f5cb51aaa',1,'Nimiq.Transaction.Data()'],['../class_nimiq_1_1_work_instructions.html#a57b46193090e8e73ae575bc24be8a88b',1,'Nimiq.WorkInstructions.Data()']]],
+  ['debug_36',['Debug',['../class_nimiq_1_1_consensus_state.html#ac8a83515215096e999c84bbdd3756e75',1,'Nimiq.ConsensusState.Debug()'],['../class_nimiq_1_1_log_level.html#afcee847fa2ccb1b4c840722d3ef9fbe1',1,'Nimiq.LogLevel.Debug()']]],
+  ['difficulty_37',['Difficulty',['../class_nimiq_1_1_block.html#ad77b6fbb778702c559bd05edb5912f74',1,'Nimiq::Block']]],
+  ['disconnect_38',['Disconnect',['../class_nimiq_1_1_peer_state_command.html#a85a6e5fe6bb43cec0b2357d23ba28562',1,'Nimiq::PeerStateCommand']]]
 ];

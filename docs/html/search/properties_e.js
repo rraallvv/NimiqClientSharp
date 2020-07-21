@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['sender_315',['sender',['../class_nimiq_1_1_h_t_l_c.html#a35c5d94dae27274e854660bc4da10583',1,'Nimiq::HTLC']]],
-  ['senderaddress_316',['senderAddress',['../class_nimiq_1_1_h_t_l_c.html#a4a7312be639a7d376c322fb7841ca3e4',1,'Nimiq::HTLC']]],
-  ['size_317',['size',['../class_nimiq_1_1_block.html#a0b99b5523f71701ecd81f4e58f3e582b',1,'Nimiq::Block']]],
-  ['startingblock_318',['startingBlock',['../class_nimiq_1_1_sync_status.html#a034948c117120eeced4cb1c116bb9111',1,'Nimiq::SyncStatus']]],
-  ['suffix_319',['suffix',['../class_nimiq_1_1_work_instructions.html#a2ceed87f5a7db26f62b11b435b77879a',1,'Nimiq::WorkInstructions']]]
+  ['scheme_312',['Scheme',['../class_nimiq_1_1_config.html#a0c1025c257e8429194c8de4403767177',1,'Nimiq::Config']]],
+  ['sender_313',['Sender',['../class_nimiq_1_1_h_t_l_c.html#a7c71a91f25bf26a5b2143ba55b9ed32e',1,'Nimiq::HTLC']]],
+  ['senderaddress_314',['SenderAddress',['../class_nimiq_1_1_h_t_l_c.html#a08da31bdcd166a9b2fc141cfd67adc02',1,'Nimiq::HTLC']]],
+  ['size_315',['Size',['../class_nimiq_1_1_block.html#ab55ec78c132ab1c117448f6d39b8d903',1,'Nimiq::Block']]],
+  ['startingblock_316',['StartingBlock',['../class_nimiq_1_1_sync_status.html#ab1a8f2962bfa0db32273ceae58422649',1,'Nimiq::SyncStatus']]],
+  ['suffix_317',['Suffix',['../class_nimiq_1_1_work_instructions.html#ab4a8d00662ed844a173a147134cdecd7',1,'Nimiq::WorkInstructions']]]
 ];

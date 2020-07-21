@@ -22,8 +22,10 @@ namespace Nimiq
     [Serializable]
     public class ResponseError
     {
-        public long code { get; set; }
-        public string message { get; set; }
+        [JsonPropertyName("code")]
+        public long Code { get; set; }
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
     }
 
     /// <summaryType of a Nimiq account.</summary>
@@ -42,53 +44,53 @@ namespace Nimiq
     public class Account
     {
         /// <summary>Hex-encoded 20 byte address.</summary>
-        public string id { get; set; }
+        public string Id { get; set; }
         /// <summary>User friendly address (NQ-address).</summary>
-        public string address { get; set; }
+        public string Address { get; set; }
         /// <summary>Balance of the account (in smallest unit).</summary>
-        public long balance { get; set; }
+        public long Balance { get; set; }
         /// <summary>The account type associated with the account.</summary>
-        public AccountType type { get; set; }
+        public AccountType Type { get; set; }
     }
 
     /// <summary>Vesting contract object returned by the server.</summary>
     public class VestingContract : Account
     {
         /// <summary>Hex-encoded 20 byte address of the owner of the vesting contract.</summary>
-        public string owner { get; set; }
+        public string Owner { get; set; }
         /// <summary>User friendly address (NQ-address) of the owner of the vesting contract.</summary>
-        public string ownerAddress { get; set; }
+        public string OwnerAddress { get; set; }
         /// <summary>The block that the vesting contracted commenced.</summary>
-        public long vestingStart { get; set; }
+        public long VestingStart { get; set; }
         /// <summary>The number of blocks after which some part of the vested funds is released.</summary>
-        public long vestingStepBlocks { get; set; }
+        public long VestingStepBlocks { get; set; }
         /// <summary>The amount (in smallest unit) released every vestingStepBlocks blocks.</summary>
-        public long vestingStepAmount { get; set; }
+        public long VestingStepAmount { get; set; }
         /// <summary>The total amount (in smallest unit) that was provided at the contract creation.</summary>
-        public long vestingTotalAmount { get; set; }
+        public long VestingTotalAmount { get; set; }
     }
 
     /// <summary>Hashed Timelock Contract object returned by the server.
     public class HTLC : Account
     {
         /// <summary>Hex-encoded 20 byte address of the sender of the HTLC.</summary>
-        public string sender { get; set; }
+        public string Sender { get; set; }
         /// <summary>User friendly address (NQ-address) of the sender of the HTLC.</summary>
-        public string senderAddress { get; set; }
+        public string SenderAddress { get; set; }
         /// <summary>Hex-encoded 20 byte address of the recipient of the HTLC.</summary>
-        public string recipient { get; set; }
+        public string Recipient { get; set; }
         /// <summary>User friendly address (NQ-address) of the recipient of the HTLC.</summary>
-        public string recipientAddress { get; set; }
+        public string RecipientAddress { get; set; }
         /// <summary>Hex-encoded 32 byte hash root.</summary>
-        public string hashRoot { get; set; }
+        public string HashRoot { get; set; }
         /// <summary>Hash algorithm.</summary>
-        public long hashAlgorithm { get; set; }
+        public long HashAlgorithm { get; set; }
         /// <summary>Number of hashes this HTLC is split into.</summary>
-        public long hashCount { get; set; }
+        public long HashCount { get; set; }
         /// <summary>Block after which the contract can only be used by the original sender to recover funds.</summary>
-        public long timeout { get; set; }
+        public long Timeout { get; set; }
         /// <summary>The total amount (in smallest unit) that was provided at the contract creation.</summary>
-        public long totalAmount { get; set; }
+        public long TotalAmount { get; set; }
     }
 
     /// <summary>Consensus state returned by the server.</summary>
@@ -97,11 +99,14 @@ namespace Nimiq
     public class ConsensusState
     {
         /// <summary>Connecting.</summary>
-        public static ConsensusState trace { get { return new ConsensusState("trace"); } }
+        [JsonPropertyName("trace")]
+        public static ConsensusState Trace { get { return new ConsensusState("trace"); } }
         /// <summary>Syncing blocks.</summary>
-        public static ConsensusState verbose { get { return new ConsensusState("verbose"); } }
+        [JsonPropertyName("verbose")]
+        public static ConsensusState Verbose { get { return new ConsensusState("verbose"); } }
         /// <summary>Consensus established.</summary>
-        public static ConsensusState debug { get { return new ConsensusState("debug"); } }
+        [JsonPropertyName("debug")]
+        public static ConsensusState Debug { get { return new ConsensusState("debug"); } }
 
         private class ConsensusStateConverter : JsonConverter<ConsensusState>
         {
@@ -136,32 +141,36 @@ namespace Nimiq
     public class Wallet
     {
         /// <summary>Hex-encoded 20 byte address.</summary>
-        public string id { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
         /// <summary>User friendly address (NQ-address).</summary>
-        public string address { get; set; }
+        [JsonPropertyName("address")]
+        public string Address { get; set; }
         /// <summary>Hex-encoded 32 byte Ed25519 public key.</summary>
-        public string publicKey { get; set; }
+        [JsonPropertyName("publicKey")]
+        public string PublicKey { get; set; }
         /// <summary>Hex-encoded 32 byte Ed25519 private key.</summary>
-        public string privateKey { get; set; }
+        [JsonPropertyName("privateKey")]
+        public string PrivateKey { get; set; }
     }
 
     /// <summary>Used to pass the data to send transaccions.</summary>
     public class OutgoingTransaction
     {
         /// <summary>The address the transaction is send from.</summary>
-        public Address from { get; set; }
+        public Address From { get; set; }
         /// <summary>The account type at the given address.</summary>
-        public AccountType fromType { get; set; } = AccountType.basic;
+        public AccountType FromType { get; set; } = AccountType.basic;
         /// <summary>The address the transaction is directed to.</summary>
-        public Address to { get; set; }
+        public Address To { get; set; }
         /// <summary>The account type at the given address.</summary>
-        public AccountType toType { get; set; } = AccountType.basic;
+        public AccountType ToType { get; set; } = AccountType.basic;
         /// <summary>Integer of the value (in smallest unit) sent with this transaction.</summary>
-        public long value { get; set; }
+        public long Value { get; set; }
         /// <summary>Integer of the fee (in smallest unit) for this transaction.</summary>
-        public long fee { get; set; }
+        public long Fee { get; set; }
         /// <summary>Hex-encoded contract parameters or a message.</summary>
-        public string data { get; set; } = null;
+        public string Data { get; set; } = null;
     }
 
     /// <summary>Transaction returned by the server.
@@ -169,33 +178,47 @@ namespace Nimiq
     public class Transaction
     {
         /// <summary>Hex-encoded hash of the transaction.</summary>
-        public Hash hash { get; set; }
+        [JsonPropertyName("hash")]
+        public Hash Hash { get; set; }
         /// <summary>Hex-encoded hash of the block containing the transaction.</summary>
-        public Hash blockHash { get; set; }
+        [JsonPropertyName("blockHash")]
+        public Hash BlockHash { get; set; }
         /// <summary>Height of the block containing the transaction.</summary>
-        public long blockNumber { get; set; }
+        [JsonPropertyName("blockNumber")]
+        public long BlockNumber { get; set; }
         /// <summary>UNIX timestamp of the block containing the transaction.</summary>
-        public long timestamp { get; set; }
+        [JsonPropertyName("timestamp")]
+        public long Timestamp { get; set; }
         /// <summary>Number of confirmations of the block containing the transaction.</summary>
-        public long confirmations { get; set; } = 0;
+        [JsonPropertyName("confirmations")]
+        public long Confirmations { get; set; } = 0;
         /// <summary>Index of the transaction in the block.</summary>
-        public long transactionIndex { get; set; }
+        [JsonPropertyName("transactionIndex")]
+        public long TransactionIndex { get; set; }
         /// <summary>Hex-encoded address of the sending account.</summary>
-        public string from { get; set; }
+        [JsonPropertyName("from")]
+        public string From { get; set; }
         /// <summary>Nimiq user friendly address (NQ-address) of the sending account.</summary>
-        public Address fromAddress { get; set; }
+        [JsonPropertyName("fromAddress")]
+        public Address FromAddress { get; set; }
         /// <summary>Hex-encoded address of the recipient account.</summary>
-        public string to { get; set; }
+        [JsonPropertyName("to")]
+        public string To { get; set; }
         /// <summary>Nimiq user friendly address (NQ-address) of the recipient account.</summary>
-        public Address toAddress { get; set; }
+        [JsonPropertyName("toAddress")]
+        public Address ToAddress { get; set; }
         /// <summary>Integer of the value (in smallest unit) sent with this transaction.</summary>
-        public long value { get; set; }
+        [JsonPropertyName("value")]
+        public long Value { get; set; }
         /// <summary>Integer of the fee (in smallest unit) for this transaction.</summary>
-        public long fee { get; set; }
+        [JsonPropertyName("fee")]
+        public long Fee { get; set; }
         /// <summary>Hex-encoded contract parameters or a message.</summary>
-        public string data { get; set; } = null;
+        [JsonPropertyName("data")]
+        public string Data { get; set; } = null;
         /// <summary>Bit-encoded transaction flags.</summary>
-        public long flags { get; set; }
+        [JsonPropertyName("flags")]
+        public long Flags { get; set; }
     }
 
     /// <summary>Block returned by the server.</summary>
@@ -203,36 +226,51 @@ namespace Nimiq
     public class Block
     {
         /// <summary>Height of the block.</summary>
-        public long number { get; set; }
+        [JsonPropertyName("number")]
+        public long Number { get; set; }
         /// <summary>Hex-encoded 32-byte hash of the block.</summary>
-        public Hash hash { get; set; }
+        [JsonPropertyName("hash")]
+        public Hash Hash { get; set; }
         /// <summary>Hex-encoded 32-byte Proof-of-Work hash of the block.</summary>
-        public Hash pow { get; set; }
+        [JsonPropertyName("pow")]
+        public Hash Pow { get; set; }
         /// <summary>Hex-encoded 32-byte hash of the predecessor block.</summary>
-        public Hash parentHash { get; set; }
+        [JsonPropertyName("parentHash")]
+        public Hash ParentHash { get; set; }
         /// <summary>The nonce of the block used to fulfill the Proof-of-Work.</summary>
-        public long nonce { get; set; }
+        [JsonPropertyName("nonce")]
+        public long Nonce { get; set; }
         /// <summary>Hex-encoded 32-byte hash of the block body Merkle root.</summary>
-        public Hash bodyHash { get; set; }
+        [JsonPropertyName("bodyHash")]
+        public Hash BodyHash { get; set; }
         /// <summary>Hex-encoded 32-byte hash of the accounts tree root.</summary>
-        public Hash accountsHash { get; set; }
+        [JsonPropertyName("accountsHash")]
+        public Hash AccountsHash { get; set; }
         /// <summary>Block difficulty, encoded as decimal number in string.</summary>
-        public string difficulty { get; set; }
+        [JsonPropertyName("difficulty")]
+        public string Difficulty { get; set; }
         /// <summary>UNIX timestamp of the block</summary>
-        public long timestamp { get; set; }
+        [JsonPropertyName("timestamp")]
+        public long Timestamp { get; set; }
         /// <summary>Number of confirmations for this transaction (number of blocks on top of the block where this transaction was in).</summary>
-        public long confirmations { get; set; }
+        [JsonPropertyName("confirmations")]
+        public long Confirmations { get; set; }
         /// <summary>Hex-encoded 20 byte address of the miner of the block.</summary>
-        public string miner { get; set; }
+        [JsonPropertyName("miner")]
+        public string Miner { get; set; }
         /// <summary>User friendly address (NQ-address) of the miner of the block.</summary>
-        public Address minerAddress { get; set; }
+        [JsonPropertyName("minerAddress")]
+        public Address MinerAddress { get; set; }
         /// <summary>Hex-encoded value of the extra data field, maximum of 255 bytes.</summary>
-        public string extraData { get; set; }
+        [JsonPropertyName("extraData")]
+        public string ExtraData { get; set; }
         /// <summary>Block size in byte.</summary>
-        public long size { get; set; }
+        [JsonPropertyName("size")]
+        public long Size { get; set; }
         /// <summary>Array of transactions. Either represented by the transaction hash or a Transaction object.</summary>
         [JsonConverter(typeof(HashOrTransactionConverter))]
-        public object[] transactions { get; set; }
+        [JsonPropertyName("transactions")]
+        public object[] Transactions { get; set; }
 
         private class HashOrTransactionConverter : JsonConverter<object[]>
         {
@@ -260,17 +298,23 @@ namespace Nimiq
     public class BlockTemplateHeader
     {
         /// <summary>Version in block header.</summary>
-        public long version { get; set; }
+        [JsonPropertyName("version")]
+        public long Version { get; set; }
         /// <summary>32-byte hex-encoded hash of the previous block.</summary>
-        public Hash prevHash { get; set; }
+        [JsonPropertyName("prevHash")]
+        public Hash PrevHash { get; set; }
         /// <summary>32-byte hex-encoded hash of the interlink.</summary>
-        public Hash interlinkHash { get; set; }
+        [JsonPropertyName("interlinkHash")]
+        public Hash InterlinkHash { get; set; }
         /// <summary>32-byte hex-encoded hash of the accounts tree.</summary>
-        public Hash accountsHash { get; set; }
+        [JsonPropertyName("accountsHash")]
+        public Hash AccountsHash { get; set; }
         /// <summary>Compact form of the hash target for this block.</summary>
-        public long nBits { get; set; }
+        [JsonPropertyName("nBits")]
+        public long NBits { get; set; }
         /// <summary>Height of the block in the block chain (also known as block number).</summary>
-        public long height { get; set; }
+        [JsonPropertyName("height")]
+        public long Height { get; set; }
     }
 
     /// <summary>Block template body returned by the server.</summary>
@@ -278,18 +322,24 @@ namespace Nimiq
     public class BlockTemplateBody
     {
         /// <summary>32-byte hex-encoded hash of the block body.</summary>
-        public Hash hash { get; set; }
+        [JsonPropertyName("hash")]
+        public Hash Hash { get; set; }
         /// <summary>20-byte hex-encoded miner address.</summary>
-        public string minerAddr { get; set; }
+        [JsonPropertyName("minerAddr")]
+        public string MinerAddr { get; set; }
         /// <summary>Hex-encoded value of the extra data field.</summary>
-        public string extraData { get; set; }
+        [JsonPropertyName("extraData")]
+        public string ExtraData { get; set; }
         /// <summary>Array of hex-encoded transactions for this block.</summary>
-        public string[] transactions { get; set; }
+        [JsonPropertyName("transactions")]
+        public string[] Transactions { get; set; }
         /// <summary>Array of hex-encoded pruned accounts for this block.</summary>
-        public string[] prunedAccounts { get; set; }
+        [JsonPropertyName("prunedAccounts")]
+        public string[] PrunedAccounts { get; set; }
         /// <summary>Array of hex-encoded hashes that verify the path of the miner address in the merkle tree.
         /// This can be used to change the miner address easily.</summary>
-        public Hash[] merkleHashes { get; set; }
+        [JsonPropertyName("merkleHashes")]
+        public Hash[] MerkleHashes { get; set; }
     }
 
     /// <summary>Block template returned by the server.</summary>
@@ -297,13 +347,17 @@ namespace Nimiq
     public class BlockTemplate
     {
         /// <summary>Block template header returned by the server.</summary>
-        public BlockTemplateHeader header { get; set; }
+        [JsonPropertyName("header")]
+        public BlockTemplateHeader Header { get; set; }
         /// <summary>Hex-encoded interlink.</summary>
-        public string interlink { get; set; }
+        [JsonPropertyName("interlink")]
+        public string Interlink { get; set; }
         /// <summary>Block template body returned by the server.</summary>
-        public BlockTemplateBody body { get; set; }
+        [JsonPropertyName("body")]
+        public BlockTemplateBody Body { get; set; }
         /// <summary>Compact form of the hash target to submit a block to this client.</summary>
-        public long target { get; set; }
+        [JsonPropertyName("target")]
+        public long Target { get; set; }
     }
 
     /// <summary>Transaction receipt returned by the server.</summary>
@@ -311,17 +365,23 @@ namespace Nimiq
     public class TransactionReceipt
     {
         /// <summary>Hex-encoded hash of the transaction.</summary>
-        public Hash transactionHash { get; set; }
+        [JsonPropertyName("transactionHash")]
+        public Hash TransactionHash { get; set; }
         /// <summary>Integer of the transactions index position in the block.</summary>
-        public long transactionIndex { get; set; }
+        [JsonPropertyName("transactionIndex")]
+        public long TransactionIndex { get; set; }
         /// <summary>Hex-encoded hash of the block where this transaction was in.</summary>
-        public Hash blockHash { get; set; }
+        [JsonPropertyName("blockHash")]
+        public Hash BlockHash { get; set; }
         /// <summary>Block number where this transaction was in.</summary>
-        public long blockNumber { get; set; }
+        [JsonPropertyName("blockNumber")]
+        public long BlockNumber { get; set; }
         /// <summary>Number of confirmations for this transaction (number of blocks on top of the block where this transaction was in).</summary>
-        public long confirmations { get; set; }
+        [JsonPropertyName("confirmations")]
+        public long Confirmations { get; set; }
         /// <summary>Timestamp of the block where this transaction was in.</summary>
-        public long timestamp { get; set; }
+        [JsonPropertyName("timestamp")]
+        public long Timestamp { get; set; }
     }
 
     /// <summary>Work instructions receipt returned by the server.</summary>
@@ -331,13 +391,17 @@ namespace Nimiq
         /// <summary>Hex-encoded block header. This is what should be passed through the hash function.
         /// The last 4 bytes describe the nonce, the 4 bytes before are the current timestamp.
         /// Most implementations allow the miner to arbitrarily choose the nonce and to update the timestamp without requesting new work instructions.</summary>
-        public string data { get; set; }
+        [JsonPropertyName("data")]
+        public string Data { get; set; }
         /// <summary>Hex-encoded block without the header. When passing a mining result to submitBlock, append the suffix to the data string with selected nonce.</summary>
-        public string suffix { get; set; }
+        [JsonPropertyName("suffix")]
+        public string Suffix { get; set; }
         /// <summary>Compact form of the hash target to submit a block to this client.</summary>
-        public long target { get; set; }
+        [JsonPropertyName("target")]
+        public long Target { get; set; }
         /// <summary>Field to describe the algorithm used to mine the block. Always nimiq-argon2 for now.</summary>
-        public string algorithm { get; set; }
+        [JsonPropertyName("algorithm")]
+        public string Algorithm { get; set; }
     }
 
     /// <summary>Used to set the log level in the JSONRPC server.</summary>
@@ -346,19 +410,26 @@ namespace Nimiq
     public class LogLevel
     {
         /// <summary>Trace level log.</summary>
-        public static LogLevel trace { get { return new LogLevel("trace"); } }
+        [JsonPropertyName("trace")]
+        public static LogLevel Trace { get { return new LogLevel("trace"); } }
         /// <summary>Verbose level log.</summary>
-        public static LogLevel verbose { get { return new LogLevel("verbose"); } }
+        [JsonPropertyName("verbose")]
+        public static LogLevel Verbose { get { return new LogLevel("verbose"); } }
         /// <summary>Debugging level log.</summary>
-        public static LogLevel debug { get { return new LogLevel("debug"); } }
+        [JsonPropertyName("debug")]
+        public static LogLevel Debug { get { return new LogLevel("debug"); } }
         /// <summary>Info level log.</summary>
-        public static LogLevel info { get { return new LogLevel("info"); } }
+        [JsonPropertyName("info")]
+        public static LogLevel Info { get { return new LogLevel("info"); } }
         /// <summary>Warning level log.</summary>
-        public static LogLevel warn { get { return new LogLevel("warn"); } }
+        [JsonPropertyName("warn")]
+        public static LogLevel Warn { get { return new LogLevel("warn"); } }
         /// <summary>Error level log.</summary>
-        public static LogLevel error { get { return new LogLevel("error"); } }
+        [JsonPropertyName("error")]
+        public static LogLevel Error { get { return new LogLevel("error"); } }
         /// <summary>Assertions level log.</summary>
-        public static LogLevel assert { get { return new LogLevel("assert"); } }
+        [JsonPropertyName("assert")]
+        public static LogLevel Assert { get { return new LogLevel("assert"); } }
 
         private class LogLevelConverter : JsonConverter<LogLevel>
         {
@@ -388,17 +459,19 @@ namespace Nimiq
         }
     }
 
-    /// <summary>Mempool information returned by the server.</summary
+    /// <summary>Mempool information returned by the server.</summary>
     [Serializable]
     [JsonConverter(typeof(MempoolInfoConverter))]
     public class MempoolInfo
     {
-        /// <summary>Total number of pending transactions in mempool.</summary
-        public long total { get; set; }
-        /// <summary>Array containing a subset of fee per byte buckets from <c>[10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0]</c> that currently have more than one transaction.</summary
-        public long[] buckets { get; set; }
-        /// <summary>Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value.</summary
-        public Dictionary<long, long> transactionsPerBucket { get; set; }
+        /// <summary>Total number of pending transactions in mempool.</summary>
+        [JsonPropertyName("total")]
+        public long Total { get; set; }
+        /// <summary>Array containing a subset of fee per byte buckets from <c>[10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0]</c> that currently have more than one transaction.</summary>
+        [JsonPropertyName("buckets")]
+        public long[] Buckets { get; set; }
+        /// <summary>Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value.</summary>
+        public Dictionary<long, long> TransactionsPerBucket { get; set; }
 
         private class MempoolInfoConverter : JsonConverter<MempoolInfo>
         {
@@ -410,7 +483,7 @@ namespace Nimiq
                 }
 
                 var result = new MempoolInfo();
-                result.transactionsPerBucket = new Dictionary<long, long>();
+                result.TransactionsPerBucket = new Dictionary<long, long>();
 
                 while (reader.Read())
                 {
@@ -429,15 +502,15 @@ namespace Nimiq
                     if (long.TryParse(propertyName, out long key))
                     {
                         long value = JsonSerializer.Deserialize<long>(ref reader, options);
-                        result.transactionsPerBucket.Add(key, value);
+                        result.TransactionsPerBucket.Add(key, value);
                     }
-                    else if (propertyName == nameof(total))
+                    else if (propertyName == "total")
                     {
-                        result.total = JsonSerializer.Deserialize<long>(ref reader, options);
+                        result.Total = JsonSerializer.Deserialize<long>(ref reader, options);
                     }
-                    else if (propertyName == nameof(buckets))
+                    else if (propertyName == "buckets")
                     {
-                        result.buckets = JsonSerializer.Deserialize<long[]>(ref reader, options);
+                        result.Buckets = JsonSerializer.Deserialize<long[]>(ref reader, options);
                     }
                     else
                     {
@@ -494,25 +567,35 @@ namespace Nimiq
     public class Peer
     {
         /// <summary>Peer id.</summary>
-        public string id { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
         /// <summary>Peer address.</summary>
-        public string address { get; set; }
+        [JsonPropertyName("address")]
+        public string Address { get; set; }
         /// <summary>Peer address state.</summary>
-        public PeerAddressState addressState { get; set; }
+        [JsonPropertyName("addressState")]
+        public PeerAddressState AddressState { get; set; }
         /// <summary>Peer connection state.</summary>
-        public PeerConnectionState? connectionState { get; set; }
+        [JsonPropertyName("connectionState")]
+        public PeerConnectionState? ConnectionState { get; set; }
         /// <summary>Node version the peer is running.</summary>
-        public int? version { get; set; }
+        [JsonPropertyName("version")]
+        public int? Version { get; set; }
         /// <summary>Time offset with the peer (in miliseconds).</summary>
-        public int? timeOffset { get; set; }
+        [JsonPropertyName("timeOffset")]
+        public int? TimeOffset { get; set; }
         /// <summary>Hash of the head block of the peer.</summary>
-        public Hash headHash { get; set; }
+        [JsonPropertyName("headHash")]
+        public Hash HeadHash { get; set; }
         /// <summary>Latency to the peer.</summary>
-        public int? latency { get; set; }
+        [JsonPropertyName("latency")]
+        public int? Latency { get; set; }
         /// <summary>Received bytes.</summary>
-        public int? rx { get; set; }
+        [JsonPropertyName("rx")]
+        public int? Rx { get; set; }
         /// <summary>Sent bytes.</summary>
-        public int? tx { get; set; }
+        [JsonPropertyName("tx")]
+        public int? Tx { get; set; }
     }
 
     /// <summary>Commands to change the state of a peer.</summary>
@@ -521,13 +604,17 @@ namespace Nimiq
     public class PeerStateCommand
     {
         /// <summary>Connect.</summary>
-        public static PeerStateCommand connect { get { return new PeerStateCommand("connect"); } }
+        [JsonPropertyName("connect")]
+        public static PeerStateCommand Connect { get { return new PeerStateCommand("connect"); } }
         /// <summary>Disconnect.</summary>
-        public static PeerStateCommand disconnect { get { return new PeerStateCommand("disconnect"); } }
+        [JsonPropertyName("disconnect")]
+        public static PeerStateCommand Disconnect { get { return new PeerStateCommand("disconnect"); } }
         /// <summary>Ban.</summary>
-        public static PeerStateCommand ban { get { return new PeerStateCommand("ban"); } }
+        [JsonPropertyName("ban")]
+        public static PeerStateCommand Ban { get { return new PeerStateCommand("ban"); } }
         /// <summary>Unban.</summary>
-        public static PeerStateCommand unban { get { return new PeerStateCommand("unban"); } }
+        [JsonPropertyName("unban")]
+        public static PeerStateCommand Unban { get { return new PeerStateCommand("unban"); } }
 
         private class PeerStateCommandConverter : JsonConverter<PeerStateCommand>
         {
@@ -574,11 +661,14 @@ namespace Nimiq
     public class SyncStatus
     {
         /// <summary>The block at which the import started (will only be reset, after the sync reached his head).</summary>
-        public long startingBlock { get; set; }
+        [JsonPropertyName("startingBlock")]
+        public long StartingBlock { get; set; }
         /// <summary>The current block, same as blockNumber.</summary>
-        public long currentBlock { get; set; }
+        [JsonPropertyName("currentBlock")]
+        public long CurrentBlock { get; set; }
         /// <summary>The estimated highest block.</summary>
-        public long highestBlock { get; set; }
+        [JsonPropertyName("highestBlock")]
+        public long HighestBlock { get; set; }
     }
 
     // JSONRPC Client
@@ -587,23 +677,23 @@ namespace Nimiq
     public class Config
     {
         /// <summary>Protocol squeme, <c>"http"</c> or <c>"https"</c>.</summary>
-        public string scheme;
+        public string Scheme { get; set; }
         /// <summary>Authorized user.</summary>
-        public string user;
+        public string User { get; set; }
         /// <summary>Password for the authorized user.</summary>
-        public string password;
+        public string Password { get; set; }
         /// <summary>Host IP address.</summary>
-        public string host;
+        public string Host { get; set; }
         /// <summary>Host port.</summary>
-        public long port;
+        public long Port { get; set; }
 
         public Config(string scheme = "http", string user = "", string password = "", string host = "127.0.0.1", long port = 8648)
         {
-            this.scheme = scheme;
-            this.user = user;
-            this.password = password;
-            this.host = host;
-            this.port = port;
+            Scheme = scheme;
+            User = user;
+            Password = password;
+            Host = host;
+            Port = port;
         }
     }
 
@@ -626,81 +716,104 @@ namespace Nimiq
         [Serializable]
         private class Root<T>
         {
-            public string jsonrpc { get; set; }
-            public T result { get; set; }
-            public long id { get; set; }
-            public ResponseError error { get; set; }
+            [JsonPropertyName("jsonrpc")]
+            public string Jsonrpc { get; set; }
+            [JsonPropertyName("result")]
+            public T Result { get; set; }
+            [JsonPropertyName("id")]
+            public long Id { get; set; }
+            [JsonPropertyName("error")]
+            public ResponseError Error { get; set; }
         }
 
         /// <summary>Nimiq account returned by the server. The especific type can obtained with the cast operator.<summary>
         [Serializable]
         private class RawAccount
         {
-            public string id { get; set; }
-            public string address { get; set; }
-            public long balance { get; set; }
-            public AccountType type { get; set; }
-            public string owner { get; set; }
-            public string ownerAddress { get; set; }
-            public long vestingStart { get; set; }
-            public long vestingStepBlocks { get; set; }
-            public long vestingStepAmount { get; set; }
-            public long vestingTotalAmount { get; set; }
-            public string sender { get; set; }
-            public string senderAddress { get; set; }
-            public string recipient { get; set; }
-            public string recipientAddress { get; set; }
-            public string hashRoot { get; set; }
-            public long hashAlgorithm { get; set; }
-            public long hashCount { get; set; }
-            public long timeout { get; set; }
-            public long totalAmount { get; set; }
+            [JsonPropertyName("id")]
+            public string Id { get; set; }
+            [JsonPropertyName("address")]
+            public string Address { get; set; }
+            [JsonPropertyName("balance")]
+            public long Balance { get; set; }
+            [JsonPropertyName("type")]
+            public AccountType Type { get; set; }
+            [JsonPropertyName("owner")]
+            public string Owner { get; set; }
+            [JsonPropertyName("ownerAddress")]
+            public string OwnerAddress { get; set; }
+            [JsonPropertyName("vestingStart")]
+            public long VestingStart { get; set; }
+            [JsonPropertyName("vestingStepBlocks")]
+            public long VestingStepBlocks { get; set; }
+            [JsonPropertyName("vestingStepAmount")]
+            public long VestingStepAmount { get; set; }
+            [JsonPropertyName("vestingTotalAmount")]
+            public long VestingTotalAmount { get; set; }
+            [JsonPropertyName("sender")]
+            public string Sender { get; set; }
+            [JsonPropertyName("senderAddress")]
+            public string SenderAddress { get; set; }
+            [JsonPropertyName("recipient")]
+            public string Recipient { get; set; }
+            [JsonPropertyName("recipientAddress")]
+            public string RecipientAddress { get; set; }
+            [JsonPropertyName("hashRoot")]
+            public string HashRoot { get; set; }
+            [JsonPropertyName("hashAlgorithm")]
+            public long HashAlgorithm { get; set; }
+            [JsonPropertyName("hashCount")]
+            public long HashCount { get; set; }
+            [JsonPropertyName("timeout")]
+            public long Timeout { get; set; }
+            [JsonPropertyName("totalAmount")]
+            public long TotalAmount { get; set; }
 
             public object Account
             {
                 get
                 {
-                    switch (type)
+                    switch (Type)
                     {
                         case AccountType.basic:
                             return new Account()
                             {
-                                id = id,
-                                address = address,
-                                balance = balance,
-                                type = type,
+                                Id = Id,
+                                Address = Address,
+                                Balance = Balance,
+                                Type = Type,
                             };
                         case AccountType.vesting:
                             return new VestingContract()
                             {
-                                id = id,
-                                address = address,
-                                balance = balance,
-                                type = type,
-                                owner = owner,
-                                ownerAddress = ownerAddress,
-                                vestingStart = vestingStart,
-                                vestingStepBlocks = vestingStepBlocks,
-                                vestingStepAmount = vestingStepAmount,
-                                vestingTotalAmount = vestingTotalAmount
+                                Id = Id,
+                                Address = Address,
+                                Balance = Balance,
+                                Type = Type,
+                                Owner = Owner,
+                                OwnerAddress = OwnerAddress,
+                                VestingStart = VestingStart,
+                                VestingStepBlocks = VestingStepBlocks,
+                                VestingStepAmount = VestingStepAmount,
+                                VestingTotalAmount = VestingTotalAmount
                             };
 
                         case AccountType.htlc:
                             return new HTLC()
                             {
-                                id = id,
-                                address = address,
-                                balance = balance,
-                                type = type,
-                                sender = sender,
-                                senderAddress = senderAddress,
-                                recipient = recipient,
-                                recipientAddress = recipientAddress,
-                                hashRoot = hashRoot,
-                                hashAlgorithm = hashAlgorithm,
-                                hashCount = hashCount,
-                                timeout = timeout,
-                                totalAmount = totalAmount
+                                Id = Id,
+                                Address = Address,
+                                Balance = Balance,
+                                Type = Type,
+                                Sender = Sender,
+                                SenderAddress = SenderAddress,
+                                Recipient = Recipient,
+                                RecipientAddress = RecipientAddress,
+                                HashRoot = HashRoot,
+                                HashAlgorithm = HashAlgorithm,
+                                HashCount = HashCount,
+                                Timeout = Timeout,
+                                TotalAmount = TotalAmount
                             };
                     }
                     return null;
@@ -709,16 +822,16 @@ namespace Nimiq
         }
 
         /// <summary>Number in the sequence for the of the next request.</summary>
-        public long id = 0;
+        public long Id { get; set; } = 0;
 
         /// <summary>URL of the JSONRPC server.
-        private string url;
+        private string Url { get; set; }
 
         /// <summary>Base64 string containing authentication parameters</summary>
-        private string auth;
+        private string Auth { get; set; }
 
         /// <summary>HttpClient used for HTTP requests send to the JSONRPC server.</summary>
-        private HttpClient client = null;
+        private HttpClient Client { get; set; } = null;
 
         /// <summary>Client initialization from a Config structure.
         /// When no parameter is given, it uses de default configuration in the server (<c>http://:@127.0.0.1:8648</c>).</summary>
@@ -727,7 +840,7 @@ namespace Nimiq
         {
             if (config != null)
             {
-                Init(config.scheme, config.user, config.password, config.host, config.port);
+                Init(config.Scheme, config.User, config.Password, config.Host, config.Port);
             }
             else
             {
@@ -756,15 +869,15 @@ namespace Nimiq
         /// <param name="client">Used to make all requests. If ommited the an instance of HttpClient is automaticaly create.</param>
         private void Init(string scheme, string user, string password, string host, long port, HttpClient client = null)
         {
-            url = $@"{scheme}://{host}:{port}";
-            auth = Convert.ToBase64String(new UTF8Encoding().GetBytes($"{user}:{password}"));
+            Url = $@"{scheme}://{host}:{port}";
+            Auth = Convert.ToBase64String(new UTF8Encoding().GetBytes($"{user}:{password}"));
             if (client != null)
             {
-                this.client = client;
+                this.Client = client;
             }
             else
             {
-                this.client = new HttpClient();
+                this.Client = new HttpClient();
             }
         }
 
@@ -780,10 +893,10 @@ namespace Nimiq
             {
                 // prepare the request
                 var serializedParams = JsonSerializer.Serialize(parameters ?? new object[0]);
-                var contentData = new StringContent($@"{{""jsonrpc"": ""2.0"", ""method"": ""{method}"", ""params"": {serializedParams}, ""id"": {id}}}", Encoding.UTF8, "application/json");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+                var contentData = new StringContent($@"{{""jsonrpc"": ""2.0"", ""method"": ""{method}"", ""params"": {serializedParams}, ""id"": {Id}}}", Encoding.UTF8, "application/json");
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Auth);
                 // send the request
-                var response = await client.PostAsync(url, contentData);
+                var response = await Client.PostAsync(Url, contentData);
                 var content = response.Content;
                 var data = await content.ReadAsStringAsync();
                 // serialize the data into an object
@@ -800,16 +913,16 @@ namespace Nimiq
                 throw new WrongFormatException(clientError.Message); ;
             }
 
-            if (responseObject.error != null)
+            if (responseObject.Error != null)
             {
-                var responseError = responseObject.error;
-                throw new BadMethodCallException($"{responseError.message} (Code: {responseError.code})");
+                var responseError = responseObject.Error;
+                throw new BadMethodCallException($"{responseError.Message} (Code: {responseError.Code})");
             }
 
             // increase the JSONRPC client request id for the next request
-            id = id + 1;
+            Id = Id + 1;
 
-            return responseObject.result;
+            return responseObject.Result;
         }
 
         /// <summary>Returns a list of addresses owned by client.</summary>
@@ -865,13 +978,13 @@ namespace Nimiq
         {
             var parameters = new Dictionary<string, object>()
             {
-                { "from", transaction.from },
-                { "fromType", transaction.fromType },
-                { "to", transaction.to },
-                { "toType", transaction.toType },
-                { "value", transaction.value },
-                { "fee", transaction.fee },
-                { "data", transaction.data }
+                { "from", transaction.From },
+                { "fromType", transaction.FromType },
+                { "to", transaction.To },
+                { "toType", transaction.ToType },
+                { "value", transaction.Value },
+                { "fee", transaction.Fee },
+                { "data", transaction.Data }
             };
             return await Fetch<string>("createRawTransaction", new object[] { parameters });
         }
@@ -1175,13 +1288,13 @@ namespace Nimiq
         {
             var parameters = new Dictionary<string, object>
             {
-                { "from", transaction.from },
-                { "fromType", transaction.fromType },
-                { "to", transaction.to },
-                { "toType", transaction.toType },
-                { "value", transaction.value },
-                { "fee", transaction.fee },
-                { "data", transaction.data }
+                { "from", transaction.From },
+                { "fromType", transaction.FromType },
+                { "to", transaction.To },
+                { "toType", transaction.ToType },
+                { "value", transaction.Value },
+                { "fee", transaction.Fee },
+                { "data", transaction.Data }
             };
             return await Fetch<Hash>(method: "sendTransaction", new object[] { parameters });
         }

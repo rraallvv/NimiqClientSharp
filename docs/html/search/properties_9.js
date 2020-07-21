@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['merklehashes_297',['merkleHashes',['../class_nimiq_1_1_block_template_body.html#ac2ee43e4b688e563f9733e0785c74e41',1,'Nimiq::BlockTemplateBody']]],
-  ['miner_298',['miner',['../class_nimiq_1_1_block.html#a89391b72608359800bc88a6fb518955e',1,'Nimiq::Block']]],
-  ['mineraddr_299',['minerAddr',['../class_nimiq_1_1_block_template_body.html#a8f67656fd7c29abc2842ae06d502d2aa',1,'Nimiq::BlockTemplateBody']]],
-  ['mineraddress_300',['minerAddress',['../class_nimiq_1_1_block.html#a9ecedae8818ac2f6646f25397e0d9a0c',1,'Nimiq::Block']]]
+  ['merklehashes_292',['MerkleHashes',['../class_nimiq_1_1_block_template_body.html#a92bda237a7692b03da67fcdad1bae993',1,'Nimiq::BlockTemplateBody']]],
+  ['miner_293',['Miner',['../class_nimiq_1_1_block.html#a1383da5427d85ad2bc8b332c8002427d',1,'Nimiq::Block']]],
+  ['mineraddr_294',['MinerAddr',['../class_nimiq_1_1_block_template_body.html#a87ee9ba6a32c5ebfea05fe609889876f',1,'Nimiq::BlockTemplateBody']]],
+  ['mineraddress_295',['MinerAddress',['../class_nimiq_1_1_block.html#a128fa7ac86ad35b045accd0f7330d970',1,'Nimiq::Block']]]
 ];
