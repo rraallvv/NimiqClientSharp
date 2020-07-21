@@ -26,16 +26,6 @@ namespace Nimiq
         public string message { get; set; }
     }
 
-    /// <summary>Used to decode the JSONRPC response returned by the server.</summary>
-    [Serializable]
-    public class Root<T>
-    {
-        public string jsonrpc { get; set; }
-        public T result { get; set; }
-        public long id { get; set; }
-        public ResponseError error { get; set; }
-    }
-
     /// <summaryType of a Nimiq account.</summary>
     [Serializable]
     public enum AccountType : long
@@ -99,82 +89,6 @@ namespace Nimiq
         public long timeout { get; set; }
         /// <summary>The total amount (in smallest unit) that was provided at the contract creation.</summary>
         public long totalAmount { get; set; }
-    }
-
-    /// <summary>Nimiq account returned by the server. The especific type can obtained with the cast operator.<summary>
-    [Serializable]
-    class RawAccount
-    {
-
-        public string id { get; set; }
-        public string address { get; set; }
-        public long balance { get; set; }
-        public AccountType type { get; set; }
-        public string owner { get; set; }
-        public string ownerAddress { get; set; }
-        public long vestingStart { get; set; }
-        public long vestingStepBlocks { get; set; }
-        public long vestingStepAmount { get; set; }
-        public long vestingTotalAmount { get; set; }
-        public string sender { get; set; }
-        public string senderAddress { get; set; }
-        public string recipient { get; set; }
-        public string recipientAddress { get; set; }
-        public string hashRoot { get; set; }
-        public long hashAlgorithm { get; set; }
-        public long hashCount { get; set; }
-        public long timeout { get; set; }
-        public long totalAmount { get; set; }
-
-        public object Account
-        {
-            get {
-                switch (type)
-                {
-                    case AccountType.basic:
-                        return new Account()
-                        {
-                            id = id,
-                            address = address,
-                            balance = balance,
-                            type = type,
-                        };
-                    case AccountType.vesting:
-                        return new VestingContract()
-                        {
-                            id = id,
-                            address = address,
-                            balance = balance,
-                            type = type,
-                            owner = owner,
-                            ownerAddress = ownerAddress,
-                            vestingStart = vestingStart,
-                            vestingStepBlocks = vestingStepBlocks,
-                            vestingStepAmount = vestingStepAmount,
-                            vestingTotalAmount = vestingTotalAmount
-                        };
-
-                    case AccountType.htlc:
-                        return new HTLC()
-                        {
-                            id = id,
-                            address = address,
-                            balance = balance,
-                            type = type,
-                            sender = sender,
-                            senderAddress = senderAddress,
-                            recipient = recipient,
-                            recipientAddress = recipientAddress,
-                            hashRoot = hashRoot,
-                            hashAlgorithm = hashAlgorithm,
-                            hashCount = hashCount,
-                            timeout = timeout,
-                            totalAmount = totalAmount
-                        };
-                }
-                return null;
-            }
-        }
     }
 
     /// <summary>Consensus state returned by the server.</summary>
@@ -708,6 +622,92 @@ namespace Nimiq
     /// <summary>Nimiq JSONRPC Client</summary>
     public class NimiqClient
     {
+        /// <summary>Used to decode the JSONRPC response returned by the server.</summary>
+        [Serializable]
+        private class Root<T>
+        {
+            public string jsonrpc { get; set; }
+            public T result { get; set; }
+            public long id { get; set; }
+            public ResponseError error { get; set; }
+        }
+
+        /// <summary>Nimiq account returned by the server. The especific type can obtained with the cast operator.<summary>
+        [Serializable]
+        private class RawAccount
+        {
+            public string id { get; set; }
+            public string address { get; set; }
+            public long balance { get; set; }
+            public AccountType type { get; set; }
+            public string owner { get; set; }
+            public string ownerAddress { get; set; }
+            public long vestingStart { get; set; }
+            public long vestingStepBlocks { get; set; }
+            public long vestingStepAmount { get; set; }
+            public long vestingTotalAmount { get; set; }
+            public string sender { get; set; }
+            public string senderAddress { get; set; }
+            public string recipient { get; set; }
+            public string recipientAddress { get; set; }
+            public string hashRoot { get; set; }
+            public long hashAlgorithm { get; set; }
+            public long hashCount { get; set; }
+            public long timeout { get; set; }
+            public long totalAmount { get; set; }
+
+            public object Account
+            {
+                get
+                {
+                    switch (type)
+                    {
+                        case AccountType.basic:
+                            return new Account()
+                            {
+                                id = id,
+                                address = address,
+                                balance = balance,
+                                type = type,
+                            };
+                        case AccountType.vesting:
+                            return new VestingContract()
+                            {
+                                id = id,
+                                address = address,
+                                balance = balance,
+                                type = type,
+                                owner = owner,
+                                ownerAddress = ownerAddress,
+                                vestingStart = vestingStart,
+                                vestingStepBlocks = vestingStepBlocks,
+                                vestingStepAmount = vestingStepAmount,
+                                vestingTotalAmount = vestingTotalAmount
+                            };
+
+                        case AccountType.htlc:
+                            return new HTLC()
+                            {
+                                id = id,
+                                address = address,
+                                balance = balance,
+                                type = type,
+                                sender = sender,
+                                senderAddress = senderAddress,
+                                recipient = recipient,
+                                recipientAddress = recipientAddress,
+                                hashRoot = hashRoot,
+                                hashAlgorithm = hashAlgorithm,
+                                hashCount = hashCount,
+                                timeout = timeout,
+                                totalAmount = totalAmount
+                            };
+                    }
+                    return null;
+                }
+            }
+        }
+
         /// <summary>Number in the sequence for the of the next request.</summary>
         public long id = 0;
 

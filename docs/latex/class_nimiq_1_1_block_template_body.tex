@@ -1,0 +1,95 @@
+\hypertarget{class_nimiq_1_1_block_template_body}{}\doxysection{Nimiq.\+Block\+Template\+Body Class Reference}
+\label{class_nimiq_1_1_block_template_body}\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+
+
+\mbox{\hyperlink{class_nimiq_1_1_block}{Block}} template body returned by the server.  
+
+
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} \mbox{\hyperlink{class_nimiq_1_1_block_template_body_a3af0891eb6566f039911b409f88a6e7e}{hash}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em 32-\/byte hex-\/encoded hash of the block body. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_block_template_body_a8f67656fd7c29abc2842ae06d502d2aa}{miner\+Addr}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em 20-\/byte hex-\/encoded miner address. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_block_template_body_a9fde57eddad0ad6ac4c7d2be69ba7593}{extra\+Data}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded value of the extra data field. \end{DoxyCompactList}\item 
+string\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_nimiq_1_1_block_template_body_a5a6f129fd34c372f35577dc8cee1c455}{transactions}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Array of hex-\/encoded transactions for this block. \end{DoxyCompactList}\item 
+string\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_nimiq_1_1_block_template_body_a599ee071dbe46af3560f6f2a20e116a6}{pruned\+Accounts}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Array of hex-\/encoded pruned accounts for this block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_nimiq_1_1_block_template_body_ac2ee43e4b688e563f9733e0785c74e41}{merkle\+Hashes}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Array of hex-\/encoded hashes that verify the path of the miner address in the merkle tree. This can be used to change the miner address easily. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_nimiq_1_1_block}{Block}} template body returned by the server. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_nimiq_1_1_block_template_body_a9fde57eddad0ad6ac4c7d2be69ba7593}\label{class_nimiq_1_1_block_template_body_a9fde57eddad0ad6ac4c7d2be69ba7593}} 
+\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}!extraData@{extraData}}
+\index{extraData@{extraData}!Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+\doxysubsubsection{\texorpdfstring{extraData}{extraData}}
+{\footnotesize\ttfamily string Nimiq.\+Block\+Template\+Body.\+extra\+Data\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded value of the extra data field. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_block_template_body_a3af0891eb6566f039911b409f88a6e7e}\label{class_nimiq_1_1_block_template_body_a3af0891eb6566f039911b409f88a6e7e}} 
+\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}!hash@{hash}}
+\index{hash@{hash}!Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+\doxysubsubsection{\texorpdfstring{hash}{hash}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} Nimiq.\+Block\+Template\+Body.\+hash\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+32-\/byte hex-\/encoded hash of the block body. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_block_template_body_ac2ee43e4b688e563f9733e0785c74e41}\label{class_nimiq_1_1_block_template_body_ac2ee43e4b688e563f9733e0785c74e41}} 
+\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}!merkleHashes@{merkleHashes}}
+\index{merkleHashes@{merkleHashes}!Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+\doxysubsubsection{\texorpdfstring{merkleHashes}{merkleHashes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} \mbox{[}$\,$\mbox{]} Nimiq.\+Block\+Template\+Body.\+merkle\+Hashes\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Array of hex-\/encoded hashes that verify the path of the miner address in the merkle tree. This can be used to change the miner address easily. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_block_template_body_a8f67656fd7c29abc2842ae06d502d2aa}\label{class_nimiq_1_1_block_template_body_a8f67656fd7c29abc2842ae06d502d2aa}} 
+\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}!minerAddr@{minerAddr}}
+\index{minerAddr@{minerAddr}!Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+\doxysubsubsection{\texorpdfstring{minerAddr}{minerAddr}}
+{\footnotesize\ttfamily string Nimiq.\+Block\+Template\+Body.\+miner\+Addr\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+20-\/byte hex-\/encoded miner address. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_block_template_body_a599ee071dbe46af3560f6f2a20e116a6}\label{class_nimiq_1_1_block_template_body_a599ee071dbe46af3560f6f2a20e116a6}} 
+\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}!prunedAccounts@{prunedAccounts}}
+\index{prunedAccounts@{prunedAccounts}!Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+\doxysubsubsection{\texorpdfstring{prunedAccounts}{prunedAccounts}}
+{\footnotesize\ttfamily string \mbox{[}$\,$\mbox{]} Nimiq.\+Block\+Template\+Body.\+pruned\+Accounts\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Array of hex-\/encoded pruned accounts for this block. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_block_template_body_a5a6f129fd34c372f35577dc8cee1c455}\label{class_nimiq_1_1_block_template_body_a5a6f129fd34c372f35577dc8cee1c455}} 
+\index{Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}!transactions@{transactions}}
+\index{transactions@{transactions}!Nimiq.BlockTemplateBody@{Nimiq.BlockTemplateBody}}
+\doxysubsubsection{\texorpdfstring{transactions}{transactions}}
+{\footnotesize\ttfamily string \mbox{[}$\,$\mbox{]} Nimiq.\+Block\+Template\+Body.\+transactions\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Array of hex-\/encoded transactions for this block. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Nimiq\+Client/Nimiq\+Client.\+cs\end{DoxyCompactItemize}

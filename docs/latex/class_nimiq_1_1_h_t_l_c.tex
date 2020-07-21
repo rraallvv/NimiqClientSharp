@@ -1,0 +1,135 @@
+\hypertarget{class_nimiq_1_1_h_t_l_c}{}\doxysection{Nimiq.\+H\+T\+LC Class Reference}
+\label{class_nimiq_1_1_h_t_l_c}\index{Nimiq.HTLC@{Nimiq.HTLC}}
+
+
+Hashed Timelock Contract object returned by the server.  
+
+
+Inheritance diagram for Nimiq.\+H\+T\+LC\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_nimiq_1_1_h_t_l_c}
+\end{center}
+\end{figure}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a35c5d94dae27274e854660bc4da10583}{sender}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded 20 byte address of the sender of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a4a7312be639a7d376c322fb7841ca3e4}{sender\+Address}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em User friendly address (N\+Q-\/address) of the sender of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a280c0b0a59b9578f6276661373b9ebbc}{recipient}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded 20 byte address of the recipient of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a8b9ae058d3f7142cedd812b70cc7d485}{recipient\+Address}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em User friendly address (N\+Q-\/address) of the recipient of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_ad6cdde49d921edae5122b27449149922}{hash\+Root}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded 32 byte hash root. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a164a04a047af8f188c17c6a70a08b993}{hash\+Algorithm}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hash algorithm. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_aaaa5e11cdeff96915f946513129b0689}{hash\+Count}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Number of hashes this \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}} is split into. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a12630a805f5b8d5f45da2ac0e6606987}{timeout}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_nimiq_1_1_block}{Block}} after which the contract can only be used by the original sender to recover funds. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c_a7de011eaa253beed280a25ef5626e1bc}{total\+Amount}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The total amount (in smallest unit) that was provided at the contract creation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hashed Timelock Contract object returned by the server. 
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a164a04a047af8f188c17c6a70a08b993}\label{class_nimiq_1_1_h_t_l_c_a164a04a047af8f188c17c6a70a08b993}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!hashAlgorithm@{hashAlgorithm}}
+\index{hashAlgorithm@{hashAlgorithm}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{hashAlgorithm}{hashAlgorithm}}
+{\footnotesize\ttfamily long Nimiq.\+H\+T\+L\+C.\+hash\+Algorithm\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hash algorithm. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_aaaa5e11cdeff96915f946513129b0689}\label{class_nimiq_1_1_h_t_l_c_aaaa5e11cdeff96915f946513129b0689}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!hashCount@{hashCount}}
+\index{hashCount@{hashCount}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{hashCount}{hashCount}}
+{\footnotesize\ttfamily long Nimiq.\+H\+T\+L\+C.\+hash\+Count\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Number of hashes this \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}} is split into. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_ad6cdde49d921edae5122b27449149922}\label{class_nimiq_1_1_h_t_l_c_ad6cdde49d921edae5122b27449149922}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!hashRoot@{hashRoot}}
+\index{hashRoot@{hashRoot}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{hashRoot}{hashRoot}}
+{\footnotesize\ttfamily string Nimiq.\+H\+T\+L\+C.\+hash\+Root\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded 32 byte hash root. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a280c0b0a59b9578f6276661373b9ebbc}\label{class_nimiq_1_1_h_t_l_c_a280c0b0a59b9578f6276661373b9ebbc}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!recipient@{recipient}}
+\index{recipient@{recipient}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{recipient}{recipient}}
+{\footnotesize\ttfamily string Nimiq.\+H\+T\+L\+C.\+recipient\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded 20 byte address of the recipient of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a8b9ae058d3f7142cedd812b70cc7d485}\label{class_nimiq_1_1_h_t_l_c_a8b9ae058d3f7142cedd812b70cc7d485}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!recipientAddress@{recipientAddress}}
+\index{recipientAddress@{recipientAddress}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{recipientAddress}{recipientAddress}}
+{\footnotesize\ttfamily string Nimiq.\+H\+T\+L\+C.\+recipient\+Address\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+User friendly address (N\+Q-\/address) of the recipient of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a35c5d94dae27274e854660bc4da10583}\label{class_nimiq_1_1_h_t_l_c_a35c5d94dae27274e854660bc4da10583}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!sender@{sender}}
+\index{sender@{sender}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{sender}{sender}}
+{\footnotesize\ttfamily string Nimiq.\+H\+T\+L\+C.\+sender\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded 20 byte address of the sender of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a4a7312be639a7d376c322fb7841ca3e4}\label{class_nimiq_1_1_h_t_l_c_a4a7312be639a7d376c322fb7841ca3e4}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!senderAddress@{senderAddress}}
+\index{senderAddress@{senderAddress}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{senderAddress}{senderAddress}}
+{\footnotesize\ttfamily string Nimiq.\+H\+T\+L\+C.\+sender\+Address\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+User friendly address (N\+Q-\/address) of the sender of the \mbox{\hyperlink{class_nimiq_1_1_h_t_l_c}{H\+T\+LC}}. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a12630a805f5b8d5f45da2ac0e6606987}\label{class_nimiq_1_1_h_t_l_c_a12630a805f5b8d5f45da2ac0e6606987}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!timeout@{timeout}}
+\index{timeout@{timeout}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{timeout}{timeout}}
+{\footnotesize\ttfamily long Nimiq.\+H\+T\+L\+C.\+timeout\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+\mbox{\hyperlink{class_nimiq_1_1_block}{Block}} after which the contract can only be used by the original sender to recover funds. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_h_t_l_c_a7de011eaa253beed280a25ef5626e1bc}\label{class_nimiq_1_1_h_t_l_c_a7de011eaa253beed280a25ef5626e1bc}} 
+\index{Nimiq.HTLC@{Nimiq.HTLC}!totalAmount@{totalAmount}}
+\index{totalAmount@{totalAmount}!Nimiq.HTLC@{Nimiq.HTLC}}
+\doxysubsubsection{\texorpdfstring{totalAmount}{totalAmount}}
+{\footnotesize\ttfamily long Nimiq.\+H\+T\+L\+C.\+total\+Amount\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The total amount (in smallest unit) that was provided at the contract creation. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Nimiq\+Client/Nimiq\+Client.\+cs\end{DoxyCompactItemize}

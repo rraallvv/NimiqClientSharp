@@ -1,0 +1,56 @@
+\begin{quote}
+C\# implementation of the \mbox{\hyperlink{namespace_nimiq}{Nimiq}} R\+PC client specs. \end{quote}
+\hypertarget{index_autotoc_md1}{}\doxysection{Usage}\label{index_autotoc_md1}
+Send requests to a \mbox{\hyperlink{namespace_nimiq}{Nimiq}} node with {\ttfamily Nimiq\+Client} object.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c\#\}}
+\DoxyCodeLine{var config = new Config(}
+\DoxyCodeLine{    scheme: "http",}
+\DoxyCodeLine{    host: "127.0.0.1",}
+\DoxyCodeLine{    port: 8648,}
+\DoxyCodeLine{    user: "luna",}
+\DoxyCodeLine{    password: "moon"}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{var client = new NimiqClient(config)}
+\end{DoxyCode}
+
+
+Once the client have been set up, we can call the methodes with the appropiate arguments to make requests to the \mbox{\hyperlink{namespace_nimiq}{Nimiq}} node.
+
+When no {\ttfamily config} object is passed in the initialization it will use defaults for the \mbox{\hyperlink{namespace_nimiq}{Nimiq}} node.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c\#\}}
+\DoxyCodeLine{var client = NimiqClient();}
+\DoxyCodeLine{}
+\DoxyCodeLine{// make rpc call to get the block number}
+\DoxyCodeLine{var blockNumber = await client.blockNumber();}
+\DoxyCodeLine{}
+\DoxyCodeLine{Console.WriteLine(blockNumber) // displays the block number, for example 748883}
+\end{DoxyCode}
+\hypertarget{index_autotoc_md2}{}\doxysection{A\+PI}\label{index_autotoc_md2}
+The complete \mbox{[}A\+PI documentation\mbox{]}(docs) is available in the {\ttfamily /docs} folder.
+
+Check out the \href{https://github.com/nimiq/core-js/wiki/JSON-RPC-API}{\texttt{ Nimiq R\+PC specs}} for behind the scene R\+PC calls.\hypertarget{index_autotoc_md3}{}\doxysection{Installation}\label{index_autotoc_md3}
+The recommended way to install \mbox{\hyperlink{namespace_nimiq}{Nimiq}} Sharp Client is adding to the dependencies the Nuget package from the Visual Studio I\+DE.\hypertarget{index_autotoc_md4}{}\doxysection{Contributions}\label{index_autotoc_md4}
+This implementation was originally contributed by \href{https://github.com/rraallvv/}{\texttt{ rraallvv}}.
+
+Please send your contributions as pull requests.
+
+Refer to the \href{https://github.com/rraallvv/NimiqClientSharp/issues}{\texttt{ issue tracker}} for ideas.\hypertarget{index_autotoc_md5}{}\doxysubsection{Develop}\label{index_autotoc_md5}
+After cloning the repository, open the solucion file in the repository root folder.
+
+All done, happy coding!\hypertarget{index_autotoc_md6}{}\doxysubsection{Testing}\label{index_autotoc_md6}
+Tests are stored in the {\ttfamily /\+Nimiq\+Client\+Test} folder and can be run from the Visual Studio I\+DE.\hypertarget{index_autotoc_md7}{}\doxysubsection{Documentation}\label{index_autotoc_md7}
+The documentation is generated automatically running \href{https://www.doxygen.nl/download.html\#srcbin}{\texttt{ Doxygen}} from the repository root directory.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{C:\(\backslash\)NimiqClient>doxygen doxygenfile}
+\end{DoxyCode}
+\hypertarget{index_autotoc_md8}{}\doxysection{License}\label{index_autotoc_md8}
+\mbox{[}M\+IT\mbox{]}(L\+I\+C\+E\+N\+SE) 

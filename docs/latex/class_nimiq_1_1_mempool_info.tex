@@ -1,0 +1,27 @@
+\hypertarget{class_nimiq_1_1_mempool_info}{}\doxysection{Nimiq.\+Mempool\+Info Class Reference}
+\label{class_nimiq_1_1_mempool_info}\index{Nimiq.MempoolInfo@{Nimiq.MempoolInfo}}
+
+
+Mempool information returned by the server.$<$/summary  
+
+
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_nimiq_1_1_mempool_info_a62e1fa603b57e128594a34657015fa8f}\label{class_nimiq_1_1_mempool_info_a62e1fa603b57e128594a34657015fa8f}} 
+long \mbox{\hyperlink{class_nimiq_1_1_mempool_info_a62e1fa603b57e128594a34657015fa8f}{total}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Total number of pending transactions in mempool.$<$/summary \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_nimiq_1_1_mempool_info_ab6aec078fabd837d97a97497e0052b8c}\label{class_nimiq_1_1_mempool_info_ab6aec078fabd837d97a97497e0052b8c}} 
+long\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_nimiq_1_1_mempool_info_ab6aec078fabd837d97a97497e0052b8c}{buckets}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Array containing a subset of fee per byte buckets from {\ttfamily \mbox{[}10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0\mbox{]}} that currently have more than one transaction.$<$/summary \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_nimiq_1_1_mempool_info_ae62baf67855def018d1d42d49b35de49}\label{class_nimiq_1_1_mempool_info_ae62baf67855def018d1d42d49b35de49}} 
+Dictionary$<$ long, long $>$ \mbox{\hyperlink{class_nimiq_1_1_mempool_info_ae62baf67855def018d1d42d49b35de49}{transactions\+Per\+Bucket}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Number of transaction in the bucket. A transaction is assigned to the highest bucket of a value lower than its fee per byte value.$<$/summary \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Mempool information returned by the server.$<$/summary 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Nimiq\+Client/Nimiq\+Client.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,189 @@
+\hypertarget{class_nimiq_1_1_transaction}{}\doxysection{Nimiq.\+Transaction Class Reference}
+\label{class_nimiq_1_1_transaction}\index{Nimiq.Transaction@{Nimiq.Transaction}}
+
+
+\mbox{\hyperlink{class_nimiq_1_1_transaction}{Transaction}} returned by the server.  
+
+
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} \mbox{\hyperlink{class_nimiq_1_1_transaction_a1dca7d98c1cfafca2a47a8d75e177bbf}{hash}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded hash of the transaction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} \mbox{\hyperlink{class_nimiq_1_1_transaction_a9f230cdc565960a091669cd5148b471c}{block\+Hash}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded hash of the block containing the transaction. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_a4d961f0bca5350c326823c47066a3f8a}{block\+Number}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Height of the block containing the transaction. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_aba6e6002ec8581fff50dad4c5332a053}{timestamp}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em U\+N\+IX timestamp of the block containing the transaction. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_abb3f6c84bef1866dc6050006e36d1b23}{confirmations}} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Number of confirmations of the block containing the transaction. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_a8e4a8e9be647dafb7061bd429a7217ed}{transaction\+Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Index of the transaction in the block. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_transaction_a3297d10ca249d9c765d660b3fef33444}{from}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded address of the sending account. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_nimiq_aa7cb09017890f63329dfb61ef5f143a1}{Address}} \mbox{\hyperlink{class_nimiq_1_1_transaction_a29d98ec55f4acf70cbaef31dbbab46f2}{from\+Address}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{namespace_nimiq}{Nimiq}} user friendly address (N\+Q-\/address) of the sending account. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_transaction_a78296e8951bcfb8ac7f6d0854110313c}{to}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded address of the recipient account. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_nimiq_aa7cb09017890f63329dfb61ef5f143a1}{Address}} \mbox{\hyperlink{class_nimiq_1_1_transaction_a8ea1632c5aac2380278c519e866e4ef8}{to\+Address}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{namespace_nimiq}{Nimiq}} user friendly address (N\+Q-\/address) of the recipient account. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_a98caf479941a6bbb3fa412fe4019c4ed}{value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Integer of the value (in smallest unit) sent with this transaction. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_a7c5a4c1a10db9a2c9bece53c3f9f8bd9}{fee}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Integer of the fee (in smallest unit) for this transaction. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_nimiq_1_1_transaction_a9b538c1cea7cb175e4608afe048bb77e}{data}} = null\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Hex-\/encoded contract parameters or a message. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_nimiq_1_1_transaction_a3eaa0cafe02bf2876713fd87aa459bdf}{flags}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Bit-\/encoded transaction flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_nimiq_1_1_transaction}{Transaction}} returned by the server. 
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a9f230cdc565960a091669cd5148b471c}\label{class_nimiq_1_1_transaction_a9f230cdc565960a091669cd5148b471c}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!blockHash@{blockHash}}
+\index{blockHash@{blockHash}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{blockHash}{blockHash}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} Nimiq.\+Transaction.\+block\+Hash\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded hash of the block containing the transaction. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a4d961f0bca5350c326823c47066a3f8a}\label{class_nimiq_1_1_transaction_a4d961f0bca5350c326823c47066a3f8a}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!blockNumber@{blockNumber}}
+\index{blockNumber@{blockNumber}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{blockNumber}{blockNumber}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+block\+Number\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Height of the block containing the transaction. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_abb3f6c84bef1866dc6050006e36d1b23}\label{class_nimiq_1_1_transaction_abb3f6c84bef1866dc6050006e36d1b23}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!confirmations@{confirmations}}
+\index{confirmations@{confirmations}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{confirmations}{confirmations}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+confirmations = 0\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Number of confirmations of the block containing the transaction. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a9b538c1cea7cb175e4608afe048bb77e}\label{class_nimiq_1_1_transaction_a9b538c1cea7cb175e4608afe048bb77e}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!data@{data}}
+\index{data@{data}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily string Nimiq.\+Transaction.\+data = null\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded contract parameters or a message. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a7c5a4c1a10db9a2c9bece53c3f9f8bd9}\label{class_nimiq_1_1_transaction_a7c5a4c1a10db9a2c9bece53c3f9f8bd9}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!fee@{fee}}
+\index{fee@{fee}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{fee}{fee}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+fee\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Integer of the fee (in smallest unit) for this transaction. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a3eaa0cafe02bf2876713fd87aa459bdf}\label{class_nimiq_1_1_transaction_a3eaa0cafe02bf2876713fd87aa459bdf}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!flags@{flags}}
+\index{flags@{flags}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+flags\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Bit-\/encoded transaction flags. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a3297d10ca249d9c765d660b3fef33444}\label{class_nimiq_1_1_transaction_a3297d10ca249d9c765d660b3fef33444}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!from@{from}}
+\index{from@{from}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{from}{from}}
+{\footnotesize\ttfamily string Nimiq.\+Transaction.\+from\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded address of the sending account. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a29d98ec55f4acf70cbaef31dbbab46f2}\label{class_nimiq_1_1_transaction_a29d98ec55f4acf70cbaef31dbbab46f2}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!fromAddress@{fromAddress}}
+\index{fromAddress@{fromAddress}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{fromAddress}{fromAddress}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_nimiq_aa7cb09017890f63329dfb61ef5f143a1}{Address}} Nimiq.\+Transaction.\+from\+Address\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+\mbox{\hyperlink{namespace_nimiq}{Nimiq}} user friendly address (N\+Q-\/address) of the sending account. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a1dca7d98c1cfafca2a47a8d75e177bbf}\label{class_nimiq_1_1_transaction_a1dca7d98c1cfafca2a47a8d75e177bbf}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!hash@{hash}}
+\index{hash@{hash}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{hash}{hash}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_nimiq_a809d7858b892c1faad5b69febca78718}{Hash}} Nimiq.\+Transaction.\+hash\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded hash of the transaction. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_aba6e6002ec8581fff50dad4c5332a053}\label{class_nimiq_1_1_transaction_aba6e6002ec8581fff50dad4c5332a053}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!timestamp@{timestamp}}
+\index{timestamp@{timestamp}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{timestamp}{timestamp}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+timestamp\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+U\+N\+IX timestamp of the block containing the transaction. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a78296e8951bcfb8ac7f6d0854110313c}\label{class_nimiq_1_1_transaction_a78296e8951bcfb8ac7f6d0854110313c}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!to@{to}}
+\index{to@{to}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{to}{to}}
+{\footnotesize\ttfamily string Nimiq.\+Transaction.\+to\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Hex-\/encoded address of the recipient account. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a8ea1632c5aac2380278c519e866e4ef8}\label{class_nimiq_1_1_transaction_a8ea1632c5aac2380278c519e866e4ef8}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!toAddress@{toAddress}}
+\index{toAddress@{toAddress}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{toAddress}{toAddress}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_nimiq_aa7cb09017890f63329dfb61ef5f143a1}{Address}} Nimiq.\+Transaction.\+to\+Address\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+\mbox{\hyperlink{namespace_nimiq}{Nimiq}} user friendly address (N\+Q-\/address) of the recipient account. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a8e4a8e9be647dafb7061bd429a7217ed}\label{class_nimiq_1_1_transaction_a8e4a8e9be647dafb7061bd429a7217ed}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!transactionIndex@{transactionIndex}}
+\index{transactionIndex@{transactionIndex}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{transactionIndex}{transactionIndex}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+transaction\+Index\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Index of the transaction in the block. 
+
+\mbox{\Hypertarget{class_nimiq_1_1_transaction_a98caf479941a6bbb3fa412fe4019c4ed}\label{class_nimiq_1_1_transaction_a98caf479941a6bbb3fa412fe4019c4ed}} 
+\index{Nimiq.Transaction@{Nimiq.Transaction}!value@{value}}
+\index{value@{value}!Nimiq.Transaction@{Nimiq.Transaction}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily long Nimiq.\+Transaction.\+value\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Integer of the value (in smallest unit) sent with this transaction. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Nimiq\+Client/Nimiq\+Client.\+cs\end{DoxyCompactItemize}
