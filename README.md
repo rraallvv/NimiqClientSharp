@@ -1,4 +1,4 @@
-# Nimiq Sharp Client
+# Nimiq Sharp Client [![Nuget](https://img.shields.io/nuget/v/NimiqClient)](https://www.nuget.org/packages/NimiqClient/)
 
 > C# implementation of the Nimiq RPC client specs.
 

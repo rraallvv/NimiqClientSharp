@@ -821,16 +821,16 @@ namespace Nimiq
             }
         }
 
-        /// <summary>Number in the sequence for the of the next request.</summary>
+        /// <summary>Number in the sequence for the next request.</summary>
         public long Id { get; set; } = 0;
 
         /// <summary>URL of the JSONRPC server.
         private string Url { get; set; }
 
-        /// <summary>Base64 string containing authentication parameters</summary>
+        /// <summary>Base64 string containing authentication parameters.</summary>
         private string Auth { get; set; }
 
-        /// <summary>HttpClient used for HTTP requests send to the JSONRPC server.</summary>
+        /// <summary>HttpClient used for HTTP requests sent to the JSONRPC server.</summary>
         private HttpClient Client { get; set; } = null;
 
         /// <summary>Client initialization from a Config structure.
