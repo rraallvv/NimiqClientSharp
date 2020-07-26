@@ -99,14 +99,11 @@ namespace Nimiq
     public class ConsensusState
     {
         /// <summary>Connecting.</summary>
-        [JsonPropertyName("trace")]
-        public static ConsensusState Trace { get { return new ConsensusState("trace"); } }
+        public static ConsensusState Connecting { get { return new ConsensusState("connecting"); } }
         /// <summary>Syncing blocks.</summary>
-        [JsonPropertyName("verbose")]
-        public static ConsensusState Verbose { get { return new ConsensusState("verbose"); } }
+        public static ConsensusState Syncing { get { return new ConsensusState("syncing"); } }
         /// <summary>Consensus established.</summary>
-        [JsonPropertyName("debug")]
-        public static ConsensusState Debug { get { return new ConsensusState("debug"); } }
+        public static ConsensusState Established { get { return new ConsensusState("established"); } }
 
         private class ConsensusStateConverter : JsonConverter<ConsensusState>
         {
@@ -133,6 +130,11 @@ namespace Nimiq
         public static explicit operator ConsensusState(string level)
         {
             return new ConsensusState(level);
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -410,25 +412,18 @@ namespace Nimiq
     public class LogLevel
     {
         /// <summary>Trace level log.</summary>
-        [JsonPropertyName("trace")]
         public static LogLevel Trace { get { return new LogLevel("trace"); } }
         /// <summary>Verbose level log.</summary>
-        [JsonPropertyName("verbose")]
         public static LogLevel Verbose { get { return new LogLevel("verbose"); } }
         /// <summary>Debugging level log.</summary>
-        [JsonPropertyName("debug")]
         public static LogLevel Debug { get { return new LogLevel("debug"); } }
         /// <summary>Info level log.</summary>
-        [JsonPropertyName("info")]
         public static LogLevel Info { get { return new LogLevel("info"); } }
         /// <summary>Warning level log.</summary>
-        [JsonPropertyName("warn")]
         public static LogLevel Warn { get { return new LogLevel("warn"); } }
         /// <summary>Error level log.</summary>
-        [JsonPropertyName("error")]
         public static LogLevel Error { get { return new LogLevel("error"); } }
         /// <summary>Assertions level log.</summary>
-        [JsonPropertyName("assert")]
         public static LogLevel Assert { get { return new LogLevel("assert"); } }
 
         private class LogLevelConverter : JsonConverter<LogLevel>
@@ -456,6 +451,11 @@ namespace Nimiq
         public static explicit operator LogLevel(string level)
         {
             return new LogLevel(level);
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -604,16 +604,12 @@ namespace Nimiq
     public class PeerStateCommand
     {
         /// <summary>Connect.</summary>
-        [JsonPropertyName("connect")]
         public static PeerStateCommand Connect { get { return new PeerStateCommand("connect"); } }
         /// <summary>Disconnect.</summary>
-        [JsonPropertyName("disconnect")]
         public static PeerStateCommand Disconnect { get { return new PeerStateCommand("disconnect"); } }
         /// <summary>Ban.</summary>
-        [JsonPropertyName("ban")]
         public static PeerStateCommand Ban { get { return new PeerStateCommand("ban"); } }
         /// <summary>Unban.</summary>
-        [JsonPropertyName("unban")]
         public static PeerStateCommand Unban { get { return new PeerStateCommand("unban"); } }
 
         private class PeerStateCommandConverter : JsonConverter<PeerStateCommand>
@@ -641,6 +637,11 @@ namespace Nimiq
         public static explicit operator PeerStateCommand(string level)
         {
             return new PeerStateCommand(level);
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -885,7 +886,7 @@ namespace Nimiq
                 var response = await Client.PostAsync(Url, contentData);
                 var content = response.Content;
                 var data = await content.ReadAsStringAsync();
-                // serialize the data into an object
+                // deserialize the data into an object
                 responseObject = JsonSerializer.Deserialize<Root<T>>(data);
             }
             catch (Exception error)
