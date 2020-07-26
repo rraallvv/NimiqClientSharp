@@ -169,7 +169,7 @@ namespace NimiqClientTest
             }
             catch(Exception error)
             {
-                Assert.IsTrue(error is BadMethodCallException);
+                Assert.IsTrue(error is RemoteErrorException);
             }
         }
 
