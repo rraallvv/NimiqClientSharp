@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['peer_182',['Peer',['../class_nimiq_1_1_peer.html',1,'Nimiq']]],
-  ['peerstatecommand_183',['PeerStateCommand',['../class_nimiq_1_1_peer_state_command.html',1,'Nimiq']]]
+  ['outgoingtransaction_181',['OutgoingTransaction',['../class_nimiq_1_1_outgoing_transaction.html',1,'Nimiq']]]
 ];
