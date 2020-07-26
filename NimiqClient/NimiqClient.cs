@@ -836,16 +836,9 @@ namespace Nimiq
         /// <summary>Client initialization from a Config structure.
         /// When no parameter is given, it uses de default configuration in the server (<c>http://:@127.0.0.1:8648</c>).</summary>
         /// <param name="config">Options used for the configuration.</param>
-        public NimiqClient(Config config = null)
+        public NimiqClient(Config config)
         {
-            if (config != null)
-            {
-                Init(config.Scheme, config.User, config.Password, config.Host, config.Port);
-            }
-            else
-            {
-                Init("http", "", "", "127.0.0.1", 8648);
-            }
+            Init(config.Scheme, config.User, config.Password, config.Host, config.Port, null);
         }
 
         /// <summary>Initialization.</summary>
@@ -867,18 +860,11 @@ namespace Nimiq
         /// <param name="host">Host IP address.</param>
         /// <param name="port">Host port.</param>
         /// <param name="client">Used to make all requests. If ommited the an instance of HttpClient is automaticaly create.</param>
-        private void Init(string scheme, string user, string password, string host, long port, HttpClient client = null)
+        private void Init(string scheme, string user, string password, string host, long port, HttpClient client)
         {
             Url = $@"{scheme}://{host}:{port}";
             Auth = Convert.ToBase64String(new UTF8Encoding().GetBytes($"{user}:{password}"));
-            if (client != null)
-            {
-                this.Client = client;
-            }
-            else
-            {
-                this.Client = new HttpClient();
-            }
+            Client = client ?? new HttpClient();
         }
 
         /// <summary>Used in all JSONRPC requests to fetch the data.</summary>
