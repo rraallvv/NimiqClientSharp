@@ -358,3 +358,6 @@ FodyWeavers.xsd
 
 # macOS
 .DS_Store
+
+# coverage
+coverage
