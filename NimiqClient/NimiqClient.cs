@@ -1232,16 +1232,9 @@ namespace Nimiq
         public async Task<string> Pool(object address = null)
         {
             var parameters = new List<object>();
-            if (address != null)
+            if (address is string || address is bool)
             {
-                if (address is string)
-                {
-                    parameters.Add(address);
-                }
-                else if (address is bool)
-                {
-                    parameters.Add(address);
-                }
+                parameters.Add(address);
             }
             return await Call<string>("pool", parameters.ToArray());
         }
