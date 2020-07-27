@@ -1,7 +1,7 @@
 Nimiq Sharp Client
 ==================
 
-![Build Status](https://github.com/rraallvv/NimiqClientSharp/workflows/.NET%20Core/badge.svg)
+![build](https://github.com/rraallvv/NimiqClientSharp/workflows/build/badge.svg)
 [![Nuget Version](https://img.shields.io/nuget/v/NimiqClient)](https://www.nuget.org/packages/NimiqClient/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/26e0dcd2f26a87848906/maintainability)](https://codeclimate.com/github/rraallvv/NimiqClientSharp/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/rraallvv/NimiqClientSharp/badge.svg?branch=master)](https://coveralls.io/github/rraallvv/NimiqClientSharp?branch=master)
