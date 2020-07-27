@@ -1,7 +1,9 @@
 Nimiq Sharp Client
 ==================
+
 [![Build Status](https://travis-ci.org/rraallvv/NimiqClientSharp.svg?branch=master)](https://travis-ci.org/rraallvv/NimiqClientSharp)
 [![Nuget version](https://img.shields.io/nuget/v/NimiqClient)](https://www.nuget.org/packages/NimiqClient/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/26e0dcd2f26a87848906/maintainability)](https://codeclimate.com/github/rraallvv/NimiqClientSharp/maintainability)
 
 > C# implementation of the Nimiq RPC client specs.
 
